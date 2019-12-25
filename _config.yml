@@ -25,7 +25,7 @@ description: Whatever People Say I Am,That's What I'm Not.
 navbar-links:
   About Me: "aboutme"
   Resources:
-    - Dream: "http://http://www.mit.edu/"
+    - Dream: "http://www.mit.edu/"
     - Past: "http://www.xjtu.edu.cn/"
     - GitHub Pages: "https://github.com/DuLiCS/"
   GitHub Pages: "https://github.com/DuLiCS"
