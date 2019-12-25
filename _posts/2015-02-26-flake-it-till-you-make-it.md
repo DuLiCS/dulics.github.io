@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Flake it till you make it
+title: My very first post
 subtitle: Excerpt from Soulshaping by Jeff Brown
-bigimg: /img/path.jpg
+bigimg: /img/Kuokuyo.JPG
 tags: [books, test]
 ---
 
