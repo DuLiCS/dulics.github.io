@@ -2,7 +2,7 @@
 layout:post
 title:My very first post.
 subtitle:A good start
-bigimg:/img/Kuokuyo.JPG
+bigimg:/img/Kuokuyou.JPG
 tags:[Daily,emotion]
 ---
 
