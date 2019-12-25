@@ -1,8 +1,8 @@
 ---
-layout:post
-title:My very first post.
-subtitle:A good start
-bigimg:/img/Kuokuyou.JPG
+layout: post
+title: My very first post.
+subtitle: A good start
+bigimg: /img/Kuokuyo.JPG
 tags:[Daily,emotion]
 ---
 
