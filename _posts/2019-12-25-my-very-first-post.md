@@ -7,6 +7,6 @@ It's another Xmas day. I still remember the same day last year, in a blink, a wh
 
 I got the Kukuyo journal today, I took a picture below, The 2019-journal is red, and I deliberately choose the blue one as my new journal. I hope this could lead to a brave new life.
 
-Merry Xmas to myself!
+Merry Xmas!
 
 ![](/img/kuo.jpg)
