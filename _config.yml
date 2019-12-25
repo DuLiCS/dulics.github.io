@@ -21,7 +21,7 @@ description: Whatever People Say I Am,That's What I'm Not.
 
 # --- Navigation bar options --- #
 
-# List of links in the navigation bar
+# List of links in the/Users/duli/Programme/dulics.github.io navigation bar
 navbar-links:
   About Me: "aboutme"
   Resources:
@@ -36,7 +36,7 @@ avatar: "/img/avatar-icon.png"
 
 # If you want to have an image logo in the top-left corner instead of the title text,
 # then specify the following parameter
-title-img: /path/to/image
+#title-img: /path/to/image
 
 # --- Background colour/image options --- #
 
