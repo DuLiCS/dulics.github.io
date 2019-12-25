@@ -1,7 +1,8 @@
 ---
 layout: post
-title: First post!
-image: /img/hello_world.jpeg
+title: My very first post
+image: /img/Kuokuyo.JPG
 ---
 
-This is my first post, how exciting!
+It's another Xmas day. I still remember the same day last year, a whole year has passed, at the beginning of a new year and the end of the old year. People always have mixed emotions, including the hope to the next year, on the other hand, the regret of the time passed-by.
+I received the Kukuyo journal today.
