@@ -1,6 +1,6 @@
 ---
 layout: post
-title: My very first post.
+title: My very first post
 subtitle: A good start
 bigimg: /img/Kuokuyo.JPG
 tags:[Daily,emotion]
