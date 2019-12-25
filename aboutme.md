@@ -1,17 +1,13 @@
 ---
 layout: page
 title: About me
-subtitle: Why you'd want to go on a date with me
+subtitle: About me
 ---
 
-My name is Du Li. I have the following qualities:
+My name is Du Li.
 
-- I'm extremely loyal to my family
+### Education Background
 
-What else do you need?
+2009-2013   Xi'an University of Technology    Bachelor   Automation
 
-### my history
-
-2009-2013   Xi'an University of Technology
-
-2013-1016  Xi'an Jiaotong University
+2013-2016   Xi'an Jiaotong University             Master      Software Engineering
