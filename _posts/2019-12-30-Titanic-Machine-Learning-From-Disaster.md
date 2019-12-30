@@ -65,3 +65,6 @@ Some children travelled only with a nanny, therefore parch=0 for them.
 
 ![](/img/test_csv.png)
 
+```python
+import pandas as pd
+print
