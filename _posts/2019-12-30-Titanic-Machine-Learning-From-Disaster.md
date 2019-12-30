@@ -10,14 +10,14 @@ This post follows the steps of the [Alexis Cook‘s Titanic Tutorial](https://ww
 
 ### 1.Get started
 
-* The challenge
+#### The challenge
 	
  The competition is simple:use the Titanic passenger data to try to predict who will survive and who will die.
  
-*  The data
+#### The data
  Data is crucial for data science.Let's have a look.The data has split into two groups:training set(train.csv) and test set(test.csv)
  
- #### Data Dictionary
+##### Data Dictionary
 
 | Variable | Definition| Key |
 | :------- |:--------- | :-- |
@@ -32,7 +32,7 @@ This post follows the steps of the [Alexis Cook‘s Titanic Tutorial](https://ww
 | cabin | Cabin number | |
 | embarked | Port of Embarkation | C = Cherbourg, Q = Queenstown, S = Southampton
 
-#### Variable Notes
+##### Variable Notes
 pclass: A proxy for socio-economic status (SES)
 
 1st = Upper
