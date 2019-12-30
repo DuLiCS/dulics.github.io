@@ -65,6 +65,22 @@ Some children travelled only with a nanny, therefore parch=0 for them.
 
 ![](/img/test_csv.png)
 
+### Show me the code
+
+I choose Python as my programming language to handle data problems. Although the R language is efficient too, for me, I still love Python.
+I copy the introduction of pandas library from its [official website](https://pandas.pydata.org/).
+
+pandas is an open source, BSD-licensed library providing high-performance, easy-to-use data structures and data analysis tools for the Python programming language.
+
+pandas is a NumFOCUS sponsored project. This will help ensure the success of development of pandas as a world-class open-source project, and makes it possible to donate to the project.
+
+#### Load the data
+
+*the location of the csv files depends on the distribution of the files in your system*
+
+
 ```python
 import pandas as pd
-print
+train_data = pd.read_csv('titanic/train.csv')
+test_data = pd.read_csv('titanic/test.csv')
+```
