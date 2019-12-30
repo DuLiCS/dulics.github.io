@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Titanic:Machine Learning From Disaster-I II III IV V
+title: Titanic:Machine Learning From Disaster-I
 subtitle: First Kaggle Competition
 tags: [Kaggle, Data Science]
 ---
@@ -56,3 +56,12 @@ Parent = mother, father
 Child = daughter, son, stepdaughter, stepson
 
 Some children travelled only with a nanny, therefore parch=0 for them.
+
+(1).train.csv
+
+![](/img/train_csv.png)
+
+(2).test.csv
+
+![](/img/test_csv.png)
+
