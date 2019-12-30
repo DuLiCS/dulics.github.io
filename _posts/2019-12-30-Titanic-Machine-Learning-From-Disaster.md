@@ -6,3 +6,4 @@ tags: [Kaggle, Data Science]
 ---
 
 This is my learning procedure of the Kaggle competition-Titanic: Machine Learning From Disaster, this problem serves as the very first attemp for most of the rookie in Kaggle.Without further ado,let's get started.
+This post follows the steps of the 
