@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Titanic:Machine Learning From Disaster-I
+title: Titanic:Machine Learning From Disaster-I II III IV V
 subtitle: First Kaggle Competition
 tags: [Kaggle, Data Science]
 ---
