@@ -65,7 +65,7 @@ Some children travelled only with a nanny, therefore parch=0 for them.
 
 ![](/img/test_csv.png)
 
-### Show me the code
+### 2.Show me the code
 
 I choose Python as my programming language to handle data problems. Although the R language is efficient too, for me, I still love Python.
 I copy the introduction of pandas library from its [official website](https://pandas.pydata.org/).
