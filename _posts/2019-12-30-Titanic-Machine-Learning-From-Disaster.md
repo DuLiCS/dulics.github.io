@@ -11,12 +11,12 @@ This post follows the steps of the [Alexis Cook‘s Titanic Tutorial](https://ww
 ### 1.Get started
 
 #### The challenge
-	
+
  The competition is simple:use the Titanic passenger data to try to predict who will survive and who will die.
- 
+
 #### The data
  Data is crucial for data science.Let's have a look.The data has split into two groups:training set(train.csv) and test set(test.csv)
- 
+
 ##### Data Dictionary
 
 | Variable | Definition| Key |
@@ -76,11 +76,19 @@ pandas is a NumFOCUS sponsored project. This will help ensure the success of dev
 
 #### Load the data
 
+The loading procedure is simple.
+
 *the location of the csv files depends on the distribution of the files in your system*
 
 
 ```python
 import pandas as pd
-train_data = pd.read_csv('titanic/train.csv')
-test_data = pd.read_csv('titanic/test.csv')
+train_data = pd.read_csv('data/train.csv')
+test_data = pd.read_csv('data/test.csv')
 ```
+
+
+
+
+
+···
