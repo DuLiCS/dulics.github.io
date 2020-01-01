@@ -14,4 +14,4 @@ Our goal is finding patterns in **train.csv** that help us predict whether the p
 
 #### Explore a pattern
 
-It might initially feel overwhelming to look for patterns,first we will start simple.
+It might initially feel overwhelming to look for patterns,first we will start simple.We will figure out the portition
