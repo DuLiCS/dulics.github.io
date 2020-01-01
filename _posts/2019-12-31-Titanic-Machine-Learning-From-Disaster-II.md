@@ -30,3 +30,10 @@ rate_women = female_survived/female_count
 #rate_women = 0.7420382165605095
 
 ```
+
+The code above calculates the percentage of male and female passengers (in train.csv) who survived. From this, you can see that almost 75% of the women on board survived, whereas only 19% of the men lived to tell about it. Since gender seems to be such a reliable indicator of survival, the submission file in gender_submission.csv is not a wrong first guess, and it makes sense that it performed reasonably well!
+
+But only one indicator is rough, and we need multiple factors combined to predict one person is survived or not.
+
+#### Our first machine learning model
+
