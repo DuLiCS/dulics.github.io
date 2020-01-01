@@ -37,3 +37,27 @@ But only one indicator is rough, and we need multiple factors combined to predic
 
 #### Our first machine learning model
 
+We'll build what's known as a random forest model. I will write an article about the random forest model soon. This model is constructed of several "trees" (there are three trees in the picture below, but we'll construct 100!) that will individually consider each passenger's data and vote on whether the individual survived. Then, the random forest model makes a democratic decision: the outcome with the most votes wins!
+
+```python
+from sklearn.ensemble import RandomForestClassifier
+
+y = train_data["Survived"]
+
+features = ["Pclass", "Sex", "SibSp", "Parch"]
+X = pd.get_dummies(train_data[features])
+X_test = pd.get_dummies(test_data[features])
+
+model = RandomForestClassifier(n_estimators=100, max_depth=5, random_state=1)
+model.fit(X, y)
+predictions = model.predict(X_test)
+
+output = pd.DataFrame({'PassengerId': test_data.PassengerId, 'Survived': predictions})
+output.to_csv('my_submission.csv', index=False)
+print("Your submission was successfully saved!")
+```
+
+### 4.The Result
+![](/img/submission_success.png)
+
+In the competition public leaderboard, the score of many people or team is 1.00, I follow the guidelines of other people. The following work for me is improving the accuracy of my submission.
