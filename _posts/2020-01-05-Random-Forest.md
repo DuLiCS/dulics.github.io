@@ -3,7 +3,7 @@
 layout: post
 title: Random Forest
 subtitle: Machine Learning Wiki
-tags: [Machine Learning, Theory]
+tags: [Machine Learning, Wiki]
 
 ---
 
