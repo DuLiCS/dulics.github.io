@@ -65,6 +65,15 @@ Following are the outputs of the 5 different CART model.
 
 ![](/img/rf5.webp)
 
+<font color = red size = 5>!!!All these five CART model are based on the statistical result!!!</font>
 
+the following profile in each CART model :
 
+1. Age : 35 years , 2, Gender : Male , 3. Highest Educational Qualification : Diploma holder, 4. Industry : Manufacturing, 5. Residence : Metro
+
+For each of these CART model, following is the distribution across salary bands :
+
+![](/img/rf6.webp)
+
+The final probability is simply the average of the probability in the same salary bands in different CART models. As you can see from this analysis, that there is 70% chance of this individual falling in class 1 (less than $40,000) and around 24% chance of the individual falling in class 2.
 
