@@ -7,6 +7,8 @@ tags: [Machine Learning, Wiki]
 
 ---
 
+This post is a brief introfuction of Random Forest.
+
 ### Introduction
 
 This section gives a brief overview of random forests and some comments about the features of the method.
