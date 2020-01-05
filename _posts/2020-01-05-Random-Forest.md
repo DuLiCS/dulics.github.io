@@ -7,7 +7,7 @@ tags: [Machine Learning, Theory]
 
 ---
 
-###Introduction
+### Introduction
 
 This section gives a brief overview of random forests and some comments about the features of the method.
 
@@ -48,3 +48,23 @@ Following are the outputs of the 5 different CART model.
 #### CART 1:Variable Age
 
 ![](/img/rf1.webp)
+
+#### CART 2 : Variable Gender
+
+![](/img/rf2.webp)
+
+#### CART 3 : Variable Education
+
+![](/img/rf3.webp)
+
+#### CART 4 : Variable Residence
+
+![](/img/rf4.webp)
+
+#### CART 5 : Variable Industry
+
+![](/img/rf5.webp)
+
+
+
+
