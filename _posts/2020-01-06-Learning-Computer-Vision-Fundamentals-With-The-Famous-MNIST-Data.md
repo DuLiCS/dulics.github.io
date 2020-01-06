@@ -55,8 +55,7 @@ The evaluation metric for this contest is the categorization accuracy, or the pr
 
 #### Let's get started!
 
-I just wrote a brief introdution of the [Rand-/*om Forest](https://dulics.github.io/2020-01-05-Random-Forest/), so I want to try it as soon as possible.
+I just wrote a brief introdution of the [Random Forest](https://dulics.github.io/2020-01-05-Random-Forest/), so I want to try it as soon as possible.
 
 ##### Solution one: Random forest
-
 
