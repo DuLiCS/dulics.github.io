@@ -22,4 +22,6 @@ Marvin Lee Minsky (August 9, 1927 – January 24, 2016) was an American cognitiv
 
 Perceptron is a basic notion of Machine Learning,and this model is a more general computational model than McCulloch-Pitts neuron.
 
-![](/img/perceptron_1.png)
+![](/img/perceptron_0.png)
+
+Assume the bank will approve or deny the application for a credit card based on the submissions they offer.
