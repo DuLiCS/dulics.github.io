@@ -11,7 +11,6 @@ This post will discuss the famous Perceptron Learning Algorithm proposed by [Min
 
 ### 1.background
 
-
 #### 1.1 Marvin Lee Minsky
 
 Marvin Lee Minsky (August 9, 1927 – January 24, 2016) was an American cognitive scientist concerned largely with research of artificial intelligence (AI), co-founder of the Massachusetts Institute of Technology's AI laboratory, and author of several texts concerning AI and philosophy.
