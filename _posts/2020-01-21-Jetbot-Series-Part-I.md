@@ -82,7 +82,7 @@ git clone https://github.com/NVIDIA-AI-IOT/jetbot
 cd jetbot
 sudo python3 setup.py install
 ```
-<p style="text-indent:2em">打开文件目录我们看到主要有4个简单的程序.分别是basic motion,collision avoidence,object following以及teleoperation,这四个部分会各写一个post进行介绍.</p>
+<p style="text-indent:2em">打开文件目录Notebooks我们看到主要有4个简单的程序.分别是basic motion,collision avoidence,object following以及teleoperation,这四个部分会各写一个post进行介绍.</p>
 
 EOF
 
