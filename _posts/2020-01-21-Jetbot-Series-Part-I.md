@@ -22,4 +22,5 @@ tags: [Jetbot, Jetson Nano]
 为了寻找他的替代品,我们就把目光投向了Jetson系列产品.入门款当然就是[Jetson Nano](https://www.nvidia.cn/autonomous-machines/embedded-systems/jetson-nano/),官方网站有比较详细的介绍,对比树莓派来说,在于对构建机器学习项目上天生的优势(cuda),毕竟有Nvidia强大的支持.功耗同样非常小,在10W以内.再加上其小巧的特点,因此应用场景非常丰富.
 
 我们的标题是Jetbot,那Jetbot又是什么呢?简而言之就是官方提供的一种Jetson Nano的实现形式.还是直接上图.
+
 ![](/img/Jetbot.jpg)
