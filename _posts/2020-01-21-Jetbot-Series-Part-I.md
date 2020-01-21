@@ -62,7 +62,7 @@ Step 4:使用浏览器连接Jetbot并进行控制
 
 连接过程非常简单,之前piOLED显示屏上显示有IP地址,我们直接在同一网段下的另一台电脑上输入IP地址:8888,我这里输入192.168.0.107:8888,输入默认密码jetbot就会远程连接上jupyter lab.
 
-![remote_connection](remote_connection.png)
+![remote_connection](/img/remote_connection.png)
 
 现在就可以直接在这个环境下进行操作了.
 
