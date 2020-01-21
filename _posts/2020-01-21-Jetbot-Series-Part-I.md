@@ -16,14 +16,14 @@ tags: [Jetbot, Jetson Nano]
 ![imge here](/img/Raspberry.jpg)
 
 <p style="text-indent:2em">树莓派的好处是便宜,资源多以及其他不少好处.拿他做的东西也不算多.去年夏天的时候,为了做一个简单的垃圾分类系统,用了下树莓派.东西的原理很简单,就是通过摄像头识别预先学习好的样本,也就是简单的用了下tensorflow的基本知识,搭建了一个小型的系统,但是树莓派的机能毕竟有限,从采集图像到最终分类成功,至少需要10s以上,这样的速度显然是无法让人满意的,如果今后由于样本的增多,使用神经网络更复杂的话,显然就超出了树莓派的能力范围了.</p>
-<p style="text-indent:2em">为了寻找他的替代品,我们就把目光投向了Jetson系列产品.入门款当然就是[Jetson Nano](https://www.nvidia.cn/autonomous-machines/embedded-systems/jetson-nano/),官方网站有比较详细的介绍,对比树莓派来说,在于对构建机器学习项目上天生的优势(cuda),毕竟有Nvidia强大的支持.功耗同样非常小,在10W以内.再加上其小巧的特点,因此应用场景非常丰富.</p>
+<p style="text-indent:2em">为了寻找他的替代品,我们就把目光投向了Jetson系列产品.入门款当然就是<a href="https://www.nvidia.cn/autonomous-machines/embedded-systems/jetson-nano/">Jetson Nano</a>,官方网站有比较详细的介绍,对比树莓派来说,在于对构建机器学习项目上天生的优势(cuda),毕竟有Nvidia强大的支持.功耗同样非常小,在10W以内.再加上其小巧的特点,因此应用场景非常丰富.</p>
 <p style="text-indent:2em">我们的标题是Jetbot,那Jetbot又是什么呢?简而言之就是官方提供的一种Jetson Nano的实现形式.还是直接上图.</p>
 
 ![imge here](/img/jetbot.jpg)
 
-<p style="text-indent:2em">图中所示就是组装好的Jetbot小车,最上面是风扇,中间那块板子就是Jetson Nano,最下面是电机电池等等</p>
+<p style="text-indent:2em">图中所示就是组装好的Jetbot小车,最上面是风扇,中间那块板子就是Jetson Nano,最下面是电机电池等等.这一系列文章将记录我捣鼓这块板子的过程.</p>
 
-<p style="text-indent:2em"></p>
+<p style="text-indent:2em">Jetbot的好处在于资源很丰富,主要的第一手学习资料来自于[NVIDIA-AI-IOT](https://github.com/NVIDIA-AI-IOT/jetbot)</p>
 
 <p style="text-indent:2em"></p>
 
