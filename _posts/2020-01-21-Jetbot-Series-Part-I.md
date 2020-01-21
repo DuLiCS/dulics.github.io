@@ -20,3 +20,5 @@ tags: [Jetbot, Jetson Nano]
 <p style="text-indent:2em">我们的标题是Jetbot,那Jetbot又是什么呢?简而言之就是官方提供的一种Jetson Nano的实现形式.还是直接上图.</p>
 
 ![](/img/Jetbot.jpg)
+
+<p style="text-indent:2em">图中所示就是组装好的Jetbot小车,最上面是风扇,中间那块板子就是Jetson Nano,最下面是电机电池等等</p>
