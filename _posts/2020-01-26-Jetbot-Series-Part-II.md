@@ -96,3 +96,42 @@ time.sleep(1.0)
 robot.left_motor.value = 0.0
 robot.right_motor.value = 0.0
 ```
+You should see the robot move in the same exact way!
+### Link motors to traitlets
+A really cool feature about these [traitlets](https://github.com/ipython/traitlets) is that we can 
+also link them to other traitlets!  This is super handy because Jupyter Notebooks allow us
+to make graphical ``widgets`` that use traitlets under the hood.  This means we can attach
+our motors to ``widgets`` to control them from the browser, or just visualize the value.
+
+To show how to do this, let's create and display two sliders that we'll use to control our motors.
+
+```python
+import ipywidgets.widgets as widgets
+from IPython.display import display
+
+# create two sliders with range [-1.0, 1.0]
+left_slider = widgets.FloatSlider(description='left', min=-1.0, max=1.0, step=0.01, orientation='vertical')
+right_slider = widgets.FloatSlider(description='right', min=-1.0, max=1.0, step=0.01, orientation='vertical')
+
+# create a horizontal box container to place the sliders next to eachother
+slider_container = widgets.HBox([left_slider, right_slider])
+
+# display the container in this cell's output
+display(slider_container)
+```
+
+You should see two ``vertical`` sliders displayed above. 
+
+> HELPFUL TIP:  In Jupyter Lab, you can actually "pop" the output of cells into entirely separate window!  It will still be 
+> connected to the notebook, but displayed separately.  This is helpful if we want to pin the output of code we executed elsewhere.
+> To do this, right click the output of the cell and select ``Create New View for Output``.  You can then drag the new window
+> to a location you find pleasing.
+
+Try clicking and dragging the sliders up and down.  Notice nothing happens when we move the sliders currently.  That's because we haven't connected them to motors yet!  We'll do that by using the ``link`` function from the traitlets package.
+
+```python
+import traitlets
+
+left_link = traitlets.link((left_slider, 'value'), (robot.left_motor, 'value'))
+right_link = traitlets.link((right_slider, 'value'), (robot.right_motor, 'value'))
+```
