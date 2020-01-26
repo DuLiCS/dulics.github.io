@@ -19,4 +19,3 @@ Now that we've imported the Robot class we can initialize the class instance as 
 ```python
 robot = Robot()
 ```
-
