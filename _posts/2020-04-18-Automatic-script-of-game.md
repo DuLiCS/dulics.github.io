@@ -66,4 +66,4 @@ saveBitMap.SaveBitmapFile(saveDC,"img_Winapi.bmp")
 
 得到的图片大概是这个样子.
 
-![](/img/img_Winapi.tif)
+![](/img/img_Winapi.jpg)
