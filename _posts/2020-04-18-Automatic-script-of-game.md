@@ -3,7 +3,7 @@
 layout: post
 title: Automatic Script of the Game
 subtitle: Part I
-tags: [Project]
+tags: [Project,Image Processing]
 
 ---
 
