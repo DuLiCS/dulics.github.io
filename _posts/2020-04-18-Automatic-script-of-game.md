@@ -102,8 +102,60 @@ ret, thresh = cv2.threshold(gray_img,10,255,cv2.THRESH_BINARY_INV)
 因此我想,既然文字规格是相近的,所以我直接将其按像素进行分割就可以.首先要找到断点位置.我们直接对图片的纵向投影按照正方向和反方向进行搜寻,找到两个方向的拐点.
 
 
+```python
+
+task_segment_img = thresh[350:420,1120:1290]
+
+cv2.imwrite('task_area.jpg',task_segment_img)
+
+horizon_img = np.sum(task_segment_img,axis=1)
+
+vertical_img = np.sum(task_segment_img,axis=0)
+
+len(vertical_img)
+
+task_detial_image = task_segment_img[33:,:]
+
+guide_image = task_segment_img[:33,:]
+
+task_hist = np.sum(task_detial_image,axis = 0)
+
+zero_index = np.where(task_hist == 0)
 
 
+turning_point = []
+
+for i in range(len(zero_index[0])-1):
+    if (zero_index[0][i+1] - zero_index[0][i])  !=1:
+        turning_point.append(i)
+        turning_point.append(i+1)
+        
+
+seg_list = []
+
+for i in range(len(turning_point)//2):
+    seg_list.append(task_detial_image[:,zero_index[0][turning_point[2*i]]+1:zero_index[0][turning_point[2*i+1]]])
+
+```
+
+以下就得到了三个部分的分割图片.
+
+![](/img/Part_1.png)
+
+![](/img/Part_2.png)
+
+![](/img/Part_3.png)
+
+
+中间部分每个字符水平宽度为14个字符.分割结果如下.
+
+![](/img/Char_1.png)
+
+![](/img/Char_2.png)
+
+![](/img/Char_3.png)
+
+![](/img/Char_4.png)
 
 
 
