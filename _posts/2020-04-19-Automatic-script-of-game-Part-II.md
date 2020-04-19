@@ -41,7 +41,48 @@ tags: [Project,Image Processing]
 给出的相似性范围从-1到1:-1意味着两个向量指向的方向正好截然相反,1表示它们的指向是完全相同的,0通常表示它们之间是独立的,而在这之间的值则表示中间的相似性或相异性。
 
 
+到这里识别的部分基本说完了,现在没有办法再进行下去是因为现在系统还没有完全跑起来,很多实际的问题还没有遇到,只有在跑程序的过程中才可以发现问题,进行测试和优化.
+因此我们接下来转向第三个问题,也就是控制,因为这个自动执行的程序的交互式靠点击完成的,所以交互也是一个很重要的环节.
 
+### 3. 交互
+
+查阅了相关资料后,由于这些库都没有使用过,就先用pyautogui来试试手.
+安装部分很简单,在anaconda环境管理里没有找到,直接用pip安装就可以了
+
+```
+pip install pyautogui
+```
+依赖的库有点多,安装起来稍微花了点时间.使用起来也不算太难,下面简单介绍一下.既然要控制鼠标,那么我们需要知道屏幕的大小,才能定位.pyautogui提供了这样的库来的到当前屏幕的分辨率.
+
+```python
+pyautogui.size()
+```
+
+但是问题来,返回的结果我看不懂了,
+
+```
+Size(width=1280, height=800)
+```
+我的电脑屏幕明明是2560x1600的分辨率,外接屏幕也是1600x900,那么为什么会返回这么一个结果呢.(这时的我还不知道为什么).那么接下来要做两件事,一个是在我的surface book2检验返回的结果是否正确,另一个就是查查[官方文档](https://pyautogui.readthedocs.io/en/latest/).
+
+Locations on your screen are referred to by X and Y Cartesian coordinates. The X coordinate starts at 0 on the left side and increases going right. Unlike in mathematics, the Y coordinate starts at 0 on the top and increases going down.
+
+```0,0       X increases -->
++---------------------------+
+|                           | Y increases
+|                           |     |
+|   1920 x 1080 screen      |     |
+|                           |     V
+|                           |
+|                           |
++---------------------------+ 1919, 1079
+```
+
+The pixel at the top-left corner is at coordinates 0, 0. If your screen’s resolution is 1920 x 1080, the pixel in the lower right corner will be 1919, 1079 (since the coordinates begin at 0, not 1).
+
+The screen resolution size is returned by the size() function as a tuple of two integers. The current X and Y coordinates of the mouse cursor are returned by the position() function.
+
+单看这个文档看不出什么端倪,我把外接显示器拔掉也是一样的结果,那么现在只能尝试在Windows上使用了.
 
 
 
