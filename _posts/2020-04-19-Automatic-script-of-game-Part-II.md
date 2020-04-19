@@ -34,6 +34,14 @@ tags: [Project,Image Processing]
 
 ![欧几里得点积](/img/similarity_cos_1.svg)
 
+给定两个属性向量， A 和B，其余弦相似性θ由点积和向量长度给出，如下所示：
+
+![余弦相似性定义](/img/similarity_cos_2.svg)
+
+
+这里的$${\displaystyle A_{i}}A_{i}$$和$${\displaystyle B_{i}}B_{i}$$分别代表向量{\displaystyle A}A和{\displaystyle B}B的各分量。
+给出的相似性范围从-1到1：-1意味着两个向量指向的方向正好截然相反，1表示它们的指向是完全相同的，0通常表示它们之间是独立的，而在这之间的值则表示中间的相似性或相异性。
+
 
 
 
