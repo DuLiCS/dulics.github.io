@@ -104,9 +104,15 @@ The screen resolution size is returned by the size() function as a tuple of two 
 >>> pyautogui.moveTo(600, None)  # moves mouse to X of 600, Y of 500.
 ```
 
-用法很简单,输入X和Y的坐标即可.有一点要说的是None这个参数的意思是传入鼠标当前位置的X或Y值.
+用法很简单,输入X和Y的坐标即可.有一点要说的是None这个参数的意思是传入鼠标当前位置的X或Y值.正常来说,如果单单是用MoveTo的话,鼠标会立刻移动到指定坐标,如果我们希望这个过程是gradually的,那么就需要另外一个参数,duration,这个单位默认是秒,例如
 
+```python
+>>> pyautogui.moveTo(100, 200, 2)   # moves mouse to X of 100, Y of 200 over 2 seconds
+```
 
+底下有个注意事项,为了方便起见,我就不翻译了,直接粘过来,非常简单.
+
+(If the duration is less than ```pyautogui.MINIMUM_DURATION``` the movement will be instant. By default, ```pyautogui.MINIMUM_DURATION``` is 0.1.)
 
 
 
