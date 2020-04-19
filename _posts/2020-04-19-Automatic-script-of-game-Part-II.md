@@ -67,7 +67,8 @@ Size(width=1280, height=800)
 
 Locations on your screen are referred to by X and Y Cartesian coordinates. The X coordinate starts at 0 on the left side and increases going right. Unlike in mathematics, the Y coordinate starts at 0 on the top and increases going down.
 
-```0,0       X increases -->
+```
+0,0       X increases -->
 +---------------------------+
 |                           | Y increases
 |                           |     |
@@ -83,6 +84,11 @@ The pixel at the top-left corner is at coordinates 0, 0. If your screen’s reso
 The screen resolution size is returned by the size() function as a tuple of two integers. The current X and Y coordinates of the mouse cursor are returned by the position() function.
 
 单看这个文档看不出什么端倪,我把外接显示器拔掉也是一样的结果,那么现在只能尝试在Windows上使用了.
+
+经过测试,在windows上是没有问题的,显示分辨率3240x2160.也不知道是为什么,在OSX上就是有问题,暂时先不管这个问题,因为最后还是要在windows环境下跑的.
+
+接下来介绍一下主要使用的几个函数.
+
 
 
 
