@@ -46,12 +46,17 @@ tags: [Project,Image Processing]
 
 ### 3. 交互
 
-查阅了相关资料后,由于这些库都没有使用过,就先用pyautogui来试试手.
+#### 3.1 pyautogui
+
+]查阅了相关资料后,由于这些库都没有使用过,就先用pyautogui来试试手.
 安装部分很简单,在anaconda环境管理里没有找到,直接用pip安装就可以了
 
 ```
 pip install pyautogui
 ```
+
+#### 3.2 获取屏幕分辨率
+
 依赖的库有点多,安装起来稍微花了点时间.使用起来也不算太难,下面简单介绍一下.既然要控制鼠标,那么我们需要知道屏幕的大小,才能定位.pyautogui提供了这样的库来的到当前屏幕的分辨率.
 
 ```python
@@ -87,10 +92,19 @@ The screen resolution size is returned by the size() function as a tuple of two 
 
 经过测试,在windows上是没有问题的,显示分辨率3240x2160.也不知道是为什么,在OSX上就是有问题,暂时先不管这个问题,因为最后还是要在windows环境下跑的.
 
+#### 3.3 要用到的方法
+
 接下来介绍一下主要使用的几个函数.
 
+**Mouse Movement**
 
+```python
+>>> pyautogui.moveTo(100, 200)   # moves mouse to X of 100, Y of 200.
+>>> pyautogui.moveTo(None, 500)  # moves mouse to X of 100, Y of 500.
+>>> pyautogui.moveTo(600, None)  # moves mouse to X of 600, Y of 500.
+```
 
+用法很简单,输入X和Y的坐标即可.有一点要说的是None这个参数的意思是传入鼠标当前位置的X或Y值.
 
 
 
