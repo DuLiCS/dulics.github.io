@@ -1,7 +1,7 @@
 ---
 
 layout: post
-title: Automatic Script of the Game
+title: Automatic Script of the Game Part I
 subtitle: Part I
 tags: [Project,Image Processing]
 
@@ -148,6 +148,13 @@ for i in range(len(turning_point)//2):
 
 
 中间部分每个字符水平宽度为14个字符.分割结果如下.
+
+```python
+char_list = []
+
+for i in range(((zero_index[0][turning_point[3]]-1)-(zero_index[0][turning_point[2]]+1)+1)//14):
+    char_list.append(seg_list[1][:,14*i:14*i+14])
+```
 
 ![](/img/Char_1.png)
 
