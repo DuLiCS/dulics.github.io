@@ -114,6 +114,108 @@ The screen resolution size is returned by the size() function as a tuple of two 
 
 (If the duration is less than ```pyautogui.MINIMUM_DURATION``` the movement will be instant. By default, ```pyautogui.MINIMUM_DURATION``` is 0.1.)
 
+还有一种移动方式算是相对移动.
+
+```python
+>>> pyautogui.moveTo(100, 200)  # moves mouse to X of 100, Y of 200.
+>>> pyautogui.move(0, 50)       # move the mouse down 50 pixels.
+>>> pyautogui.move(-30, 0)      # move the mouse left 30 pixels.
+>>> pyautogui.move(-30, None)   # move the mouse left 30 pixels.
+```
+
+***Mouse Drags***
+
+```python
+>>> pyautogui.dragTo(100, 200, button='left')     # drag mouse to X of 100, Y of 200 while holding down left mouse button
+>>> pyautogui.dragTo(300, 400, 2, button='left')  # drag mouse to X of 300, Y of 400 over 2 seconds while holding down left mouse button
+>>> pyautogui.drag(30, 0, 2, button='right')   # drag the mouse left 30 pixels over 2 seconds while holding down the right mouse button
+```
+简单来说,这个用法和Mouse Movement很接近,MoveTo和Move分别对应DragTo和Drag,参数也大体相同.由于是drag,有了鼠标的三个键,left,middle和right.
+
+***Mouse Clicks***
+
+The ```click()``` function simulates a single, left-button mouse click at the mouse’s current position. A “click” is defined as pushing the button down and then releasing it up. For example:
+
+```python
+>>> pyautogui.click()  # click the mouse
+```
+click()直接点击鼠标.
+
+To combine a ```moveTo()``` call before the click, pass integers for the x and y keyword argument:
+
+```python
+>>> pyautogui.click(x=100, y=200)  # move to 100, 200, then click the left mouse button.
+```
+
+To specify a different mouse button to click, pass 'left', 'middle', or 'right' for the button keyword argument:
+
+```
+>>> pyautogui.click(button='right')  # right-click the mouse
+```
+To do multiple clicks, pass an integer to the clicks keyword argument. Optionally, you can pass a float or integer to the interval keyword argument to specify the amount of pause between the clicks in seconds. For example:
+
+```
+>>> pyautogui.click(clicks=2)  # double-click the left mouse button
+>>> pyautogui.click(clicks=2, interval=0.25)  # double-click the left mouse button, but with a quarter second pause in between clicks
+>>> pyautogui.click(button='right', clicks=3, interval=0.25)  ## triple-click the right mouse button with a quarter second pause in between clicks
+```
+
+As a convenient shortcut, the doubleClick() function will perform a double click of the left mouse button. It also has the optional x, y, interval, and button keyword arguments. For example:
+
+```
+>>> pyautogui.doubleClick()  # perform a left-button double click
+```
+There is also a tripleClick() function with similar optional keyword arguments.
+
+The rightClick() function has optional x and y keyword arguments.
+
+The mouseDown() and mouseUp() Functions
+Mouse clicks and drags are composed of both pressing the mouse button down and releasing it back up. If you want to perform these actions separately, call the mouseDown() and mouseUp() functions. They have the same x, y, and button. For example:
+
+```
+>>> pyautogui.mouseDown(); pyautogui.mouseUp()  # does the same thing as a left-button mouse click
+>>> pyautogui.mouseDown(button='right')  # press the right button down
+>>> pyautogui.mouseUp(button='right', x=100, y=200)  # move the mouse to 100, 200, then release the right button up.
+```
+
+***Mouse Scrolling***
+
+The mouse scroll wheel can be simulated by calling the scroll() function and passing an integer number of “clicks” to scroll. The amount of scrolling in a “click” varies between platforms. Optionally, integers can be passed for the the x and y keyword arguments to move the mouse cursor before performing the scroll. For example:
+
+```
+>>> pyautogui.scroll(10)   # scroll up 10 "clicks"
+>>> pyautogui.scroll(-10)  # scroll down 10 "clicks"
+>>> pyautogui.scroll(10, x=100, y=100)  # move mouse cursor to 100, 200, then scroll up 10 "clicks"
+```
+On OS X and Linux platforms, PyAutoGUI can also perform horizontal scrolling by calling the hscroll() function. For example:
+
+```
+>>> pyautogui.hscroll(10)   # scroll right 10 "clicks"
+>>> pyautogui.hscroll(-10)   # scroll left 10 "clicks"
+```
+
+The scroll() function is a wrapper for vscroll(), which performs vertical scrolling.
+
+无耻的复制粘贴了,主要在于里面的内容并不难,所以不需要浪费时间.以上就是鼠标的主要操作,涵盖了移动,点击,拖拽,这已经做够满足我们的使用需求了.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
