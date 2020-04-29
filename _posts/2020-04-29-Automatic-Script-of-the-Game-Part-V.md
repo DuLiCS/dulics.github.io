@@ -1,19 +1,8 @@
 ---
 
 layout: post
-title: c = OperationClass()
-       
-       for i in range(10):
-           
-           if c.FindStrFastEx(0,0,int(c.width),int(c.height*0.5),"力破奇案有担当","ffffff-111111",0.9):
-               c.LeftClick(c.x,c.y,20,10)
-               print("found")
-               break
-           time.sleep(0.5)
-       
-       
-       time.sleep(10)
-subtitle: Machine Learning Wiki
+title: Automatic Script of the Game Part V
+subtitle: Part V
 tags: [Project, Image Processing]
 
 ---
