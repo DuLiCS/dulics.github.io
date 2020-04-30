@@ -149,6 +149,12 @@ from mxnet import autograd,nd
 import random
 ```
 
+在这里设置训练机样本数为1000,每个样本有两个特征.给定随机生成的批量样本特征$\boldsymbol{X} \in \mathbb{R}^{1000 \times 2}$，我们使用线性回归模型真实权重$\boldsymbol{w} = [2, -3.4]^\top$和偏差$b = 4.2$，以及一个随机噪声项$\epsilon$来生成标签
+
+$$\boldsymbol{y} = \boldsymbol{X}\boldsymbol{w} + b + \epsilon,$$
+
+其中噪声项$\epsilon$服从均值为0、标准差为0.01的正态分布。噪声代表了数据集中无意义的干扰。
+
 
 
 
