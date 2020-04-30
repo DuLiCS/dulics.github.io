@@ -133,8 +133,21 @@ $$
 $$
 
 #### 3.从零开始的线性回归
+重头戏来了,这部分就是从零开始的线性回归,有助于理解问题,深入了解算法.那么现在就开始.
 
+##### 3.1 生成数据集
 
+第一步是生成一个数据集,在这里的训练数据是我们自己生成的,而在现实中当然不是这样,在这里是为了比较学习的参数和真实的参数.
+
+第一步当然是导入模块
+
+```python
+%matplotlib inline
+from IPython import display
+from matplotlib import pyplot as plt
+from mxnet import autograd,nd
+import random
+```
 
 
 
