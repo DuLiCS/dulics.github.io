@@ -45,4 +45,28 @@ $$
 \end{aligned}
 $$
 
+我们可以把这一组公式转化为矩阵的形式:
+
+$$
+\boldsymbol{\hat{y}} =
+\begin{bmatrix}
+    \hat{y}^{(1)} \\
+    \hat{y}^{(2)} \\
+    \hat{y}^{(3)}
+\end{bmatrix},\quad
+\boldsymbol{X} =
+\begin{bmatrix}
+    x_1^{(1)} & x_2^{(1)} \\
+    x_1^{(2)} & x_2^{(2)} \\
+    x_1^{(3)} & x_2^{(3)}
+\end{bmatrix},\quad
+\boldsymbol{w} =
+\begin{bmatrix}
+    w_1 \\
+    w_2
+\end{bmatrix}.
+$$
+
+在这里估计值和实际值的误差就是$$y-hat{y}$$
+
 
