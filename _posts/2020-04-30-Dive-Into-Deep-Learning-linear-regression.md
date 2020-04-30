@@ -1,4 +1,3 @@
-
 ---
 
 layout: post
@@ -14,5 +13,5 @@ tags: [Deep Learning, AI]
 
 #### 
 
-$$\hat{y} = x_1 w_1 + x_2 w_2 + b,$$
+$$\hat{y} = x_1 w_1 + x_2 w_2 + b$$
 
