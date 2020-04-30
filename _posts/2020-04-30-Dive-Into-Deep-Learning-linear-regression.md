@@ -93,6 +93,47 @@ b &\leftarrow b -   \frac{\eta}{|\mathcal{B}|} \sum_{i \in \mathcal{B}} \frac{ \
 \end{aligned}
 $$
 
+在上式中，$|\mathcal{B}|$代表每个小批量中的样本个数（批量大小，batch size），$\eta$称作学习率（learning rate）并取正数。需要强调的是，这里的批量大小和学习率的值是人为设定的，并不是通过模型训练学出的，因此叫作超参数（hyperparameter）。我们通常所说的“调参”指的正是调节超参数，例如通过反复试错来找到超参数合适的值。在少数情况下，超参数也可以通过模型训练学出。
+
+广义上讲，当数据样本数为$n$，特征数为$d$时，线性回归的矢量计算表达式为
+
+$$\boldsymbol{\hat{y}} = \boldsymbol{X} \boldsymbol{w} + b,$$
+
+其中模型输出$\boldsymbol{\hat{y}} \in \mathbb{R}^{n \times 1}$， 批量数据样本特征$\boldsymbol{X} \in \mathbb{R}^{n \times d}$，权重$\boldsymbol{w} \in \mathbb{R}^{d \times 1}$， 偏差$b \in \mathbb{R}$。相应地，批量数据样本标签$\boldsymbol{y} \in \mathbb{R}^{n \times 1}$。设模型参数$\boldsymbol{\theta} = [w_1, w_2, b]^\top$，我们可以重写损失函数为
+
+
+$$\ell(\boldsymbol{\theta})=\frac{1}{2n}(\boldsymbol{\hat{y}}-\boldsymbol{y})^\top(\boldsymbol{\hat{y}}-\boldsymbol{y}).$$
+
+小批量随机梯度下降的迭代步骤将相应地改写为
+
+$$\boldsymbol{\theta} \leftarrow \boldsymbol{\theta} -   \frac{\eta}{|\mathcal{B}|} \sum_{i \in \mathcal{B}}   \nabla_{\boldsymbol{\theta}} \ell^{(i)}(\boldsymbol{\theta}),$$
+
+其中梯度是损失有关3个为标量的模型参数的偏导数组成的向量：
+$$
+\nabla_{\boldsymbol{\theta}} \ell^{(i)}(\boldsymbol{\theta})=
+\begin{bmatrix}
+    \frac{ \partial \ell^{(i)}(w_1, w_2, b)  }{\partial w_1} \\
+    \frac{ \partial \ell^{(i)}(w_1, w_2, b)  }{\partial w_2} \\
+    \frac{ \partial \ell^{(i)}(w_1, w_2, b)  }{\partial b}
+\end{bmatrix}
+=
+\begin{bmatrix}
+    x_1^{(i)} (x_1^{(i)} w_1 + x_2^{(i)} w_2 + b - y^{(i)}) \\
+    x_2^{(i)} (x_1^{(i)} w_1 + x_2^{(i)} w_2 + b - y^{(i)}) \\
+    x_1^{(i)} w_1 + x_2^{(i)} w_2 + b - y^{(i)}
+\end{bmatrix}
+=
+\begin{bmatrix}
+    x_1^{(i)} \\
+    x_2^{(i)} \\
+    1
+\end{bmatrix}
+(\hat{y}^{(i)} - y^{(i)}).
+$$
+
+#### 3.从零开始的线性回归
+
+
 
 
 
