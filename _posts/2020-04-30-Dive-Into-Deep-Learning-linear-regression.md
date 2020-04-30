@@ -1,0 +1,17 @@
+---
+
+layout: post
+title: Dive into Deep Learning Linear Regression
+subtitle: 
+tags: [Project, Image Processing]
+
+---
+
+### 前言
+
+世界读书日的时候买了很多书,其中只有一本专业书,就是这本Dive into deep learning.和之前买的Deep Learning那本书不同,这本书注重实践,通过写某一个算法的Scratch版本来学习算法.从零开始手撸算法有助于理解.从简单的开始,第一个就是线性回归.
+
+#### 
+
+$$\hat{y} = x_1 w_1 + x_2 w_2 + b,$$
+
