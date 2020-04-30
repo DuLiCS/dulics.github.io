@@ -3,7 +3,7 @@
 layout: post
 title: Dive into Deep Learning Linear Regression
 subtitle: 
-tags: [Deep Learning, AI]
+tags: [Project, Image Processing]
 
 ---
 
