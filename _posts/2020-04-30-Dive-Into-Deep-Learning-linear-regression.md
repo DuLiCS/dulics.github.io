@@ -155,6 +155,12 @@ $$\boldsymbol{y} = \boldsymbol{X}\boldsymbol{w} + b + \epsilon,$$
 
 其中噪声项$\epsilon$服从均值为0、标准差为0.01的正态分布。噪声代表了数据集中无意义的干扰。
 
+下面是我自己写的代码,一会儿和书上的代码进行对比,高下立判哈.
+```python
+
+```
+
+
 
 
 
