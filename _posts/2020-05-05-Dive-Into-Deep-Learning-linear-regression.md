@@ -165,7 +165,7 @@ labels = true_w[0] * features[:, 0] + true_w[1] * features[:, 1] + true_b
 labels += nd.random.normal(scale=0.01, shape=labels.shape)
 
 ```
-![线性回归数据](linear_Reg_data.png)
+![线性回归数据](\img\linear_Reg_data.png)
 
 
 
