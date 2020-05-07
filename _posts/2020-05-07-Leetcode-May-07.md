@@ -7,6 +7,9 @@ tags: [Algorithm, Leetcode]
 
 ---
 
+
+Leetcode in May 7th
+
 ### 1431. Kids With the Greatest Number of Candies
 
 
@@ -55,7 +58,7 @@ Constraints:
 
 ### Python3:
 
-```
+```python
 class Solution:
     def kidsWithCandies(self, candies: List[int], extraCandies: int) -> List[bool]:
         result = []
