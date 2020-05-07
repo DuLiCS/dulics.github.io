@@ -1,7 +1,7 @@
 ---
 
 layout: post
-title: Leetcode Rush 
+title: Leetcode Rush
 subtitle: May 07
 tags: [Algorithm, Leetcode]
 
