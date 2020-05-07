@@ -180,6 +180,7 @@ plt.scatter(features[:, 1].asnumpy(), labels.asnumpy(), 1);  # 加分号只显�
 ![线性回归数据](\img\linear_Reg_data.png)
 
 通过对图片的观察,我们可以看出
+![线性回归二元一次](\img\origin_linear_Reg.png)
 
 
 
