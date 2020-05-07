@@ -164,10 +164,22 @@ features = nd.random.normal(scale=1, shape=(num_examples, num_inputs))
 labels = true_w[0] * features[:, 0] + true_w[1] * features[:, 1] + true_b
 labels += nd.random.normal(scale=0.01, shape=labels.shape)
 
+def use_svg_display():
+    # 用矢量图显示
+    display.set_matplotlib_formats('svg')
+
+def set_figsize(figsize=(3.5, 2.5)):
+    use_svg_display()
+    # 设置图的尺寸
+    plt.rcParams['figure.figsize'] = figsize
+
+set_figsize()
+plt.scatter(features[:, 1].asnumpy(), labels.asnumpy(), 1);  # 加分号只显示图
+
 ```
 ![线性回归数据](\img\linear_Reg_data.png)
 
-
+通过对图片的观察,我们可以看出
 
 
 
