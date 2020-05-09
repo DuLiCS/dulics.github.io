@@ -168,8 +168,8 @@ s[i] = 'L' or 'R'
  
 ### python3:
  
- ```
- class Solution:
+```python
+class Solution:
     def balancedStringSplit(self, s: str) -> int:
         r,l,c=0,0,0
         for i in s:
@@ -181,4 +181,49 @@ s[i] = 'L' or 'R'
                 c+=1
                 r,l=0,0
         return c
+```
+
+
+### LeetCoding Challenge
+
+#### Valid Perfect Square
+
+Given a positive integer num, write a function which returns True if num is a perfect square else False.
+
+Note: Do not use any built-in library function such as sqrt.
+
+Example 1:
+
+```
+Input: 16
+Output: true
+```
+
+Example 2:
+
+```
+Input: 14
+Output: false
+```
+
+#### python3:
+
+
+```python
+class Solution:
+    def isPerfectSquare(self, num: int) -> bool:
+        
+        flag = 1
+
+        while(num>0):
+
+            num -= 2*flag - 1
+            flag += 1
+
+        if num == 0:
+            return True
+
+        else:
+            return False
+
 ```
