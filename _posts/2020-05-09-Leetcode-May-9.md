@@ -97,7 +97,7 @@ Constraints:
 
 ### python3:
 
-```python3
+```python
 
 class Solution:
     def findNumbers(self, nums: List[int]) -> int:
