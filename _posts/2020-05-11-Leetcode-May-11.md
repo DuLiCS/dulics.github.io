@@ -158,3 +158,63 @@ class Solution:
             
         return -1
 ```
+
+### 1232. Check If It Is a Straight Line
+
+
+You are given an array coordinates, coordinates[i] = [x, y], where [x, y] represents the coordinate of a point. Check if these points make a straight line in the XY plane.
+
+ 
+
+ 
+
+Example 1:
+
+
+```
+Input: coordinates = [[1,2],[2,3],[3,4],[4,5],[5,6],[6,7]]
+Output: true
+```
+
+Example 2:
+
+
+```
+Input: coordinates = [[1,1],[2,2],[3,4],[4,5],[5,6],[7,7]]
+Output: false
+``` 
+
+Constraints:
+
+```
+2 <= coordinates.length <= 1000
+coordinates[i].length == 2
+-10^4 <= coordinates[i][0], coordinates[i][1] <= 10^4
+coordinates contains no duplicate point.
+```
+
+### python3:
+
+```python
+class Solution:
+    def checkStraightLine(self, coordinates: List[List[int]]) -> bool:
+        flag = 0
+        if len(coordinates) == 2:
+            return True
+        else:
+            p1 = coordinates[0]
+            p2 = coordinates[1]
+            if (p1[1]-p2[1])!=0 and (p1[0]-p2[0]) !=0:
+                for i in coordinates[2:]:
+                    if((i[1]-p2[1])/(p1[1]-p2[1])) == ((i[0]-p2[0])/(p1[0]-p2[0])):
+                        flag += 1
+            else:
+                for i in coordinates[2:]:
+                    if (i[0] == p1[0]) or (i[1] == p1[1]):
+                        flag += 1
+            
+            if flag == (len(coordinates)-2):
+                return True
+            else:
+                return False
+```
