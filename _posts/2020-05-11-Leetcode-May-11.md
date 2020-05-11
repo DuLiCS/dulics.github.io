@@ -2,228 +2,159 @@
 
 layout: post
 title: Leetcode Rush
-subtitle: May 09
+subtitle: May 11
 tags: [Algorithm, Leetcode]
 
 ---
 
 
-### 1313. Decompress Run-Length Encoded List
+### 1389. Create Target Array in the Given Order
 
+Given two arrays of integers nums and index. Your task is to create target array under the following rules:
 
-We are given a list nums of integers representing a list compressed with run-length encoding.
+Initially target array is empty.
+From left to right read nums[i] and index[i], insert at index index[i] the value nums[i] in target array.
+Repeat the previous step until there are no elements to read in nums and index.
+Return the target array.
 
-Consider each adjacent pair of elements [freq, val] = [nums[2*i], nums[2*i+1]] (with i >= 0).  For each such pair, there are freq elements with value val concatenated in a sublist. Concatenate all the sublists from left to right to generate the decompressed list.
-
-Return the decompressed list.
-
- 
-
-Example 1:
-
-```
-Input: nums = [1,2,3,4]
-Output: [2,4,4,4]
-Explanation: The first pair [1,2] means we have freq = 1 and val = 2 so we generate the array [2].
-The second pair [3,4] means we have freq = 3 and val = 4 so we generate [4,4,4].
-At the end the concatenation [2] + [4,4,4] is [2,4,4,4].
-```
-
-Example 2:
-
-```
-Input: nums = [1,1,2,3]
-Output: [1,3,3]
-```
-
-Constraints:
-
-```
-2 <= nums.length <= 100
-nums.length % 2 == 0
-1 <= nums[i] <= 100
-```
-
-### python3:
-
-```python
-class Solution:
-    def decompressRLElist(self, nums: List[int]) -> List[int]:
-        result = []
-        for i in range(len(nums)//2):
-            for j in range(nums[2*i]):
-                result.append(nums[2*i+1])
-                
-        return result
-```
-
-
-
-### 1295. Find Numbers with Even Number of Digits
-
-Given an array nums of integers, return how many of them contain an even number of digits.
- 
-
-Example 1:
-
-```
-Input: nums = [12,345,2,6,7896]
-Output: 2
-Explanation: 
-12 contains 2 digits (even number of digits). 
-345 contains 3 digits (odd number of digits). 
-2 contains 1 digit (odd number of digits). 
-6 contains 1 digit (odd number of digits). 
-7896 contains 4 digits (even number of digits). 
-Therefore only 12 and 7896 contain an even number of digits.
-```
-
-
-Example 2:
-
-```
-Input: nums = [555,901,482,1771]
-Output: 1 
-Explanation: 
-Only 1771 contains an even number of digits.
-``` 
-
-Constraints:
-
-```
-1 <= nums.length <= 500
-1 <= nums[i] <= 10^5
-```
-
-### python3:
-
-```python
-
-class Solution:
-    def findNumbers(self, nums: List[int]) -> int:
-        flag = 0
-        for num in nums:
-            tag = 0
-            while(num>0):
-                num = num//10
-                tag += 1
-
-            if tag%2 == 0:
-                flag += 1
-
-        return flag
- ```
- 
-### 1221. Split a String in Balanced Strings
-
-
-Balanced strings are those who have equal quantity of 'L' and 'R' characters.
-
-Given a balanced string s split it in the maximum amount of balanced strings.
-
-Return the maximum amount of splitted balanced strings.
+It is guaranteed that the insertion operations will be valid.
 
  
 
 Example 1:
 
 ```
-Input: s = "RLRRLLRLRL"
-Output: 4
-Explanation: s can be split into "RL", "RRLL", "RL", "RL", each substring contains same number of 'L' and 'R'.
+Input: nums = [0,1,2,3,4], index = [0,1,2,2,1]
+Output: [0,4,1,3,2]
+Explanation:
+nums       index     target
+0            0        [0]
+1            1        [0,1]
+2            2        [0,1,2]
+3            2        [0,1,3,2]
+4            1        [0,4,1,3,2]
 ```
-
 
 Example 2:
 
 ```
-Input: s = "RLLLLRRRLR"
-Output: 3
-Explanation: s can be split into "RL", "LLLRRR", "LR", each substring contains same number of 'L' and 'R'.
+Input: nums = [1,2,3,4,0], index = [0,1,2,3,0]
+Output: [0,1,2,3,4]
+Explanation:
+nums       index     target
+1            0        [1]
+2            1        [1,2]
+3            2        [1,2,3]
+4            3        [1,2,3,4]
+0            0        [0,1,2,3,4]
 ```
 
 Example 3:
 
 ```
-Input: s = "LLLLRRRR"
-Output: 1
-Explanation: s can be split into "LLLLRRRR".
+Input: nums = [1], index = [0]
+Output: [1]
 ```
-
-Example 4:
-
-```
-Input: s = "RLRRRLLRLL"
-Output: 2
-Explanation: s can be split into "RL", "RRRLLRLL", since each substring contains an equal number of 'L' and 'R'
-``` 
 
 Constraints:
 
 ```
-1 <= s.length <= 1000
-s[i] = 'L' or 'R'
+1 <= nums.length, index.length <= 100
+nums.length == index.length
+0 <= nums[i] <= 100
+0 <= index[i] <= i
 ```
- 
- 
+
+
 ### python3:
- 
 ```python
 class Solution:
-    def balancedStringSplit(self, s: str) -> int:
-        r,l,c=0,0,0
-        for i in s:
-            if i=="R":
-                r+=1
-            else:
-                l+=1
-            if l==r:
-                c+=1
-                r,l=0,0
-        return c
+    def createTargetArray(self, nums: List[int], index: List[int]) -> List[int]:
+        result = []
+
+        for i in range(len(nums)):
+            result.insert(index[i],nums[i])
+        
+        return result
 ```
 
+### 997. Find the Town Judge
 
-### LeetCoding Challenge
+In a town, there are N people labelled from 1 to N.  There is a rumor that one of these people is secretly the town judge.
 
-#### Valid Perfect Square
+If the town judge exists, then:
 
-Given a positive integer num, write a function which returns True if num is a perfect square else False.
+The town judge trusts nobody.
+Everybody (except for the town judge) trusts the town judge.
+There is exactly one person that satisfies properties 1 and 2.
+You are given trust, an array of pairs trust[i] = [a, b] representing that the person labelled a trusts the person labelled b.
 
-Note: Do not use any built-in library function such as sqrt.
+If the town judge exists and can be identified, return the label of the town judge.  Otherwise, return -1.
+
+ 
 
 Example 1:
 
 ```
-Input: 16
-Output: true
+Input: N = 2, trust = [[1,2]]
+Output: 2
 ```
+
 
 Example 2:
 
 ```
-Input: 14
-Output: false
+Input: N = 3, trust = [[1,3],[2,3]]
+Output: 3
 ```
 
-#### python3:
+Example 3:
 
+```
+Input: N = 3, trust = [[1,3],[2,3],[3,1]]
+Output: -1
+```
+
+Example 4:
+
+
+```
+Input: N = 3, trust = [[1,2],[2,3]]
+Output: -1
+```
+
+Example 5:
+
+```
+Input: N = 4, trust = [[1,3],[1,4],[2,3],[2,4],[4,3]]
+Output: 3
+```
+
+Note:
+
+1 <= N <= 1000
+trust.length <= 10000
+trust[i] are all different
+trust[i][0] != trust[i][1]
+1 <= trust[i][0], trust[i][1] <= N
+
+### python3:
 
 ```python
 class Solution:
-    def isPerfectSquare(self, num: int) -> bool:
-        
-        flag = 1
+    def findJudge(self, N: int, trust: List[List[int]]) -> int:
+        people = [0]*N
+        judge = [0]*N
+        for i in trust:
+            people[i[0]-1] += 1
+            judge[i[1]-1] += 1
 
-        while(num>0):
-
-            num -= 2*flag - 1
-            flag += 1
-
-        if num == 0:
-            return True
-
-        else:
-            return False
-
+        for j in range(len(people)):
+            if people[j] == 0:
+                if judge[j] == N-1:
+                    return j+1
+                else:
+                    return -1
+            
+        return -1
 ```
