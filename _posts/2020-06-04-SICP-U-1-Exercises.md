@@ -7,6 +7,19 @@ tags: [SICP, Lisp]
 
 ---
 
+<head>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+</head>
+
+
 ### 1.2 写前缀形式
 
 ```Lisp
@@ -50,3 +63,11 @@ tags: [SICP, Lisp]
 ```
 
 (define (p) (p))是一个不断调用自己的过程,因此一旦执行,就会无限循环.那么正则序和应用序的不同在于,先调用还是先展开,如果是正则序,先展开,再执行,则会输出0,因为(p)始终没有调用.而应用序则相反,先调用,那么就会进入无限循环.
+
+
+### 实例1.1.7 牛顿法求平方根
+
+$$
+f(x) = x^2-2
+$$
+
