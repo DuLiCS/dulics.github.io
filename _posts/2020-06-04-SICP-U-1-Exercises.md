@@ -75,5 +75,25 @@ $$
 
 $$y = f^{’}(x_n)x +f(x_n)-f^{’}(x_n)x_n$$
 
-将这个直线和横轴的交点求出,这个点是$(\frac{f^{’}(x_n)x_n - f(x_n)}{f^{’}(x_n)},0)$.对于本题来说,$f(x) = x^2-2$,$f^{’}(x) = 2x$,因此$x_{n+1} = \frac{x_n+\frac{2}{x_n}{2}$
+将这个直线和横轴的交点求出,这个点是$(\frac{f^{’}(x_n)x_n - f(x_n)}{f^{’}(x_n)},0)$.对于本题来说,$f(x) = x^2-2$,$f^{’}(x) = 2x$,因此$x_{n+1} = \frac{x_n+\frac{2}{x_n}{2}$.
+
+```
+(define (square-iter guess x)
+  (if (good-enough? guess x)
+      guess
+      (square-iter (improve guess x) x)))
+
+(define (improve guess x)
+  (average guess (/ x guess)))
+
+(define (average x y)
+  (/ (+ x y) 2))
+
+(define (good-enough? guess x)
+  (< (abs (- (square guess) x)) 0.0001))
+
+
+(define (square x)
+  (* x x))
+```
 
