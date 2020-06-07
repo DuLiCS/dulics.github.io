@@ -113,3 +113,30 @@ $$y = f^{’}(x_n)x +f(x_n)-f^{’}(x_n)x_n$$
 (define (good-enough? guess x)
   (< (abs (/ (abs (- (square guess) x)) x)) 0.001))
 ```
+
+
+### 1.8
+
+```
+(define (cube-iter guess x)
+  (if (good-enough? guess x)
+      guess
+      (cube-iter (improve guess x) x)))
+
+(define (improve guess x)
+  (third-div (* guess 2) (/ x (square guess))))
+
+(define (third-div x y)
+  (/ (+ x y) 3))
+
+(define (good-enough? guess x)
+  (< (abs (/ (abs (- (cube guess) x)) x)) 0.001))
+
+
+(define (square x)
+  (* x x))
+(define (cube x)
+  (* x x x))
+
+(cube-iter 1.0 8.0)
+```
