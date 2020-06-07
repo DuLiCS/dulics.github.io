@@ -107,3 +107,9 @@ $$y = f^{’}(x_n)x +f(x_n)-f^{’}(x_n)x_n$$
 
 而另一方面，新定义的 new-if 只是一个普通函数，它没有 if 所具有的特殊形式，根据解释器所使用的应用序求值规则，每个函数的实际参数在传入的时候都会被求值，因此，当使用 new-if 函数时，无论 predicate 是真还是假， then-clause 和 else-clause 两个分支都会被求值。
 
+### 1.7
+
+```
+(define (good-enough? guess x)
+  (< (abs (/ (abs (- (square guess) x)) x)) 0.001))
+```
