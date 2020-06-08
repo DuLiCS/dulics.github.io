@@ -77,8 +77,8 @@ Consider the following procedures, where A is the proce- dure defined above:
 (define (k n) (* 5 n n))
 ```
 
-(f n)计算的是2*y
+(f n)计算的是$2*y$
 
-(g n)计算的是2的y次方
+(g n)计算的是$2^{y}$
 
 (h n)计算的是$2^{2^{\dots2}}$
