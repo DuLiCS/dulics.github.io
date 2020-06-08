@@ -59,3 +59,26 @@ tags: [SICP, Lisp]
 ```
 上面的运算过程是线性迭代.
 
+
+### 1.9 Ackermann’s function.
+
+```
+(define (A x y) (cond ((= y 0) 0)
+((= x 0) (* 2 y))
+((= y 1) 2)
+(else (A (- x 1) (A x (- y 1))))))
+```
+
+Consider the following procedures, where A is the proce- dure defined above:
+```
+(define (f n) (A 0 n)) 
+(define (g n) (A 1 n)) 
+(define (h n) (A 2 n))
+(define (k n) (* 5 n n))
+```
+
+(f n)计算的是2*y
+
+(g n)计算的是2的y次方
+
+(h n)计算的是$2^{2^{\dots2}}$
