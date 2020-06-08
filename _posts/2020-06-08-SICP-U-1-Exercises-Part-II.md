@@ -1,0 +1,60 @@
+---
+
+layout: post
+title: SICP exercises
+subtitle: U1 Part II
+tags: [SICP, Lisp]
+
+---
+
+<head>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+</head>
+
+
+### 1.9 
+
+```
+(define (+ a b)
+(if (= a 0) b (inc (+ (dec a) b))))
+```
+原文中相当于重载了+这个运算,在这里写成plus会更直观一些.
+
+```
+(plus 4 5)
+(inc (plus (3) 5))
+(inc (inc (plus (2) 5)))
+(inc (inc (inc (plus (1) 5))))
+(inc (inc (inc (inc (plus (0) 5)))))
+(inc (inc (inc (inc 5))))
+(inc (inc (inc 6)))
+(inc (inc 7))
+(inc 8)
+(9)
+```
+
+```
+(define (+ a b)
+(if (= a 0) b (+ (dec a) (inc b))))
+```
+
+这里也用plus代替+
+```
+(plus 4 5)
+(plus (dec 4) (inc 5))
+(plus 3 6)
+(plus 2 7)
+(plus 1 8)
+(plus 0 9)
+(9)
+```
+
+
