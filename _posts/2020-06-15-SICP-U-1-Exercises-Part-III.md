@@ -76,5 +76,27 @@ kinds-of-coins)))))
 ((= kinds-of-coins 5) 50)))
 ```
 
-### 练习1.11
+### Exercise 1.11: A function f is defined by the rule that
 
+$$
+f(n)=\left\{\begin{array}{l}
+n \text { if } n<3 \\
+f(n-1)+2 f(n-2)+3 f(n-3) \text { if } n \geq 3
+\end{array}\right.
+$$
+
+Write a procedure that computes f by means of a recursive process.Write a procedure that computes f by means of an iterative process.
+
+**recursive process:**
+
+```
+(define (f n)
+  (cond ((< n 3) n)
+        (else (+ (f (- n 1)) (* (f (- n 2)) 2) (* (f (- n 3)) 3)))))
+```
+
+**iterative process:**
+
+```
+
+```
