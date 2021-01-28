@@ -1,7 +1,7 @@
 ---
 
 layout: post
-title:深度学习入门  基于Python的理论实现
+title: 深度学习入门  基于Python的理论实现
 subtitle: 第二章 感知机
 tags: [Deep learning, Reading]
 
