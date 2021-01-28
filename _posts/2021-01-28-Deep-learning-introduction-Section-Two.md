@@ -26,7 +26,7 @@ tags: [Deep learning, Reading]
 
 暂时是这么安排的，对于学习的过程，一方面写文章，一方面做视频，不清楚做这些的时间成本怎么样，先试试看。
 <div style="text-align: center;">
-![书封面](/img/Deep learning from Scratch.jpg)    
+[书封面](/img/Deep learning from Scratch.jpg)    
 </div>
 
 买过各种各样的机器学习的书了，这次打算从底层好好的过一遍。不管是原理还是实现都尽可能贴近原理。
