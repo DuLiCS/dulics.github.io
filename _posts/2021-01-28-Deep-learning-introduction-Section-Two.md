@@ -29,7 +29,12 @@ tags: [Deep learning, Reading]
 ![书封面](/img/Deep learning from Scratch.jpg)    
 </center>
 
+买过各种各样的机器学习的书了，这次打算从底层好好的过一遍。不管是原理还是实现都尽可能贴近原理。
 
-买过各种各样的机器学习的书了，这次打算从
+这里是本书的第二章。由于第一章是Python的入门知识，在这里就不需要再赘述了。Dirac
+
+### 1.1 感知机的概念
+
+感知机(Perceptron),是由美国学者Frank Rosenblatt在1975年提出。
 
 
