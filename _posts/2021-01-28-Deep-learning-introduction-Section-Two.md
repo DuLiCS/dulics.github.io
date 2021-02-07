@@ -275,3 +275,6 @@ b+\omega_1 + \omega_2 \leqslant 0
 \end{array}\right.
 $$
 
+通过观察这个等式不难发现，其中有很多问题，$b+\omega_1 > 0$与$b + \omega_2 > 0$可以得到$2b+\omega_1 + \omega_2 > 0$,但是$b+\omega_1 + \omega_2 \leqslant 0$，那么我们就能得到b一定是大于0的，那么和之前的条件$b \leqslant 0$是相背离的，所以出现了一个问题，我们找不到一组参数可以根据感知器的模型模拟一个异或门。
+
+
