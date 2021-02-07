@@ -129,6 +129,17 @@ $$
 
 按照之前的分析方法可得：
 
+$$
+\left\{\begin{array}{ll}
+\theta \geqslant 0 \\
+\theta < \omega_1\\
+\theta < \omega_2\\
+\omega_1 + \omega_2 > \theta
+\end{array}\right.
+$$
+
+例如，$(\omega_1, \omega_2,\theta) = (1.0, 1.0 , 0.8)或(0.5, 0.5, 0.4)$即可满足条件。这样的组合依然有无穷多个。
+
 
 
 
