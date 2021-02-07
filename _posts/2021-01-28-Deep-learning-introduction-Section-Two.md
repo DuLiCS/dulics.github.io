@@ -34,6 +34,10 @@ tags: [Deep learning, Reading]
 
 ### 1.1 感知机的概念
 
-感知机(Perceptron),是由美国学者Frank Rosenblatt在1975年提出。
+感知机(Perceptron),是由美国学者Frank Rosenblatt在1975年提出。感知机是作为神经网络起源的算法，因此对感知机的学习是后续内容的开始。
 
+感知机，顾名思义是感知，英文perceptron，来源于percept，代表认知，认识。所以在这里，感知机接收多个信号，这个信号是流动的，类似于电流或水流。一般来说，0代表不传递，1代表传递，也就是常见的0代表关，1代表开。
+下图就是一个例子。
+
+![手绘感知机](/img/perceptron.svg)
 
