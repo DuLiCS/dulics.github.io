@@ -81,10 +81,10 @@ $$
 
 $$
 \left\{\begin{array}{ll}
-\theta >= 0 \\
-\theta >= \omega_1\\
-\theta >= \omega_2\\
-\omega_1 + \omega_2 >= \theta
+\theta \geqslant 0 \\
+\theta \geqslant \omega_1\\
+\theta \geqslant \omega_2\\
+\omega_1 + \omega_2 > \theta
 \end{array}\right.
 $$
 
