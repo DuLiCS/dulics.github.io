@@ -324,6 +324,17 @@ $$
 
 ```python
 
+def XOR(x1,x2):
+    s1 = NAND(x1,x2)
+    s2 = OR(x1,x2)
+    y = AND(s1,s2)
+    return y
+
+```
+
+异或门就这么完成了，NAND，AND和OR都可以通过线性的感知机模型完成，将他们组合在一起，就完成了异或的实现。转换成感知机模型如下图所示。
+
+![或门感知机](/img/perceptron_arch.png)
 
 
 
