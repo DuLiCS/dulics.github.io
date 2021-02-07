@@ -145,10 +145,10 @@ $$
 
 
 ### 2.3 感知机的实现
-### 2.3.1 简单实现
+#### 2.3.1 简单实现
 
 我们在理论上的到了模型，最终将变为code。
-
+首先是与门的实现。
 ```python
 def AND(x1,x2):
 	w1 =  0.5
@@ -160,6 +160,37 @@ def AND(x1,x2):
 		return 1
 
 ```
+
+接下来是与非门。
+
+```python
+def NAND(x1,x2):
+	w1 =  -0.5
+	w2 = -0.5
+	theta = -0.8
+	if x1*w1 + x2*w2 <= theta:
+		return 0
+	else:
+		return 1
+
+```
+
+最后是或门。
+
+```python
+def NAND(x1,x2):
+	w1 =  1.0
+	w2 = 1.0
+	theta = 0.8
+	if x1*w1 + x2*w2 <= theta:
+		return 0
+	else:
+		return 1
+
+```
+
+#### 2.3.2 倒入权重和偏置
+
 
 
 
