@@ -191,7 +191,14 @@ def NAND(x1,x2):
 
 #### 2.3.2 导入权重和偏置
 
+首先我们将感知机模型的公式做一个变形。将$\theta$变为$b$并移到等式左边。
 
+$$
+y=\left\{\begin{array}{ll}
+0 & \left(b+w_{1} x_{1}+w_{2} x_{2} \leqslant 0\right) \\
+1 & \left(b+w_{1} x_{1}+w_{2} x_{2}>0\right)
+\end{array}\right.
+$$
 
 
 
