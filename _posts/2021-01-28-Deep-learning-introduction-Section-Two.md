@@ -268,10 +268,10 @@ def AND(x1,x2):
 
 $$
 \left\{\begin{array}{ll}
-b \geqslant 0 \\
+b \leqslant 0 \\
 b+\omega_1 > 0\\
 b + \omega_2 > 0\\
-b+\omega_1 + \omega_2 \geqslant 0
+b+\omega_1 + \omega_2 \leqslant 0
 \end{array}\right.
 $$
 
