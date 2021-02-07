@@ -27,7 +27,7 @@ tags: [Machine learning, Reading]
 暂时是这么安排的，对于学习的过程，一方面写文章，一方面做视频，不清楚做这些的时间成本怎么样，先试试看。
 
 
-![书封面](/img/Deep learning from Scratch.jpg)
+![书封面](/img/Deep_learning_from_Scratch.jpg)
 
 
 
@@ -76,8 +76,16 @@ $$
 
 
 
-看完了与门的基本结构和感知机的原理，我们思考一下该如何实现
+看完了与门的基本结构和感知机的原理，我们思考一下该如何实现。对真值表中的数值分别带入不等式。可得
 
 
+$$
+\left\{\begin{array}{ll}
+\theta >= 0 \\
+\theta >= \omega_1\\
+\theta >= \omega_2\\
+\omega_1 + \omega_2 >= \theta
+\end{array}\right.
+$$
 
 
