@@ -28,7 +28,7 @@ tags: [Machine learning, Reading]
 
 <center>
 
-![书封面](/img/Deep learning from Scratch.jpg#pic_center)
+![书封面](/img/Deep learning from Scratch.jpg)
 
 </center>
 
