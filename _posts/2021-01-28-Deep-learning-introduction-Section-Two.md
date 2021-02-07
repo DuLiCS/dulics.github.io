@@ -200,6 +200,54 @@ y=\left\{\begin{array}{ll}
 \end{array}\right.
 $$
 
+上面是一个等价变换。在这里，我们将$b$称为<fonrt color=red>偏置<\font>，将$\omega_1$和$\omega_2$称为<font color=red>权重</font>。换言之就是信号与权重的乘积和加上偏置看是否大于0，是则输出1，否则为0。
 
+#### 2.3.3 加上偏置和权重的实现
 
+与门的实现方式几乎一样。做了一点小小的改动。
+
+```python
+def AND(x1,x2):
+	x =  np.array([x1,x2])
+	w = np.array([0.5,0.5])
+	b = -0.8
+	tmp  = np.sum(w*x)+b
+	if tmp <= 0:
+		return 0
+	else:
+		return 1
+
+```
+权重衡量了不同输入信号的重要程度，而偏置则代表了神经元被激活的容易程度。
+
+接下来实现与非门：
+```python
+def AND(x1,x2):
+	x =  np.array([x1,x2])
+	w = np.array([-0.5,-0.5])
+	b = 0.8
+	tmp  = np.sum(w*x)+b
+	if tmp <= 0:
+		return 0
+	else:
+		return 1
+
+```
+
+最后是或门
+
+```python
+def AND(x1,x2):
+	x =  np.array([x1,x2])
+	w = np.array([0.5,0.5])
+	b = -0.3
+	tmp  = np.sum(w*x)+b
+	if tmp <= 0:
+		return 0
+	else:
+		return 1
+
+```
+
+综上，上述结构仅仅是调整参数的不同即可实现。
 
