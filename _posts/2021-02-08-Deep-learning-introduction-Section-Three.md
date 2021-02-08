@@ -85,7 +85,90 @@ $$y = h(a)$$
 这是非常常见的激活函数。
 
 $$
-S(x)=\frac{1}{1+e^{-x}}
+h(x)=\frac{1}{1+e^{-x}}
 $$
 
+神经网络使用sigmoid作为激活函数。<font color=red>神经网络和感知机的主要区别就在于激活函数</font>。
 
+#### 3.2.2 阶跃函数的实现
+即：
+
+$$
+h=\left\{\begin{array}{ll}
+0 & \left(x \leqslant 0 \right) \\
+1 & \left(x > 0\right)
+\end{array}\right.
+$$
+
+```python
+
+def step_function(x):
+	if x>0:
+		return 1
+	else:
+		return 0
+```
+
+这是一个最基本的实现，但是输入不能以数组的形式呈现，下面我们修改一下使之可以使用Numpy数组实现。
+
+```python
+def step_function(x):
+	y = x > 0
+	
+	return y.astype(np.int)
+```
+
+这里函数中的第二个行对输入的numpy数组判断是否大于零，大于零的返回True，反之则为False。astype将布尔值转换为整形，True变为1，False变为0。
+
+![代码验证结果](/img/numpy_code.png)
+
+#### 3.2.3 阶跃函数的图形
+
+我们用matplotlib来画图。
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def step_function(x):
+    return np.array(x>0,dtype=np.int)
+
+x = np.arange(-5.0,5.0,0.1)
+y = step_function(x)
+
+plt.plot(x,y)
+plt.ylim(-0.1,1.1)
+plt.show()
+```
+
+执行结果如下：
+![阶跃函数图像](/img/step_function.png)
+
+#### 3.2.4 sigmoid函数的实现
+
+```python
+
+def sigmoid(x):
+	return 1/(1+np.exp(-x))
+```
+
+绘图：
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def step_function(x):
+    return 1/(1+np.exp(-x))
+
+x = np.arange(-5.0,5.0,0.1)
+y = step_function(x)
+
+plt.plot(x,y)
+plt.ylim(-0.1,1.1)
+plt.show()
+```
+执行结果如下：
+![sigmoid函数图像](/img/sigmoid_function.png)
+	
+	
