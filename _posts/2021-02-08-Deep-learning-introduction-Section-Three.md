@@ -215,5 +215,42 @@ x & \left(x > 0\right)
 \end{array}\right.
 $$
 
+代码实现如下：
+
+```python
+def relu(x):
+	if x>0:
+		return x
+	else:
+		return 0
+```
+
+```python
+def relu(x):
+	return np.maxium(0,x)
+```
+
+ReLU函数的图像如下。
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def relu(x):
+    return np.maximum(0,x)
+
+x = np.arange(-5.0,5.0,0.1)
+y = relu(x)
+plt.plot(x,y)
+plt.ylim(-0.5,4.0)
+plt.show()
+```
+
+![relu函数图像](/img/relu.png)
+
+
+### 3.3 多位数组的运算
+
+
  
 	
