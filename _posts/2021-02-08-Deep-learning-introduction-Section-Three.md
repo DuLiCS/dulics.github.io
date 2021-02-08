@@ -189,7 +189,7 @@ plt.ylim(-0.1,1.1)
 plt.show()
 ```
 
-![图像对比](/img/step_and_sigmoid_function.png)
+![图像对比](/img/sigmoid_and_step_function.png)
 
 
 通过上图观察，他们之间究竟有什么不同。我讲这些不同归纳为以下两点：
