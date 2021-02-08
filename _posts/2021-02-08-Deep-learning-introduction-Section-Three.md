@@ -205,7 +205,15 @@ plt.show()
 在这里举一个简单的例子。假设我们在这里用线性函数$h(x) = cx$为激活函数。于是$y(x)=h(h(h(x)))$作为三层神经网络的运算，于是得到$y(x)=c^3x$，我们让$c^3=a$,于是有$y(x)=ax$,这个三层网络可以用一层网络代替，那么这个三层网络就没有意义了且无论多少层都可用一层代替。
  
  
- #### 3.2.7 ReLU函数
- 
+#### 3.2.7 ReLU函数
+sigmoid函数很早就开始使用了，现在使用较多的是ReLU函数(Rectified Linear Unit)。ReLU函数也很简单，输入大于0时，直接输出该值，否则输出0。可表示为：
+
+$$
+h=\left\{\begin{array}{ll}
+0 & \left(x \leqslant 0 \right) \\
+x & \left(x > 0\right)
+\end{array}\right.
+$$
+
  
 	
