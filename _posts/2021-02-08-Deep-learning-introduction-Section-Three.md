@@ -158,11 +158,11 @@ def sigmoid(x):
 import numpy as np
 import matplotlib.pyplot as plt
 
-def step_function(x):
+def sigmoid_function(x):
     return 1/(1+np.exp(-x))
 
 x = np.arange(-5.0,5.0,0.1)
-y = step_function(x)
+y = sigmoid_function(x)
 
 plt.plot(x,y)
 plt.ylim(-0.1,1.1)
@@ -170,5 +170,24 @@ plt.show()
 ```
 执行结果如下：
 ![sigmoid函数图像](/img/sigmoid_function.png)
-	
+
+
+将他们放在一起做一个对比：
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def sigmoid_function(x):
+    return 1/(1+np.exp(-x))
+
+x = np.arange(-5.0,5.0,0.1)
+y = sigmoid_function(x)
+z = step_function(x)
+plt.plot(x,y)
+plt.plot(x,z,'--')
+plt.ylim(-0.1,1.1)
+plt.show()
+```
+
+![图像对比](/img/step_and_sigmoid_function.png)
 	
