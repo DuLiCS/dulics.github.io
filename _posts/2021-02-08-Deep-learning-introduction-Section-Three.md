@@ -258,5 +258,44 @@ plt.show()
 现在我们使用Numpy来实现神经网络。下面的神经网络省略了偏置和激活函数，只有权重。
 
 ![简单神经网络结构](/img/NLP_lite.png)
+
+结合上面的图，我们得到几个式子。
+
+$$
+h=\left\{\begin{array}{ll}
+1 \times x_1+2 \times x_2 = y_1 \\
+3 \times x_1+4 \times x_2 = y_2 \\
+5 \times x_1+6 \times x_2 = y_3 
+\end{array}\right.
+$$
+
+
+使得$X = \begin{pmatrix}
+x_1\\
+x_2
+\end{pmatrix}$,使得$Y = \begin{pmatrix}
+y_1\\
+y_2\\
+y_3
+\end{pmatrix}$
+
+$$
+\begin{pmatrix}
+1&2 \\
+3&4\\
+5&6
+\end{pmatrix}
+\begin{pmatrix}
+x_1\\
+x_2
+\end{pmatrix} = 
+\begin{pmatrix}
+y_1\\
+y_2\\
+y_3
+\end{pmatrix}
+$$
+
+
  
 	
