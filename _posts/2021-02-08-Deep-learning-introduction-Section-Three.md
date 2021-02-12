@@ -432,3 +432,9 @@ A2 = np.dot(Z1,W2) + B
 Z2 = sigmoid_function(A2)
 print(A1)
 ```
+
+![第二层代码](/img/layer2_code.png)
+
+第二层和第一层是完全一样的，只不过第二层的输入变成了上一层的输出。
+
+![第二层图示](/img/layer2_process.png)
