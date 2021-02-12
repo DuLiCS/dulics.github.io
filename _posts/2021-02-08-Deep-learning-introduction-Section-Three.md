@@ -467,6 +467,39 @@ print(Y)
 
 这一节将之前的代码做整理。
 
+```python
+import numpy as np
+
+def init_parameter():   #初始化参数
+    network = {}
+    network['W1'] = np.array([[0.1,0.3,0.5],[0.2,0.4,0.6]]) 
+    network['W2'] = np.array([[0.1,0.4],[0.2,0.5],[0.3,0.6]]) 
+    network['W3'] = np.array([[0.1,0.3],[0.2,0.4]])
+    
+    network['B1'] = np.array([0.1,0.2,0.3])
+    network['B2'] = np.array([0.1,0.2])
+    network['B3'] = np.array([0.1,0.2])
+    
+    return network
+
+def forward(network,x):   #运算
+    Z1 = sigmoid_function(np.dot(x,network['W1'])+network['B1'])
+    Z2 = sigmoid_function(np.dot(Z1,network['W2'])+network['B2'])
+    Y = identity_function(np.dot(Z2,network['W3'])+network['B3'])
+    
+    return Y
+
+# 实现
+network = init_parameter()
+
+x = np.array([1.0,0.5])
+
+Y = forward(network,x)
+
+print(Y)
+```
+运行结果如下，在这里使用init_parameter()函数初始化参数，再用forward函数整合计算过程。
+![完整代码](/img/NLP_full_code.png)
 
 
 
