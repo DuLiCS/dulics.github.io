@@ -209,7 +209,8 @@ plt.show()
 sigmoid函数很早就开始使用了，现在使用较多的是ReLU函数(Rectified Linear Unit)。ReLU函数也很简单，输入大于0时，直接输出该值，否则输出0。可表示为：
 
 $$
-h=\left\{\begin{array}{ll}
+h=
+\left\{\begin{array}{ll}
 0 & \left(x \leqslant 0 \right) \\
 x & \left(x > 0\right)
 \end{array}\right.
@@ -422,6 +423,9 @@ Z1 = sigmoid_function(A1)
 
 对照着第一层的计算过程，我们写出第二层的公式和代码。
 
+![第二层图示](/img/layer2_process.png)
+
+
 ```python
 import numpy as np
 
@@ -437,4 +441,32 @@ print(A1)
 
 第二层和第一层是完全一样的，只不过第二层的输入变成了上一层的输出。
 
-![第二层图示](/img/layer2_process.png)
+最后是第二层到输出层的代码和示意图，分析方法和表示方法同上。只是激活函数略有不同。代码如下：
+
+```python
+def identity_function(x):
+    return x
+
+W3 = np.array([[0.1,0.3],[0.2,0.4]])
+B3 = np.array([0.1,0.2])
+
+A3 = np.dot(Z2,W3) + B3
+Y = identity_function(A3)
+
+print(Y)
+```
+
+![第三层代码](/img/layer3_code.png)
+
+在这里定义了identity_function作为激活函数。最后，输出层的激活函数区别于隐藏层用$h(x)$表示，输出层的激活函数用$\sigma(x)$表示。最后放出输出层的示意图。
+![第三层示意图](/img/layer3_process.png)
+
+输出层激活函数的选择将在下一节详细介绍。
+
+#### 3.4.3 代码实现小结
+
+这一节将之前的代码做整理。
+
+
+
+
