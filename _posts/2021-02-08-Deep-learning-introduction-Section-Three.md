@@ -413,3 +413,22 @@ def sigmoid_function(x):
     
 Z1 = sigmoid_function(A1)
 ```
+![第一层代码](/img/layer1_code.png)
+
+具体的计算细节如下图所示：
+
+
+![第一层示意图](/img/layer1_process.png)
+
+对照着第一层的计算过程，我们写出第二层的公式和代码。
+
+```python
+import numpy as np
+
+W2 = np.array([[0.1,0.4],[0.2,0.5],[0.3,0.6]])
+B2 = np.array([0.1,0.2])
+
+A2 = np.dot(Z1,W2) + B
+Z2 = sigmoid_function(A2)
+print(A1)
+```
