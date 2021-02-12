@@ -514,3 +514,41 @@ print(Y)
 $$
 y_k = \frac{exp(a_k)}{\sum_{i=1}^{n} exp(a_i)}
 $$
+
+这个式子还是比较好理解的，也就是说第$k$个输出等于，$e^k$除以所有输入信号指数和。图示如下：
+![softmax函数](/img/softmax.png)
+
+明白了原理接下来实现。
+
+```python
+a = np.array([0.3,2.9,4.0])
+exp_a = np.exp(a)  #分别求指数
+print(exp_a)
+sum_exp_a = np.sum(exp_a) #指数和
+print(sum_exp_a)
+Y = exp_a/sum_exp_a  #结果
+print(Y)
+```
+
+这只是简单验证，最终我们要写成函数。
+
+```python
+def softmax(a):
+    exp_a = np.exp(a)
+    sum_exp_a = np.sum(exp_a)
+    y = exp_a/sum_exp_a
+    
+    return y
+```
+
+#### 3.5.2 实现softmax函数的注意事项
+
+上面的实现固然没有什么问题，就是严格按照函数的定义来写的，但是实际使用的时候，会遇到各种问题，因为这是一个指数函数，所以当输入信号很大时，会出现数据溢出的问题。因此我们可以做一点改进。
+
+$$
+y_k = \frac{exp(a_k)}{\sum_{i=1}^{n} exp(a_i)} = \frac{Cexp(a_k)}{C\sum_{i=1}^{n} exp(a_i)} = 
+ \frac{exp(a_k+logC)}{\sum_{i=1}^{n} exp(a_i+logC)} =  \frac{exp(a_k+C')}{\sum_{i=1}^{n} exp(a_i+C')}
+$$
+
+首先我们在分子分母上都乘以$C$,然后
+
