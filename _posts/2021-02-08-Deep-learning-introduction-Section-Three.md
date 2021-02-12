@@ -361,6 +361,7 @@ A^{(1)} = XW^{(1)}+B^{(1)}
 $$
 
 其中：
+
 $$
 A^{(1)} = 
 \begin{pmatrix}
@@ -382,11 +383,33 @@ b_{1}^{(1)} & b_{2}^{(1)} & b_{3}^{(1)}
 \end{pmatrix}
 $$
 
-
 $$
 W^{(1)} = 
 \begin{pmatrix}
-{\omega_{11}^{(1)}&\omega_{21}^{(1)}&\omega_{31}^{(1)}} \\
-{\omega_{12}^{(1)}&\omega_{22}^{(1)}&\omega_{32}^{(1)}}
+\omega_{11}^{(1)}&\omega_{21}^{(1)}&\omega_{31}^{(1)}\\
+\omega_{12}^{(1)}&\omega_{22}^{(1)}&\omega_{32}^{(1)}
 \end{pmatrix}
 $$
+
+
+在实现时，我们首先将输入$X$和偏置$B^{(1)}$设置为某任意值。
+
+```python
+import numpy as np
+
+X = np.array([1.0,0.5])
+W1 = np.array([[0.1,0.3,0.5],[0.2,0.4,0.6]])
+B1 = np.array([0.1,0.2,0.3])
+
+A1 = np.dot(X,W1) + B1
+print(A1)
+```
+
+对于得到的加权和我们还要代入激活函数。
+
+```python
+def sigmoid_function(x):
+    return 1/(1+np.exp(-x))
+    
+Z1 = sigmoid_function(A1)
+```
