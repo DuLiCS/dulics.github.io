@@ -362,7 +362,8 @@ $$
 
 其中：
 $$
-A^{(1)} = \begin{pmatrix}
+A^{(1)} = 
+\begin{pmatrix}
 a_{1}^{(1)} \\
 a_{2}^{(1)}\\
 a_{3}^{(1)}
@@ -370,20 +371,23 @@ a_{3}^{(1)}
 $$
 
 $$
-X = \begin{pmatrix}
+X = 
+\begin{pmatrix}
 x_1&x_2
 \end{pmatrix}
 $$
 
 $$
-B^{(1)} = \begin{pmatrix}
+B^{(1)} = 
+\begin{pmatrix}
 b_{1}^{(1)} & b_{2}^{(1)} & b_{3}^{(1)}
 \end{pmatrix}
 $$
 
 
 $$
-W^{(1)} = \begin{pmatrix}
+W^{(1)} = 
+\begin{pmatrix}
 \omega_{11}^{(1)}&\omega_{21}^{(1)}&\omega_{31}^{(1)} \\
 \omega_{12}^{(1)}&\omega_{22}^{(1)}&\omega_{32}^{(1)}
 \end{pmatrix}
