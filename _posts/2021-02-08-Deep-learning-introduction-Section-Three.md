@@ -550,5 +550,44 @@ y_k = \frac{exp(a_k)}{\sum_{i=1}^{n} exp(a_i)} = \frac{Cexp(a_k)}{C\sum_{i=1}^{n
  \frac{exp(a_k+logC)}{\sum_{i=1}^{n} exp(a_i+logC)} =  \frac{exp(a_k+C')}{\sum_{i=1}^{n} exp(a_i+C')}
 $$
 
-首先我们在分子分母上都乘以$C$,然后
+首先我们在分子分母上都乘以$C$,然后把$C$移进指数函数中，记为$logC$,最后把$logC$替换为$C'$。对比原来的公式，我们发现，当使用softmax函数进行计算时，加上或减去某个常数并不会改变计算结果。于是对于溢出的结果，我们尝试让每个信号都减去信号中的最大值。
 
+```python
+
+def softmax(a):
+    exp_a = np.exp(a)
+    sum_exp_a = np.sum(exp_a)
+    y = exp_a/sum_exp_a
+    
+    return y
+    
+a = np.array([1010,1000,990])
+print(softmax(a))
+```
+于是我们让每个信号都减去信号中的最大值。
+
+```python
+def softmax(a):
+    exp_a = np.exp(a)
+    sum_exp_a = np.sum(exp_a)
+    y = exp_a/sum_exp_a
+    
+    return y
+
+c = a - np.max(a)
+print(softmax(c))
+```
+
+![softmax函数改进](/img/softmax_revised.png)
+
+改进后的的代码如下：
+
+```python
+def softmax(a):
+    c= np.max(a)
+    exp_a = np.exp(a-c) #溢出对策
+    sum_exp_a = np.sum(exp_a)
+    y = exp_a/sum_exp_a
+    
+    return y
+```
