@@ -33,7 +33,7 @@ tags: [Machine learning, Reading]
 
 介绍简单带过。MNIST数据集(Mixed National Institute of Standards and Technology database)是美国国家标准与技术研究院收集整理的大型手写数字数据库,包含60,000个示例的训练集以及10,000个示例的测试集。
 
-MNIST的图像是28$\times$28像素的灰度图像（1通道），像素的取值在0到255之间。每个图像都标有对应的阿拉伯数字标签。
+MNIST的图像是28 $\times$ 28像素的灰度图像（1通道），像素的取值在0到255之间。每个图像都标有对应的阿拉伯数字标签。
 
 这本书提供了数据集和相应的代码。[传送门](https://www.ituring.com.cn/book/1921)
 
@@ -57,7 +57,7 @@ print(t_test.shape)
 
 ![MNIST code](\img\MNIST_code.png)
 
-这里对代码做一点简单说明，这里的load_mnist函数是将数据集做导入，分别为两个训练集两个测试集，flatten参数为True代表将28$\times$28的图像扁平化，变成1$\times$784的向量。normalize的含义是将数值标准化为0到1之间的数字，这个函数还可以传入一个参数，就是one_hot_label，这个参数设置为True将会让标签变为one hot representation。
+这里对代码做一点简单说明，这里的load_mnist函数是将数据集做导入，分别为两个训练集两个测试集，flatten参数为True代表将28 $\times$ 28的图像扁平化，变成1 $\times$ 784的向量。normalize的含义是将数值标准化为0到1之间的数字，这个函数还可以传入一个参数，就是one_hot_label，这个参数设置为True将会让标签变为one hot representation。
 
 因为这里并不涉及参数的训练，因此我们需要导入参数，这离有一个pkl文件，保存着训练好的参数，直接导入就可以。下来简单显示一下图片。
 
