@@ -55,7 +55,7 @@ print(t_test.shape)
 
 于是我们打印出训练集，测试集和对应的label的shape。
 
-![MNIST code](MNIST_code.png)
+![MNIST code](\img\MNIST_code.png)
 
 这里对代码做一点简单说明，这里的load_mnist函数是将数据集做导入，分别为两个训练集两个测试集，flatten参数为True代表将28$\times$28的图像扁平化，变成1$\times$784的向量。normalize的含义是将数值标准化为0到1之间的数字，这个函数还可以传入一个参数，就是one_hot_label，这个参数设置为True将会让标签变为one hot representation。
 
@@ -88,7 +88,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
 
-![第一张图片](MNIST_image.png)
+![第一张图片](\img\MNIST_image.png)
 
 #### 3.6.2 神经网络的推理处理
 
