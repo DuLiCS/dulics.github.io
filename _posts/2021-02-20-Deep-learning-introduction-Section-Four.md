@@ -89,4 +89,28 @@ $$
 E = -\frac{1}{N}\sum_n\sum_kt_{nk}log\ y_{nk}
 $$
 
+这里假设有$N$个数据，$t_nk$代表第$n$个数据的第$k$个元素的值。另外，MNIST有60000个数据，假设以全部数据为对象求损失函数的和，计算过程需要花费较长的时间。实际中的数据集比这个量更大，因此，我们从全部数据中选出一批数据，然后对每个mini-batch进行学习。这种方式叫做mini-batch学习。
+
+之前我们已经有了读取数据集的代码，接下来我们要从中随机选取10个数据。随机选取可以使用np.random.choice()。
+
+```python
+import sys,os
+import numpy as np
+
+sys.path.append(os.pardir)
+from dataset.mnist import load_mnist
+
+(x_train, t_train),(x_test, t_test) = load_mnist(flatten=True, normalize=True)
+
+
+train_size = x_train.shape[0]
+batch_size = 10
+batch_mask = np.random.choice(train_size,batch_size)
+
+x_batch = x_train[batch_mask]
+t_batch = t_train[batch_mask]
+```
+
+#### 4.2.4 mini-batch 版交叉熵误差的实现
+
                                                            
