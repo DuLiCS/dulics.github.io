@@ -113,4 +113,19 @@ t_batch = t_train[batch_mask]
 
 #### 4.2.4 mini-batch 版交叉熵误差的实现
 
-                                                           
+```python
+def cross_entropy_error(y,t):
+    if y.ndim == 1:
+        t = t.reshape(1, t.size)
+        y = y.reshape(1, y.size)
+    
+    delta = 1e-7
+    batch_size = y.shape[0]
+    return -np.sum(t * np.log(y + delta))/batch_size
+```
+
+对于非one-hot标签，可以用下面的形式：
+
+```python
+
+```
