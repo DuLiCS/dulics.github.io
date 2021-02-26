@@ -118,7 +118,7 @@ def cross_entropy_error(y,t):
     if y.ndim == 1:
         t = t.reshape(1, t.size)
         y = y.reshape(1, y.size)
-    
+
     delta = 1e-7
     batch_size = y.shape[0]
     return -np.sum(t * np.log(y + delta))/batch_size
@@ -131,7 +131,7 @@ def cross_entropy_error(y,t):
     if y.ndim == 1:
         t = t.reshape(1, t.size)
         y = y.reshape(1, y.size)
-    
+
     delta = 1e-7
     batch_size = y.shape[0]
     return -np.sum(np.log(y[np.arange(batch_size), t] + 1e-7)) / batch_size
@@ -202,18 +202,18 @@ def function_2(x):
 def numerical_gradient(f,x):
     h = 1e-4
     grad = np.zeros(x.size)
-    
+
     for idx in range(x.size):
         tmp_val = x[idx]
         x[idx] = tmp_val + h
         fxh1 = f(x)
-        
+
         x[idx] = tmp_val - h
         fxh2 = f(x)
-        
+
         grad[idx] = (fxh1 - fxh2) / (2 * h)
         x[idx] = tmp_val
-        
+
     return grad
 
 
@@ -273,11 +273,11 @@ $$
 ```python
 def gradient_decent(f,init_x,lr=0.01,step_num=100):
     x = init_x
-    
+
     for i in range(step_num):
         grad = numerical_gradient(f,x)
         x = x - lr*grad
-    
+
     return x
 ```
 
@@ -298,10 +298,10 @@ def numerical_gradient(f, X):
         return _numerical_gradient_no_batch(f, X)
     else:
         grad = np.zeros_like(X)
-        
+
         for idx, x in enumerate(X):
             grad[idx] = _numerical_gradient_no_batch(f, x)
-        
+
         return grad
 
 def gradient_descent(f, init_x, lr=0.01, step_num=100):
@@ -320,7 +320,7 @@ def gradient_descent(f, init_x, lr=0.01, step_num=100):
 def function_2(x):
     return x[0]**2 + x[1]**2
 
-init_x = np.array([-3.0, 4.0])    
+init_x = np.array([-3.0, 4.0])
 
 lr = 0.1
 step_num = 20
@@ -340,3 +340,10 @@ plt.show()
 ```
 
 ![gradient_decent_visualization](/img/gradient_decent_visualization.png)
+
+像学习率这样的参数，取大取小都不好，他和诸如权重和偏置这样通过神经网络学习获得的参数不同，它需要人为进行设定，这一类参数通常被称为**超参数**。
+
+#### 4.4.2 神经网络的梯度
+
+神经网络的学习过程也需要求梯度，这里的损失函数就是基于权重参数的梯度。如有一个形状为$2 \times 3$的权重为$W$的神经网络,损失函数用$L$表示，此时梯度可以用$
+\frac{\partial{L}}{\partial{W}}$表示。
