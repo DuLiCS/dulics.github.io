@@ -362,3 +362,50 @@ $$
 $$
 
 $\frac{\partial{L}}{\partial{W}}$ 的元素是关于$W$的偏导数，例如第一行第一列的元素 $\frac{\partial{L}}{\partial{\omega_{11}}}$ 表示当 $\omega_{11}$ 稍微变化时，损失函数$L$会发生多大变化。接下来看每一个简单神经网络求梯度的例子：
+
+```python
+import numpy as np
+
+
+def softmax(x):
+    exp_a = np.exp(x-np.max(x))
+    sum_exp_a = np.sum(exp_a)
+
+    return exp_a/sum_exp_a
+
+def cross_entropy_error(y,t):
+    delta = 1e-7
+    return -np.sum(t*np.log(y + delta))
+
+class SimpleNet:
+    def __init__(self):
+        self.W = np.random.randn(2,3)
+
+    def predict(self,x):
+        return np.dot(x,self.W)
+
+    def loss(self,x,t):
+        z = self.predict(x)
+        y = softmax(z)
+        loss = cross_entropy_error(y,t)
+
+        return loss
+
+net = SimpleNet()
+
+x = np.array([0.6,0.9])
+
+p = net.predict(x)
+
+print(p)
+
+print(np.argmax(p))
+
+t = np.array([1,0,0])
+
+loss = net.loss(x,t)
+
+print(loss)
+```
+
+上面构建了简单的神经网络，使用交叉熵作为损失函 数。求得了误差之后，接下来使用梯度下降，更新参数后看误差的变化。
