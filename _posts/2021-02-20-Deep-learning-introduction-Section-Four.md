@@ -345,5 +345,20 @@ plt.show()
 
 #### 4.4.2 神经网络的梯度
 
-神经网络的学习过程也需要求梯度，这里的损失函数就是基于权重参数的梯度。如有一个形状为$2 \times 3$的权重为$W$的神经网络,损失函数用$L$表示，此时梯度可以用$
-\frac{\partial{L}}{\partial{W}}$表示。
+神经网络的学习过程也需要求梯度，这里的损失函数就是基于权重参数的梯度。如有一个形状为$2 \times 3$的权重为$W$的神经网络,损失函数用$L$表示，此时梯度可以用 $\frac{\partial{L}}{\partial{W}}$ 表示。
+
+$$
+W = \begin{pmatrix}
+\omega_{11}&\omega_{12}&\omega_{13} \\
+\omega_{21}&\omega_{22}&\omega_{23}
+\end{pmatrix}
+$$
+
+$$
+\frac{\partial{L}}{\partial{W}} = \begin{pmatrix}
+\frac{\partial{L}}{\partial{\omega_{11}}}&\frac{\partial{L}}{\partial{\omega_{12}}}&\frac{\partial{L}}{\partial{\omega_{13}}} \\
+\frac{\partial{L}}{\partial{\omega_{21}}}&\frac{\partial{L}}{\partial{\omega_{22}}}&\frac{\partial{L}}{\partial{\omega_{23}}}
+\end{pmatrix}
+$$
+
+$\frac{\partial{L}}{\partial{W}}$ 的元素是关于$W$的偏导数，例如第一行第一列的元素 $\frac{\partial{L}}{\partial{\omega_{11}}}$ 表示当 $\omega_{11}$ 稍微变化时，损失函数$L$会发生多大变化。接下来看每一个简单神经网络求梯度的例子：
