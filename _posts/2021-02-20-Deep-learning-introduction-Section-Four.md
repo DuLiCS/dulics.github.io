@@ -266,4 +266,77 @@ $$
 x_1= x_0-\eta\frac{\partial{f}}{\partial{x_1}}
 $$
 
-在上面的式子里，$\eta$称为**学习率**（learning rate）。
+在上面的式子里，$\eta$称为**学习率**（learning rate）。这个类似于步长的概念。学习率需要事先确定，过大或者过小都不利于找到好的位置。
+
+接下来实现一下梯度下降法。
+
+```python
+def gradient_decent(f,init_x,lr=0.01,step_num=100):
+    x = init_x
+    
+    for i in range(step_num):
+        grad = numerical_gradient(f,x)
+        x = x - lr*grad
+    
+    return x
+```
+
+拥有了所有的工具，接下来尝试解决问题。
+
+问题：用梯度法求解$f(x_0,x_1) = x_062+x_1^2$的最小值。
+
+思路：使用梯度下降，指定一个初始值，学习率和步长即可。下面是代码和图示。
+
+```python
+# coding: utf-8
+import numpy as np
+import matplotlib.pylab as plt
+
+
+def numerical_gradient(f, X):
+    if X.ndim == 1:
+        return _numerical_gradient_no_batch(f, X)
+    else:
+        grad = np.zeros_like(X)
+        
+        for idx, x in enumerate(X):
+            grad[idx] = _numerical_gradient_no_batch(f, x)
+        
+        return grad
+
+def gradient_descent(f, init_x, lr=0.01, step_num=100):
+    x = init_x
+    x_history = []
+
+    for i in range(step_num):
+        x_history.append( x.copy() )
+
+        grad = numerical_gradient(f, x)
+        x -= lr * grad
+
+    return x, np.array(x_history)
+
+
+def function_2(x):
+    return x[0]**2 + x[1]**2
+
+init_x = np.array([-3.0, 4.0])    
+
+lr = 0.1
+step_num = 20
+x, x_history = gradient_descent(function_2, init_x, lr=lr, step_num=step_num)
+
+plt.plot( [-5, 5], [0,0], '--b')
+plt.plot( [0,0], [-5, 5], '--b')
+plt.plot(x_history[:,0], x_history[:,1], 'o')
+
+plt.xlim(-3.5, 3.5)
+plt.ylim(-4.5, 4.5)
+plt.xlabel("X0")
+plt.ylabel("X1")
+plt.savefig('gradient_decent_visualization.png')
+plt.show()
+
+```
+
+![gradient_decent_visualization](/img/gradient_decent_visualization.png)
