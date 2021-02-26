@@ -137,3 +137,133 @@ def cross_entropy_error(y,t):
     return -np.sum(np.log(y[np.arange(batch_size), t] + 1e-7)) / batch_size
 ```
 
+#### 4.2.5 为何要设定损失函数
+
+原因主要有以下几点：
+
+* 不能关注某一个特定的参数
+* 不能以识别精度为指标
+* 识别精度对微小的参数变化不敏感
+
+### 4.3 数值微分
+
+#### 4.3.1 导数
+
+#### 4.3.2 数值微分的例子
+
+下面的例子是一个求数值微分的例子。使用的中心差分。求的是$f(x) = 0.01x^2+0.1x$在$f(x+h)$到$f(x-h)$之间的差分。
+
+```python
+def function_x(x):
+    return 0.01*x**2 + 0.1*x
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.arange(0.0,20.0,0.1)
+y = function_x(x)
+
+plt.plot(x,y)
+plt.show()
+
+def numerical_diff(f,x):
+    h = 1e-4
+    return (f(x+h) - f(x-h))/(2*h)
+
+print(numerical_diff(function_x,5))
+
+print(numerical_diff(function_x,10))
+```
+
+![数值微分](/img/numberical_diff.png)
+
+#### 4.3.3 偏导数
+
+这里以一个函数为例：
+
+$$
+f(x_0,x_1) = x_0^2 + x_1^2
+$$
+
+因为这里有两个变量，所以求偏导数时，固定一个值，对另一个变量求导数。
+
+### 4.4 梯度
+
+学习了导数和偏导数，那么什么是梯度呢。形如$
+（\frac{\partial f}{\partial x_0},\frac{\partial f}{\partial x_1}）
+$的由全部变量的偏导数汇总而成形成的向量被称为**梯度**。
+
+下面实际看一个例子：
+
+```python
+def function_2(x):
+    return x[0]**2 + x[1]**2
+
+def numerical_gradient(f,x):
+    h = 1e-4
+    grad = np.zeros(x.size)
+    
+    for idx in range(x.size):
+        tmp_val = x[idx]
+        x[idx] = tmp_val + h
+        fxh1 = f(x)
+        
+        x[idx] = tmp_val - h
+        fxh2 = f(x)
+        
+        grad[idx] = (fxh1 - fxh2) / (2 * h)
+        x[idx] = tmp_val
+        
+    return grad
+
+
+print(numerical_gradient(function_2,np.array([3.0,4.0])))
+```
+![partial_derivative](/img/partial_derivative.png)
+
+这里提供一个梯度的可视化方法。使用了matplotlib中的quiver函数。quiver函数使用方法很简单，前面四个参数分别代表了箭头起点，XY，也就是每一个点的梯度位置，后两个参数就是计算出的梯度，代表箭头在两个方向上的矢量。
+
+```python
+x0 = np.arange(-2, 2.5, 0.25)
+x1 = np.arange(-2, 2.5, 0.25)
+X, Y = np.meshgrid(x0, x1)
+
+X = X.flatten()
+Y = Y.flatten()
+
+grad = numerical_gradient(function_2, np.array([X, Y]) )
+
+plt.figure()
+plt.quiver(X, Y, -grad[0], -grad[1],  angles="xy",color="#666666")#,headwidth=10,scale=40,color="#444444")
+plt.xlim([-2, 2])
+plt.ylim([-2, 2])
+plt.xlabel('x0')
+plt.ylabel('x1')
+plt.grid()
+plt.legend()
+plt.draw()
+plt.show()
+```
+
+![gradient_visualization](/img/gradient_visualization.png)
+
+
+#### 4.4.1 梯度法
+
+讲解了梯度的意义，现在要讲的是具体的使用，也就是梯度法对于寻找最优参数的意义。这里的最优参数就是损失函数取最小值时的参数。
+
+但是这个最小值通常是很难找的，因为函数通常比较复杂，并且可能找到的仅仅是局部最优解，但是不可否认的是，梯度的下降方向是可以使损失函数减小的方向。
+
+简而言之，梯度法就是通过不断的沿着梯度方向前进，逐渐减小损失函数的值的过程就叫做**梯度法**。寻找最小值的方法乘坐**梯度下降法**，反之，则称为**梯度上升法**。
+
+接下来用数学方式表示梯度法。
+
+$$
+x_0= x_0-\eta\frac{\partial{f}}{\partial{x_0}}
+$$
+
+$$
+x_1= x_0-\eta\frac{\partial{f}}{\partial{x_1}}
+$$
+
+在上面的式子里，$\eta$称为**学习率**（learning rate）。
