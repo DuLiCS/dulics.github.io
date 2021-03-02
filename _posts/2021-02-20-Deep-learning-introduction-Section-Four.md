@@ -502,4 +502,82 @@ class TwoLayerNet:
         return grads
 ```
 
-这个类的实现稍稍有点长，但是并没有什么新鲜的内容。TwoLayerNet类有para ms和grads两个字典实例变量
+这个类的实现稍稍有点长，但是并没有什么新鲜的内容。TwoLayerNet类有params和grads两个字典实例变量，在实现的时候，调用了构造函数，__init__(self,input_size,hidden_size,output_size)第一个参数代表输入层神经元个数，第二个参数代表隐藏层的神经元个数，第三个参数代表输出层神经元个数，在这里，输入层的神经元个数为 $28 \times 28 = 784$，输出为10个类别，隐藏层设置一个合适的参数即可。
+在后面将会详细讨论参数初始化问题，这里我们使用符合高斯分布的随机数进行初始化，偏置使用0进行初始化。predict(self, x)和 accuracy(self, x, t)的实现和上一章的神经网络的推理处理基本一样。如 果仍有不明白的地方，请再回顾一下上一章的内容。另外，loss(self, x, t)是计算损失函数值的方法。这个方法会基于predict()的结果和正确解标签，计算交叉熵误差。剩下的numerical_gradient(self, x, t)方法会计算各个参数的梯度。根 据数值微分，计算各个参数相对于损失函数的梯度。另外，gradient(self, x, t) 是下一章要实现的方法，该方法使用误差反向传播法高效地计算梯度。
+
+
+#### 4.5.2 mini-batch的实现
+
+神经网络的学习使用的是前面介绍过的mini batch学习，所谓mini batch学习指的是从训练数据中随机选取一部分数据，再使用这些数据用梯度法更新参数。
+
+  ```python
+  import numpy as np
+from mnist import load_mnist
+
+def numerical_gradient(f, X):
+    if X.ndim == 1:
+        return _numerical_gradient_no_batch(f, X)
+    else:
+        grad = np.zeros_like(X)
+
+        for idx, x in enumerate(X):
+            grad[idx] = _numerical_gradient_no_batch(f, x)
+
+    return grad
+
+def cross_entropy_error(y,t):
+    delta = 1e-7
+    return -np.sum(t*np.log(y + delta))
+
+def _numerical_gradient_no_batch(f, x):
+    h = 1e-4 # 0.0001
+    grad = np.zeros_like(x)
+
+    for idx in range(x.size):
+        tmp_val = x[idx]
+        x[idx] = float(tmp_val) + h
+        fxh1 = f(x) # f(x+h)
+
+        x[idx] = tmp_val - h
+        fxh2 = f(x) # f(x-h)
+        grad[idx] = (fxh1 - fxh2) / (2*h)
+
+        x[idx] = tmp_val # 还原值
+
+    return grad
+
+
+(x_train,t_train),(x_test,t_test) = load_mnist(normalize=True,one_hot_label=True)
+
+train_loss_list = []
+
+#超参数
+
+iters_num = 10000
+train_size = x_train.shape[0]
+batch_size = 100
+learning_rate = 0.1
+
+
+network = TwoLayerNet(input_size=x_train.shape[1],hidden_size=50,output_size=10)
+
+for i in range(iters_num):
+    print(i)
+    batch_mask = np.random.choice(train_size,batch_size)
+    x_batch = x_train[batch_mask]
+    t_batch = t_train[batch_mask]
+
+    grad = network.numerical_gradient(x_batch,t_batch)
+
+
+    for key in ('W1','b1','W2','b2'):
+        print(key)
+        network.params[key] -= learning_rate * grad[key]
+
+        loss = network(x_batch,t_batch)
+        train_loss_list.append(loss)
+        print(loss)
+
+```
+
+这样的计算是十分缓慢的。
