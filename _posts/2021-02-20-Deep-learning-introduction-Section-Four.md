@@ -437,7 +437,7 @@ print(loss)
 下面以手写数字识别为例做实现。
 
 #### 4.5.1 2层神经网络的类
-我们将这个类命名为TwoLayerNet的类。这个类用于构建我们所用的神经网络，使用这个类可以根据需要创建
+我们将这个类命名为TwoLayerNet的类。这个类用于构建我们所用的神经网络，使用这个类可以根据需要创建。
 
 ```python
 def sigmoid(x):
@@ -450,6 +450,10 @@ def softmax(x):
 
     return exp_x/sum_exp_x
 
+def cross_entropy_error(y,t):
+  delta = 1e-7
+
+  return -np.sum(t * np.log/(y + delta))
 
 
 
@@ -497,3 +501,5 @@ class TwoLayerNet:
 
         return grads
 ```
+
+这个类的实现稍稍有点长，但是并没有什么新鲜的内容。TwoLayerNet类有para ms和grads两个字典实例变量
