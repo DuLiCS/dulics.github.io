@@ -83,4 +83,177 @@ tags: [Machine learning, Reading]
 ![计算图6](/img/comput_graph_6.png)
 
 反向传播的计算顺序是，将信号E乘以节点的局部导数 $\frac{\partial y}{\partial x}$，然后将结果传递给下一个节点，这里所说的局部导数是指正向传播中 $y = f(x)$ 的导数，也就是y关于x的导数 $\frac{\partial y}{\partial x}$。比如，假设 $y = f(x) = x^2$ ，
-则 局 部 导 数 为 $\frac{\partial y}{\partial x}= 2x$  。 把 这 个 局 部 导 数 乘 以 上 游 传 过 来 的 值 ( 本 例 中 为 E )， 然后传递给前面的节点。
+则局部导数为 $\frac{\partial y}{\partial x}= 2x$ 。把这个局部导数乘以上游传过来的值( 本 例 中 为 E )， 然后传递给前面的节点。
+
+
+#### 5.2.2  链式法则
+
+介绍链式法则之前，先要从**复合函数**说起，复合函数是多个函数构成的函数，比如 $z = (x+y)^2$ 是由以下两个式子构成的。
+$$
+z = t^2 \\
+t = x + y
+$$
+链式法则是关于复合函数的导数的性质，定义如下。
+
+*如果某个函数由复合函数表示，则该复合函数的导数可以用构成复合函数的各个函数的导数的乘积表示*
+
+这就是链式法则的原理，用上面的表达式为例，$\frac{\partial z}{\partial x}$(z关于x的导数)可以用 $\frac{\partial z}{\partial t}$ (z关于t的导数)和 $\frac{\partial t}{\partial x}$(t关于x的导数)的乘积表示。数学表示如下：
+
+$$
+\frac{\partial z}{\partial x} = \frac{\partial z}{\partial t}\frac{\partial t}{\partial x}
+$$
+
+式子中的 ${\partial t}$ 可以相互抵消。
+
+现在我们用链式法则，试着求上面表达式的导数，接下来要求式子中的局部导数（偏导数）
+
+$$
+\frac{\partial z}{\partial t} = 2t \\
+\frac{\partial t}{\partial x} = 1
+$$
+
+于是可以得到：
+
+$$
+\frac{\partial z}{\partial x} = \frac{\partial z}{\partial t}\frac{\partial t}{\partial x}=2t \times 1 = 2(x+y)
+$$
+
+#### 5.2.3 链式法则和计算图
+
+现在我们尝试将链式法则的计算用计算图表达出来。
+
+![计算图7](/img/comput_graph_7.png)
+
+如图所示，计算图的反向传播从右往左传播信号，反向传播的计算顺序是，先将节点的输入信号乘以节点的偏导数，然后再传递给下一个节点。比如，反向传播时，“**2”节点的输入是 $\frac{\partial z}{\partial z}$，将其乘以局部导数 $\frac{\partial z}{\partial z}$ 因为正向传播的输入是t，输出是z，所以这个节点的局部导数是 $\frac{\partial z}{\partial t}$ 然后传递给下一个节点。
+在图中最左边是反向传播的结果，他的计算基于上面的规则，因此有 $\frac{\partial z}{\partial z}\frac{\partial z}{\partial t}\frac{\partial t}{\partial x} = \frac{\partial z}{\partial t}\frac{\partial t}{\partial x}=\frac{\partial z}{\partial x}$,对应z关于x的导数。代入得到 $\frac{\partial z}{\partial x}$ 的结果是 $2(x+y)$
+
+![计算图8](/img/comput_graph_8.png)
+
+### 5.3 反向传播
+
+#### 5.3.1 加法节点的反向传播
+
+首先看一下加法节点的反向传播这，这里以 $z = x + y$ 为对象，观察反向传播。$z = x + y$ 的导数可以由下式计算出来。
+
+$$
+\frac{\partial z}{\partial x} = 1 \\
+\frac{\partial z}{\partial y} = 1
+$$
+
+上面两个式子都等于1，用计算图表示如下所示。
+
+![计算图9](/img/comput_graph_9.png)
+
+![计算图10](/img/comput_graph_10.png)
+下面来看一个具体的例子。假设有“$10 + 5 =15$”这样的计算，加法节点的反向传播只是将信号输出到下一个节点。
+
+
+#### 5.3.2 乘法节点的反向传播
+
+用同样的方式看乘法节点。假设 $z =xy$ 于是有
+
+$$
+\frac{\partial z}{\partial x} = y \\
+\frac{\partial z}{\partial y} = x
+$$
+
+下面看一个具体的例子， $10 \times 5 =50$。
+
+![计算图9](/img/comput_graph_11.png)
+
+![计算图10](/img/comput_graph_12.png)
+
+#### 5.3.3 苹果的例子
+
+
+接着来思考一下苹果的例子。这里要解的问题是苹果的价格、苹果的个数、消费税这3个变量各自如何影响最终支付的金额。这个问题相当于求“支付金额关于苹果的价格的导数”“支付金额关于苹果的个数的导数”“支付金额关于消费税的导数”。
+![计算图10](/img/comput_graph_13.png)
+
+### 5.4 简单层的实现
+
+本节用python实现前面的苹果例子，乘法节点称为“乘法层”，加法节点称为“加法层”。
+
+#### 5.4.1 乘法层的实现
+
+```python
+class MulLayer:
+    def __init__(self):
+        self.x = None
+        self.y = None
+
+    def forward(self, x, y):
+        self.x = x
+        self.y = y
+        out = x * y
+
+        return out
+
+    def backward(self, dout):
+        dx = dout * self.y
+        dy = dout * self.x
+
+        return dx,dy
+```
+init() 中会初始化实例变量 x 和 y，它们用于保存正向传播时的输入值。 forward() 接收 x 和 y 两个参数，将它们相乘后输出。backward() 将从上游传 来的导数(dout)乘以正向传播的翻转值，然后传给下游。
+
+![计算图10](/img/comput_graph_13.png)
+
+参照上图可以作如下实现。
+
+
+```python
+
+apple = 100
+apple_num = 2
+tax = 1.1
+
+#layer
+
+mul_apple_layer = MulLayer()
+mul_tax_layer = MulLayer()
+
+#forward
+
+apple_price = mul_apple_layer.forward(apple,apple_num)
+price = mul_tax_layer.forward(apple_price,tax)
+
+print(price)
+
+
+
+#backward
+
+dprice = 1
+dapple_price,dtax = mul_tax_layer.backward(dprice)
+dapple,dapple_num = mul_apple_layer.backward(dapple_price)
+
+print(dapple,dapple_num,dtax)
+```
+
+#### 5.4.2 加法层的实现
+
+```python
+
+class AddLayer:
+    def __init__(self):
+        pass
+
+    def forward(self,x,y):
+
+        out = x + y
+
+        return out
+
+    def backward(self,dout):
+
+        dx = dout * 1
+        dy = dout * 1
+
+        return dx,dy
+```
+
+
+![计算图14](/img/comput_graph_14.png)
+
+
+使用之前的方法进行实现。
