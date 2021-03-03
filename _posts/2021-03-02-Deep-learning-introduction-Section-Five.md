@@ -257,3 +257,100 @@ class AddLayer:
 
 
 使用之前的方法进行实现。
+
+```python
+apple = 100
+orange = 150
+apple_num = 2
+orange_num = 3
+tax = 1.1
+
+#layer
+
+mul_apple_layer = MulLayer()
+mul_orange_layer = MulLayer()
+add_apple_orange_layer = AddLayer()
+mul_tax_layer = MulLayer()
+
+#forward
+
+apple_price = mul_apple_layer.forward(apple,apple_num)
+orange_price = mul_orange_layer.forward(orange,orange_num)
+all_price = add_apple_orange_layer.forward(apple_price,orange_price)
+price = mul_tax_layer.forward(all_price,tax)
+
+#backward
+dprice = 1
+dall_price,dtax   = mul_tax_layer.backward(dprice)
+dapple_price, dorange_price = add_apple_orange_layer.backward(dall_price)
+dorange,dorange_num = mul_orange_layer.backward(dorange_price)
+dapple,dapple_num = mul_apple_layer.backward(dapple_price)
+
+print(price)
+print(dapple_num,dapple,dorange,dorange_num,dtax)
+```
+
+### 5.5 激活函数层的实现
+
+现在把计算图的思想应用到神经网络。
+
+#### 5.5.1 ReLU层
+
+激活函数ReLU数学表达式如下:
+
+$$
+f(x) =
+\begin{cases}
+x & x \gt 0 \\
+0 & x \leqslant 0
+\end{cases}
+$$
+
+可以求出y关于x的导数:
+
+$$
+\frac{\partial y}{\partial x} =
+\begin{cases}
+1 & x \gt 0 \\
+0 & x \leqslant 0
+\end{cases}
+$$
+
+ 根据上面的表达式可以得知，正向传播时如果输入x大于零，则反向传播会将上游的值原封不动的传递，当正向传播的值x小于0时，会将信号停留在此处。
+
+ 下面是是实现：
+
+ ```python
+ class Relu:
+    def __init__(self):
+        self.mask = None
+
+    def forward(self, x):
+        self.mask = (x <= 0)
+        out = x.copy()
+        out[self.mask] = 0 #True的位置变成0 也就是小于0的变成0
+
+        return out
+
+    def backward(self,dout):
+        dout[self.mask] = 0
+        dx = dout
+
+        return dx
+
+x = np.array([[1,-0.5],[-2.0,3.0]])
+print(x)
+mask = (x<=0)
+out = x.copy()
+out[mask] = 0
+print(out)
+ ```
+
+
+ #### 5.5.2 Sigmoid 层
+
+ 接下来是sigmoid函数的实现
+
+ $$
+ y = \frac{1}{1+exp(-x)}
+ $$
