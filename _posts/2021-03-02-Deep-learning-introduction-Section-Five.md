@@ -463,4 +463,231 @@ $$
 ![计算图16](/img/comput_graph_26.png)
 
 
-####
+#### 5.6.2 批版本的Affine层
+
+前面介绍的X是以单个数据为对象的，现在考虑N个数据一起正向传播的情况。
+
+![计算图16](/img/comput_graph_28.png)
+
+实现：
+
+```python
+
+class Affine:
+    def __init__(self, W, b):
+        self.W = W
+        self.b = b
+        self.x = None
+        self.dW = None
+        self.db = None
+
+
+    def forward(self, x):
+        self.x = x
+        out = np.dot(x, self.W) + self.b
+
+        return out
+
+    def backward(self, dout):
+        dx = np.dot(dout, self.W.T)
+        self.dW = np.dot(self.x.T, dout)
+        self.db = np.sum(dout,axis = 0)
+
+        return dx
+
+```
+
+#### 5.6.3 Softmax-with-Loss 层
+
+最后介绍输出层的softmax函数。手写数字识别的时候，整个神经网络的结构如图所示。
+
+![计算图16](/img/comput_graph_29.png)
+
+下面实现Softmax层，考虑到这里也包含交叉熵误差，所以也称为Softmax-with-Loss层。以下是计算图和简化版：
+
+![计算图16](/img/comput_graph_30.png)
+
+![计算图16](/img/comput_graph_31.png)
+
+实现：
+
+```python
+
+
+def cross_entropy_error(y,t):
+    delta = 1e-7
+    return -np.sum(t*np.log(y + delta))
+
+def softmax(x):
+    exp_x = np.exp(x-np.max(x))
+    sum_exp_x = np.sum(exp_x)
+
+    return exp_x/sum_exp_x
+
+class SoftmaxWithLoss:
+
+    def __init__(self):
+        self.loss = None
+        self.y = None
+        self.t = None
+
+
+    def forward(self, x, t):
+        self.t = t
+        self.y = softmax(x)
+        self.loss = cross_entropy_error(self.y,self.t)
+
+        return self.loss
+
+    def backward(self,dout=1):
+        batch_size = self.t.shape[0]
+        dx = (self.y - self.t) / batch_size
+
+        return dx
+```
+
+
+### 5.7 误差反向传播法的实现
+
+#### 5.7.1 神经网络学习的全貌
+
+**前提**
+
+神经网络中有合适的权重和偏置，调整权重和偏置以便拟合训练数据的 过程称为学习。神经网络的学习分为下面 4 个步骤。
+
+**步骤1（mini-batch）**
+
+从训练数据中随机选择一部分数据。
+
+**步骤2（计算梯度）**
+
+计算损失函数关于各个权重参数的梯度。
+
+**步骤3（更新参数）**
+
+将权重参数沿梯度方向进行微小的更新。
+
+**步骤4（重复）**
+
+重复步骤 1、步骤 2、步骤 3。
+
+
+#### 5.7.2 对应误差反向传播法的神经网络的实现
+
+
+下面是TwoLayerNet的代码实现：
+
+```python
+import sys, os
+sys.path.append(os.pardir)  # 为了导入父目录的文件而进行的设定
+import numpy as np
+from common.layers import *
+from common.gradient import numerical_gradient
+from collections import OrderedDict
+
+class TwoLayerNet:
+
+    def __init__(self, input_size, hidden_size, output_size, weight_init_std=0.01):
+
+        #初始化权重
+        self.params = {}
+        self.params['W1'] = weight_init_std * np.random.randn(input_size, hidden_size)
+        self.params['b1'] = np.zeros(hidden_size)
+        self.params['W2'] = weight_init_std * np.random.randn(hidden_size, output_size)
+        self.params['b2'] = np.zeros(output_size)
+
+
+        #生成层
+
+        self.layers = OrderedDict()
+        self.layers['Affine1'] = Affine(self.params['W1'], self.params['b1'])
+        self.layers['Relu1'] = Relu()
+        self.layers['Affine2'] = Affine(self.params['W'],self.params['b2'])
+
+        self.lastlayer = SoftmaxWithLoss()
+
+        def predict(self, x):
+            for layer in self.layers.values():
+                x = layer.forward(x)
+
+            return x
+
+        def loss(self, x, t):
+            y = self.predict(x)
+
+            return self.lastlayer.forward(y, t)
+
+        def accuracy(self, x, t):
+            y = self.predict(x)
+            y = np.argmax(y, axis = 1)
+            if t.ndim != 1 : t = np.argmax(t, axis=1)
+
+            accuracy = np.sum(y == t) / float(x.shape[0])
+
+            return accuracy
+
+        def numerical_gradient(self, x, t):
+            loss_W = lambda W : self.loss(x, t)
+
+            grads = {}
+            grads['W1'] = numerical_gradient(loss_W, self.params['W1'])
+            grads['b1'] = numerical_gradient(loss_W, self.params['b1'])
+            grads['W2'] = numerical_gradient(loss_W, self.params['W2'])
+            grads['b2'] = numerical_gradient(loss_W, self.params['b2'])
+
+            return grads
+
+        def gradient(self, x, t):
+            self.loss(x, t)
+
+            dout = 1
+            dout = self.lastLayer.backward(dout)
+
+            layers = list(self.layers.values())
+            layers.reverse()
+            for layer in layers:
+                dout = layer.backward(dout)
+            # 设定
+            grads = {}
+            grads['W1'] = self.layers['Affine1'].dW
+            grads['b1'] = self.layers['Affine1'].db
+            grads['W2'] = self.layers['Affine2'].dW
+            grads['b2'] = self.layers['Affine2'].db
+
+            return grads
+```
+
+
+```python
+import sys, os
+sys.path.append(os.pardir)
+import numpy as np
+from dataset.mnist import load_mnist
+from two_layer_net import TwoLayerNet
+# 读入数据
+
+(x_train, t_train), (x_test, t_test) = load_mnist(normalize=True, one_hot_label = True)
+
+network = TwoLayerNet(input_size=784, hidden_size=50, output_size=10)
+x_batch = x_train[:3]
+
+t_batch = t_train[:3]
+grad_backprop = network.gradient(x_batch, t_batch)
+# 求各个权重的绝对误差的平均值
+grad_numerical = network.numerical_gradient(x_batch, t_batch)
+for key in grad_numerical.keys():
+    diff = np.average( np.abs(grad_backprop[key] - grad_numerical[key]) )
+    print(key + ":" + str(diff))
+
+```
+计算后的结果如下：
+
+W1:3.5949338619330523e-10 \
+b1:2.239133814485334e-09 \
+W2:5.190797970067163e-09 \
+b2:1.4008290402101054e-07
+
+结果表明，使用数值微分和误差反向传播法求出的梯度的差非常小。也就是说，反向传播法是正确的。
+
+
+#### 5.7.4 使用误差反向传播法的学习
