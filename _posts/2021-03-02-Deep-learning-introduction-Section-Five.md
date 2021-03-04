@@ -316,6 +316,9 @@ $$
 \end{cases}
 $$
 
+![计算图15](/img/comput_graph_15.png)
+
+
  根据上面的表达式可以得知，正向传播时如果输入x大于零，则反向传播会将上游的值原封不动的传递，当正向传播的值x小于0时，会将信号停留在此处。
 
  下面是是实现：
@@ -354,3 +357,103 @@ print(out)
  $$
  y = \frac{1}{1+exp(-x)}
  $$
+
+ 计算图如下：
+
+ ![计算图16](/img/comput_graph_16.png)
+
+ 下面简单看一下反向传播的流程：
+
+ **步骤1**
+
+ “/”节点表示 $y=\frac{1}{x}$ 导数如下：
+
+ $$
+ \frac{\partial y}{\partial x} = -\frac{1}{x^2} \\
+ =-y^2
+ $$
+
+因此如下图所示
+
+
+![计算图17](/img/comput_graph_17.png)
+
+**步骤2**
+下面的节点是加法节点，原封不动的传给下游
+
+![计算图16](/img/comput_graph_18.png)
+
+**步骤3**
+“exp”节点表示 $y = exp(x)$, 他的导数由下式表示。
+
+$$
+\frac{\partial y}{\partial x} = exp(x)
+$$
+
+
+![计算图16](/img/comput_graph_19.png)
+
+**步骤4**
+
+乘法节点翻转相乘。
+
+![计算图16](/img/comput_graph_20.png)
+
+根据上面的计算，简化后，得到如图所示的图，和上面的计算结果相同。
+
+![计算图16](/img/comput_graph_21.png)
+
+进一步作整理：
+
+$$
+
+\frac{\partial L}{\partial y}y^2exp(-x) = \frac{\partial L}{\partial y}\frac{1}{(1+exp(-x))^2}exp(-x) \\
+=\frac{\partial L}{\partial y}\frac{1}{1+exp(-x)}\frac{exp(-x)}{1+exp(-x)} \\
+=\frac{\partial L}{\partial y}y(1-y)
+$$
+
+  因此，我们可以简化如下：
+
+![计算图16](/img/comput_graph_22.png)
+
+以下是实现：
+
+```python
+class Sigmoid:
+    def __init__(self):
+        self.out = None
+
+    def forward(self, x):
+        out = 1 / (1 + np.exp(-x))
+        self.out = out
+
+        return out
+
+    def backward(self, dout):
+        dx = dout * (1.0 - self.out) * self.out
+
+        return dx
+
+```
+
+### 5.6 Affine/Softamx层的实现
+
+#### 5.6.1 Affine层
+
+上一章讲解了矩阵的乘法，使用Y= np.dot(X, W) + B计算，这里把这个运算表达出来。
+
+![计算图16](/img/comput_graph_23.png)
+
+
+![计算图16](/img/comput_graph_24.png)
+
+现在考虑上图的反向传播。对于加法节点来说，原封不动的传递 $\frac{\partial L}{\partial Y}$,对于dot节点，交换乘转置，得到 $\frac{\partial L}{\partial Y}W^T$。同理得到：
+
+$$
+\frac{\partial L}{\partial X} = \frac{\partial L}{\partial Y}W^T \\
+\frac{\partial L}{\partial W} = X^T\frac{\partial L}{\partial Y}
+$$
+
+转置的概念不再赘述。
+
+![计算图16](/img/comput_graph_25.png)
