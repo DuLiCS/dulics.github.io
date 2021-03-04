@@ -349,8 +349,7 @@ out[mask] = 0
 print(out)
  ```
 
-
- #### 5.5.2 Sigmoid 层
+#### 5.5.2 Sigmoid 层
 
  接下来是sigmoid函数的实现
 
@@ -457,3 +456,11 @@ $$
 转置的概念不再赘述。
 
 ![计算图16](/img/comput_graph_25.png)
+
+
+简化上面的表达式，可以得到：
+
+![计算图16](/img/comput_graph_26.png)
+
+
+####
