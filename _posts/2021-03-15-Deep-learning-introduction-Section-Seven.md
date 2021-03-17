@@ -299,3 +299,35 @@ class Pooling:
 
 
 ### 7.5 CNN的实现
+
+
+我们已经实现了卷积层和池化层，现在来组合这些层，搭建进行手写数
+字识别的 CNN。
+
+![CNN22.png](/img/CNN22.png)
+
+上图网络的构成是“Convolution - ReLU - Pooling -Affine - ReLU - Affine - Softmax”，我们将它实现为名为SimpleConvNet的类。
+
+
+参数
+* input_dim― 输入数据的维度:(通道，高，长)
+* conv_param― 卷积层的超参数(字典)。字典的关键字如下:
+    filter_num― 滤波器的数量 filter_size― 滤波器的大小 stride― 步幅
+    pad― 填充
+* hidden_size― 隐藏层(全连接)的神经元数量
+* output_size― 输出层(全连接)的神经元数量
+* weitght_int_std― 初始化时权重的标准差
+
+卷积层的超参数通过名为 conv_param 的字典传入。我们设想它会像 {'filter_num':30,'filter_size':5, 'pad':0, 'stride':1} 这样，保存必要 的超参数值。
+
+SimpleConvNet 的初始化的实现稍长，我们分成 3 部分来说明，首先是初 始化的最开始部分。
+
+
+```python
+class SimpleConvNet:
+    def __init__(self, input_dim=(1, 28, 28), conv_param={'filter_num':30, 'filter_size':5, 'pad':0, 'stride':1}, hidden_size = 100, output_size = 10, weight_init_std = 0.01):
+        filter_num = conv_param['filter_num']
+        filter_size = conv_param['filter_size']
+        filter_pad = conv_param['pad']
+        filter_stried
+```
