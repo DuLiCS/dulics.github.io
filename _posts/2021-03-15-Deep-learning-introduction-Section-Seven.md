@@ -256,7 +256,7 @@ class Convolution:
 
         out = out.reshape(N, out_h, out_w, -1).transpose(0, 3, 1, 2)
 
-        return
+        return out
 ```
 #### 7.4.4 池化层的实现
 
@@ -386,3 +386,23 @@ class SimpleConvNet:
         grads['b3'] = self.layers['Affine2'].db
         return grads
     ```
+### 7.6 CNN的可视化
+
+#### 7.6.1 第一层权重的可视化
+
+
+![CNN23.png](/img/CNN23.png)
+
+
+![CNN24.png](/img/CNN24.png)
+
+
+### 7.7 小结
+
+本章介绍了 CNN。构成 CNN 的基本模块的卷积层和池化层虽然有些复 杂，但是一旦理解了，之后就只是如何使用它们的问题了。本章为了使读者 在实现层面上理解卷积层和池化层，花了不少时间进行介绍。在图像处理领 域，几乎毫无例外地都会使用 CNN。
+
+* CNN在此前的全连接层的网络中新增了卷积层和池化层
+* 使用im2col函数可以简单高效的实现卷积层和池化层
+* 通过CNN的可视化，克制随着层次变深，提取的信息愈加高级
+* LeNet 和 AlexNet 是 CNN 的代表性网络
+* 在深度学习的发展中，大数据和GPU子哦了很大的贡献
