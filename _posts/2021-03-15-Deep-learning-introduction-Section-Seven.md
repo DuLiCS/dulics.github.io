@@ -385,13 +385,14 @@ class SimpleConvNet:
         grads['W3'] = self.layers['Affine2'].dW
         grads['b3'] = self.layers['Affine2'].db
         return grads
-    ```
+```
 ### 7.6 CNN的可视化
 
 #### 7.6.1 第一层权重的可视化
 
 
 ![CNN23.png](/img/CNN23.png)
+
 
 
 ![CNN24.png](/img/CNN24.png)
