@@ -126,3 +126,124 @@ features = torch.randn(num_examples, num_inputs,dtype=torch.float32) #随机生�
 labels = true_w[0] * features[:, 0] + true_w[1] * features[:, 1] + true_b  #根据计算y的值
 labels +=torch.tensor(np.random.normal(0,0.01,size=labels.size()),dtype=torch.float32) #加入白噪音
 ```
+
+这里的features是1000行2列，labels是一个标量。接下来画出特征和标签之间的散点图。
+
+
+```python
+
+def use_svg_display():
+    # 用矢量图显示
+    display.set_matplotlib_formats('svg')
+
+def set_figsize(figsize=(3.5, 2.5)):
+    use_svg_display()
+    # 设置图的尺寸
+    plt.rcParams['figure.figsize'] = figsize
+
+# # 在../d2lzh_pytorch里面添加上面两个函数后就可以这样导入
+# import sys
+# sys.path.append("..")
+# from d2lzh_pytorch import *
+
+set_figsize()
+plt.scatter(features[:, 0].numpy(), labels.numpy(), 1);
+
+set_figsize()
+plt.scatter(features[:, 1].numpy(), labels.numpy(), 1);
+```
+
+![linear1](/img/liner1.svg)
+
+可以看出比较明显的线性关系。
+
+### 3.2.2 读取数据
+
+
+```python
+# 本函数已保存在d2lzh包中方便以后使用
+def data_iter(batch_size, features, labels):
+    num_examples = len(features) #总长度
+    indices = list(range(num_examples)) #[0, 1, 2, 3 ···]
+    random.shuffle(indices)  # 样本的读取顺序是随机的
+    for i in range(0, num_examples, batch_size):  #
+        j = torch.LongTensor(indices[i: min(i + batch_size, num_examples)]) # 最后一次可能不足一个batch
+        yield  features.index_select(0, j), labels.index_select(0, j) #index_select第一个参数表示从第几维挑选数据 这里是第0维，也就是按行取
+```
+
+### 3.2.3 初始化模型参数
+
+首先初始化权重，偏置初始化为0.
+
+```python
+w = torch.tensor(np.random.normal(0, 0.01, (num_inputs, 1)), dtype=torch.float32)
+b = torch.zeros(1, dtype=torch.float32)
+w.requires_grad_(requires_grad=True)  #自动求导
+b.requires_grad_(requires_grad=True)
+```
+
+### 3.2.4 定义模型
+
+```python
+def linreg(X, w, b):
+  return torch.mm(X, w) + b
+```
+
+### 3.2.5 定义损失函数
+
+```python
+def square_loss(y_hat, y):
+  return (y_hat - y.view(y_hat.size())) ** 2 / 2
+```
+
+### 3.2.6 定义优化算法
+
+def sgd(params, lr, batch_size):
+
+```python
+def sgd(params, lr, batch_size):
+  for param in params:
+    param.data -= lr * param.grad / batch_size
+```
+
+### 3.2.7 训练模型
+
+```python
+lr = 0.03
+num_epochs = 3
+batch_size = 10
+net = linreg
+loss = squared_loss
+
+for epoch in range(num_epochs):  # 训练模型一共需要num_epochs个迭代周期
+    # 在每一个迭代周期中，会使用训练数据集中所有样本一次（假设样本数能够被批量大小整除）。X
+    # 和y分别是小批量样本的特征和标签
+    for X, y in data_iter(batch_size, features, labels):
+        l = loss(net(X, w, b), y).sum()  # l是有关小批量X和y的损失
+        l.backward()  # 小批量的损失对模型参数求梯度
+        sgd([w, b], lr, batch_size)  # 使用小批量随机梯度下降迭代模型参数
+
+        # 不要忘了梯度清零
+        w.grad.data.zero_()
+        b.grad.data.zero_()
+    train_l = loss(net(features, w, b), labels)
+    print('epoch %d, loss %f' % (epoch + 1, train_l.mean().item()))
+
+print(true_w, '\n', w)
+print(true_b, '\n', b)
+```
+
+
+
+```python
+
+```
+```python
+
+```
+```python
+
+```
+```python
+
+```
