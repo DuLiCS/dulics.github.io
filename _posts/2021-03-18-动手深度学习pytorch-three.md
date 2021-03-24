@@ -233,17 +233,74 @@ print(true_w, '\n', w)
 print(true_b, '\n', b)
 ```
 
+## 3.3 线性回归的简洁实现
 
+### 3.3.1 生成数据集
+
+方法和上一节相同。
 
 ```python
+num_inputs = 2  #特征数为2
+num_examples = 1000 #数据集里有1000个样本
+true_w = [2, -3.4] #权重
+true_b = 4.2    #偏置
+features = torch.randn(num_examples, num_inputs,dtype=torch.float32) #随机生成100X2个浮点数据
+labels = true_w[0] * features[:, 0] + true_w[1] * features[:, 1] + true_b  #根据计算y的值
+labels +=torch.tensor(np.random.normal(0,0.01,size=labels.size()),dtype=torch.float32) #加入白噪音
+```
+### 3.3.2 读取数据
+
+使用内置函数data读取数据
+
+```python
+import torch.utils.data as Data
+
+batch_size = 10
+# 将训练数据的特征和标签组合
+dataset = Data.TensorDataset(features, labels)
+# 随机读取小批量
+data_iter = Data.DataLoader(dataset, batch_size, shuffle=True)
 
 ```
+### 3.3.3 定义模型
+
+
 ```python
+class LinearNet(torch.nn.Module):
+    def __init__(self, n_feature):
+        super(LinearNet, self).__init__()
+        self.linear = nn.Linear(n_feature, 1)
+    # forward 定义前向传播
+    def forward(self, x):
+        y = self.linear(x)
+        return y
+
+net = LinearNet(num_inputs)
+print(net) # 使用print可以打印出网络的结构
 
 ```
-```python
+也可以用nn.Seqential来构建网络
 
-```
 ```python
+# 写法一
+net = nn.Sequential(
+    nn.Linear(num_inputs, 1)
+    # 此处还可以传入其他层
+    )
+
+# 写法二
+net = nn.Sequential()
+net.add_module('linear', nn.Linear(num_inputs, 1))
+# net.add_module ......
+
+# 写法三
+from collections import OrderedDict
+net = nn.Sequential(OrderedDict([
+          ('linear', nn.Linear(num_inputs, 1))
+          # ......
+        ]))
+
+print(net)
+print(net[0])
 
 ```
