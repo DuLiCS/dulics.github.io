@@ -55,7 +55,24 @@ TCM(Tradition Chinese Medicine) Recongition System 是本年度的创新创业�
 <video id="video" width="500px" height="500px" autoplay="autoplay"></video>
 <canvas id="canvas" width="500px" height="500px"></canvas>
 <button onclick="takePhoto()">拍照</button>
-//<button onclick="downLoadImage('img','a.png')">保存</button>
+<button onclick="SavePhoto('img','a.png')">保存</button>
+<img id="imgTag" src="" alt="imgTag">
+<button onclick="closeMedia()">关闭摄像头</button>
+<script>
+<!doctype html>
+<html lang="en">
+<head>
+    <title>js调用摄像头拍照上传图片</title>
+    <meta charset="utf-8">
+</head>
+<body>
+<button onclick="openMedia()">开启摄像头</button>
+<video id="video" width="500px" height="500px" autoplay="autoplay"></video>
+<canvas id="canvas" width="500px" height="500px"></canvas>
+药材<input  type="text" id="TCM">
+<button onclick="takePhoto()">拍照</button>
+
+<button onclick=SavePhoto('img',document.getElementById('TCM').value)>保存</button>
 <img id="imgTag" src="" alt="imgTag">
 <button onclick="closeMedia()">关闭摄像头</button>
 <script>
@@ -87,12 +104,16 @@ TCM(Tradition Chinese Medicine) Recongition System 是本年度的创新创业�
         // toDataURL  ---  可传入'image/png'---默认, 'image/jpeg'
         let img = document.getElementById('canvas').toDataURL("image/png");
         // 这里的img就是得到的图片
-        console.log('img-----', img);
+        //console.log('img-----', img);
         document.getElementById('imgTag').src=img;
     }
 
-function downLoadImage() {
+function SavePhoto(img,name) {
+  var a = document.createElement("a");
 
+  a.href = document.getElementById('imgTag').src;
+  a.download= name;
+  a.click();
 }
 
     // 关闭摄像头
@@ -101,4 +122,10 @@ function downLoadImage() {
     }
 </script>
 </body>
+
 ```
+![TCM3](/img/TCM3.jpg)
+
+就是这样，拍照，然后呈现出来，合适的话就保存，不合适就继续拍，保存下来的图片用个批处理文件筛选就OK，数据采集就是这样。
+
+由于还在等待药材，所以，这部分更新暂时停止。
