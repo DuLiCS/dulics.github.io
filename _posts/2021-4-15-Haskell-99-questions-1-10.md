@@ -108,13 +108,68 @@ Example in Haskell:
 λ> myLength "Hello, world!"
 13
 ```
+## Problem 5
+(*) Reverse a list.
+
+Example in Haskell:
+
+、、、
+λ> myReverse "A man, a plan, a canal, panama!"
+"!amanap ,lanac a ,nalp a ,nam A"
+λ> myReverse [1,2,3,4]
+[4,3,2,1]
+、、、
+
+
 
 ```haskell
+--solution1
+myReverse :: [a] -> [a]
+myReverse [] = []
+myReverse (x:xs) = reverse xs ++ [x]
 
 ```
+## Problem 6
+(*) Find out whether a list is a palindrome. A palindrome can be read forward or backward; e.g. (x a m a x).
+
+Example in Haskell:
+
+、、、
+λ> isPalindrome [1,2,3]
+False
+λ> isPalindrome "madamimadam"
+True
+λ> isPalindrome [1,2,4,8,16,8,4,2,1]
+True
+、、、
+
 ```haskell
-
+isPalindrome :: (Eq a) => [a] -> Bool
+isPalindrome x = x == (reverse x)
 ```
+
+## Problem 7
+(**) Flatten a nested list structure.
+
+Transform a list, possibly holding lists as elements into a `flat' list by replacing each list with its elements (recursively).
+
+Example:
+
+* (my-flatten '(a (b (c d) e)))
+(A B C D E)
+Example in Haskell:
+
+We have to define a new data type, because lists in Haskell are homogeneous.
+
+ data NestedList a = Elem a | List [NestedList a]
+λ> flatten (Elem 5)
+[5]
+λ> flatten (List [Elem 1, List [Elem 2, List [Elem 3, Elem 4], Elem 5]])
+[1,2,3,4,5]
+λ> flatten (List [])
+[]
+
+
 ```haskell
 
 ```
