@@ -4,4 +4,8 @@ title: About me
 subtitle: About me
 ---
 
-To be constructed.
+dulics811@gmail.com
+
+XJTUer
+
+Wechat:IEEE811
