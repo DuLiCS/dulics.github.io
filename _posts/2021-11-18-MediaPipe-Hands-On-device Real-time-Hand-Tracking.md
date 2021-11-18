@@ -1,11 +1,12 @@
 ---
 
 layout: post
-title: MediaPipe Hands: On-device Real-time Hand Tracking
+title: MediaPipe Hands:On-device Real-time Hand Tracking
 subtitle: Paper Reading
 tags: [Paper Reading, Machine Learning]
 
 ---
+
 
 
 <head>
