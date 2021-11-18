@@ -1,12 +1,12 @@
 ---
 
-
 layout: post
 title: MediaPipe Hands: On-device Real-time Hand Tracking
 subtitle: Paper Reading
 tags: [Paper Reading, Machine Learning]
 
 ---
+
 
 <head>
     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
@@ -19,6 +19,8 @@ tags: [Paper Reading, Machine Learning]
         });
     </script>
 </head>
+
+
 
 
 ## MediaPipe Hands: On-device Real-time Hand Tracking
