@@ -21,13 +21,16 @@ tags: [Project]
 </head>
 
 
-
+7.16 开始项目
+7.28 更新requests基础
+7.29 更新了百度翻译和豆瓣电影的项目
 
 
 ## 1.背景介绍
 
 刚好到了志愿填报季，报志愿也是考生和家长都比较关心的问题。现在一切都从工程的角度看问题，做出来的项目必须是有实际意义的东西，不能只做成半成品或者仅仅验证算法，那样的话就没有多少意义。
 高考志愿填报是一个大部分人都比较熟悉的东西，只不过现在比以往会复杂一些，多了很多各种各样的计划，提前批那样的情况。现在也有很多机构和网站都在做类似的东西，换句话说，他们掌握的信息和算法不见得有个人掌握的多，因此，这是一个没有太多知识壁垒的项目。也是为后续做类似的应用做基础和准备。
+Github链接 https://github.com/DuLiCS/CEE_crawler
 
 ## 2.大体思路
 
@@ -116,12 +119,71 @@ with open(fileName, 'w', encoding='utf-8') as fp:
 
 ### 3.2 案例一 百度翻译
 
-使用翻译时，会出现页面局部刷新的情况，此时需要获取局部刷新的结果。
+使用翻译时，会出现页面局部刷新的情况，此时需要获取局部刷新的结果。此时可以在开发者模式中寻找相应的抓包工具。
 
+![XHR](/img/Requests5.png)
 
+挨个分析查找对应的包。
 
+![XHR](/img/Requests6.png)
 
+查看内容。
+
+![XHR](/img/Requests7.png)
+
+Code：
+```python
+import requests
+import json
+
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) '
+                  'Version/15.5 Safari/605.1.15 '
+}
+post_url = 'https://fanyi.baidu.com/sug'
+data = {
+    'kw': 'cat'
+}
+response = requests.post(post_url, data, headers=headers)
+dic_obj = response.json()
+fp = open('./cat.json', 'w', encoding='utf-8')
+json.dump(dic_obj, fp=fp, ensure_ascii=False)
+```
+
+### 3.3 豆瓣电影排行榜
+
+这里是要将豆瓣电影的某个分类下的排行榜的数据爬取出来，例如这个链接下的纪录片排行。https://movie.douban.com/typerank?type_name=纪录片&type=1&interval_id=100:90&action= 
+我们在滚动页面的时候，会展示更多的页面，这也是一个抓包的问题，因此捕获一下。
+
+![douban](/img/Requests8.png)
+
+代码和上一个项目类似。
+Code:
+
+```python
+import requests
+import json
+
+url = 'https://movie.douban.com/j/chart/top_list'
+params = {
+    'type': '1',
+    'interval_id': '100:90',
+    'action': '',
+    'start': '1',
+    'limit': '20'
+}
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) '
+                  'Version/15.5 Safari/605.1.15 '
+}
+
+response = requests.get(url, params=params, headers=headers)
+list_data = response.json()
+fp = open('./douban.json', 'w', encoding='utf-8')
+json.dump(list_data, fp, ensure_ascii=False)
+```
 
 
 7.16 更新1
 7.28 更新2
+7.29 更新了百度翻译和豆瓣电影的项目
