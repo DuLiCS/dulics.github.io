@@ -47,7 +47,7 @@ $ echo " source ~/dev_ws/install/local_setup.sh" >> ~/.bashrc # 所有终端均�
 
 
 
-## 1.节点
+## 1.节点 Node
 
 ROS2是服务于机器人的操作系统。机器人是各种功能的综合体，每一项功能就像机器人的一个工作细胞，众多细胞通过一些机制连接到一起，成为了一个机器人整体。
 
@@ -151,7 +151,7 @@ def main(args=None):                               # ROS2节点主入口main函�
 - 实现节点功能
 - 销毁节点并关闭接口
 
-### 案例三 物体识别节点
+### 1.5 案例三 物体识别节点
 
 现在做一点更有实际意义的内容。下面的图片是一张苹果的照片。编写一个节点来对苹果进行识别。
 
@@ -168,7 +168,7 @@ sudo apt install python3-opencv
 ros2 run learning_node node_object
 ```
 
-源码：
+- 源码：
 
 ```python
 import rclpy                            # ROS2 Python接口库
@@ -203,10 +203,253 @@ def main(args=None):                                      # ROS2节点主入口m
     node = Node("node_object")                            # 创建ROS2节点对象并进行初始化
     node.get_logger().info("ROS2节点示例：检测图片中的苹果")
 
-    image = cv2.imread('/home/hcx/dev_ws/src/ros2_21_tutorials/learning_node/learning_node/apple.jpg')  # 读取图像
+    image = cv2.imread('~/Downloads/dev_ws/src/ros2_21_tutorials/learning_node/learning_node/apple.jpg')  # 读取图像
     object_detect(image)                                   # 苹果检测
     rclpy.spin(node)                                       # 循环等待ROS2退出
     node.destroy_node()                                    # 销毁节点对象
     rclpy.shutdown()                                       # 关闭ROS2 Python接口
 
 ```
+
+编码结束后，需要指定入口。
+
+
+```python
+entry_points={
+    'console_scripts': [
+     'node_helloworld       = learning_node.node_helloworld:main',
+     'node_helloworld_class = learning_node.node_helloworld_class:main',
+     'node_object           = learning_node.node_object:main',
+    ],
+
+```
+
+### 1.6 案例四：机器视觉识别节点
+
+```
+ros2 run learning_node node_object_webcam #注意设置摄像头
+
+```
+
+- 源码：
+
+```python
+import rclpy                            # ROS2 Python接口库
+from rclpy.node import Node             # ROS2 节点类
+
+import cv2                              # OpenCV图像处理库
+import numpy as np                      # Python数值计算库
+
+lower_red = np.array([0, 90, 128])     # 红色的HSV阈值下限
+upper_red = np.array([180, 255, 255])  # 红色的HSV阈值上限
+
+def object_detect(image):
+    hsv_img = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)       # 图像从BGR颜色模型转换为HSV模型
+    mask_red = cv2.inRange(hsv_img, lower_red, upper_red)  # 图像二值化
+
+    contours, hierarchy = cv2.findContours(mask_red, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE) # 图像中轮廓检测
+
+    for cnt in contours:                                   # 去除一些轮廓面积太小的噪声
+        if cnt.shape[0] < 150:
+            continue
+
+        (x, y, w, h) = cv2.boundingRect(cnt)               # 得到苹果所在轮廓的左上角xy像素坐标及轮廓范围的宽和高
+        cv2.drawContours(image, [cnt], -1, (0, 255, 0), 2) # 将苹果的轮廓勾勒出来
+        cv2.circle(image, (int(x+w/2), int(y+h/2)), 5, (0, 255, 0), -1)    # 将苹果的图像中心点画出来
+
+    cv2.imshow("object", image)                            # 使用OpenCV显示处理后的图像效果
+    cv2.waitKey(50)
+
+def main(args=None):                                       # ROS2节点主入口main函数
+    rclpy.init(args=args)                                  # ROS2 Python接口初始化
+    node = Node("node_object_webcam")                      # 创建ROS2节点对象并进行初始化
+    node.get_logger().info("ROS2节点示例：检测图片中的苹果")
+
+    cap = cv2.VideoCapture(0)
+
+
+    while rclpy.ok():
+        ret, image = cap.read()          # 读取一帧图像
+
+        if ret == True:
+            object_detect(image)         # 苹果检测
+
+    node.destroy_node()                  # 销毁节点对象
+    rclpy.shutdown()                     # 关闭ROS2 Python接口
+```
+
+- 入口节点配置
+
+```python
+entry_points={
+    'console_scripts': [
+     'node_helloworld       = learning_node.node_helloworld:main',
+     'node_helloworld_class = learning_node.node_helloworld_class:main',
+     'node_object           = learning_node.node_object:main',
+     'node_object_webcam    = learning_node.node_object_webcam:main',
+    ],
+```
+
+### 1.7 节点命令行操作
+
+```
+ros2 node list   # 查看节点列表
+ros2 node info <node_name>   # 查看节点信息
+```
+
+## 2.话题 Topic
+
+节点实现了功能，但这些节点需要进行联系。话题就是节点间传递数据的桥梁。
+
+### 2.1 发布订阅模型
+
+![ROS2](/img/ROS25.gif)
+
+发送数据的节点叫做发布者（publisher），接受数据的叫订阅者（subscriber）。
+
+
+### 2.2 多对多通信
+
+发布者和订阅这不是一一对应的。可以是多对多的模型。
+
+![ROS2](/img/ROS26.gif)
+
+### 2.3 异步通信
+
+异步的意思是指发出的数据不知道何时可以收到。
+
+### 2.3 消息接口
+
+消息是ROS中的一种接口定义方式，与编程语言无关，我们也可以通过.msg后缀的文件自行定义，有了这样的接口，各种节点就像积木块一样，通过各种各样的接口进行拼接，组成复杂的机器人系统。
+
+### 2.4 案例一：Hello World 话题通信
+
+![ROS2](/img/ROS27.png)
+
+发布者发送Hello World，订阅者接受Hello World。
+
+- Run
+
+启动发布者
+
+```
+ros2 run learning_topic topic_helloworld_pub
+```
+![ROS2](/img/ROS28.png)
+
+启动订阅者（开另一个Termial）
+
+```
+ros2 run learning_topic topic_helloworld_sub
+```
+
+![ROS2](/img/ROS29.png)
+
+- 发布者源码解析
+
+```python
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import rclpy                                     # ROS2 Python接口库
+from rclpy.node import Node                      # ROS2 节点类
+from std_msgs.msg import String                  # 字符串消息类型
+
+"""
+创建一个发布者节点
+"""
+class PublisherNode(Node):
+
+    def __init__(self, name):
+        super().__init__(name)                                    # ROS2节点父类初始化
+        self.pub = self.create_publisher(String, "chatter", 10)   # 创建发布者对象（消息类型、话题名、队列长度）
+        self.timer = self.create_timer(0.5, self.timer_callback)  # 创建一个定时器（单位为秒的周期，定时执行的回调函数）
+
+    def timer_callback(self):                                     # 创建定时器周期执行的回调函数
+        msg = String()                                            # 创建一个String类型的消息对象
+        msg.data = 'Hello World'                                  # 填充消息对象中的消息数据
+        self.pub.publish(msg)                                     # 发布话题消息
+        self.get_logger().info('Publishing: "%s"' % msg.data)     # 输出日志信息，提示已经完成话题发布
+
+def main(args=None):                                 # ROS2节点主入口main函数
+    rclpy.init(args=args)                            # ROS2 Python接口初始化
+    node = PublisherNode("topic_helloworld_pub")     # 创建ROS2节点对象并进行初始化
+    rclpy.spin(node)                                 # 循环等待ROS2退出
+    node.destroy_node()                              # 销毁节点对象
+    rclpy.shutdown()                                 # 关闭ROS2 Python接口
+
+```
+
+- 入口配置
+
+```
+    entry_points={
+        'console_scripts': [
+         'topic_helloworld_pub  = learning_topic.topic_helloworld_pub:main',
+        ],
+    },
+```
+
+2.5 流程总结
+
+实现发布者的流程：
+
+- 编程接口初始化
+- 创建节点并初始化
+- 创建发布者对象
+- 创建并填充话题消息
+- 发布话题消息
+- 销毁节点并关闭接口
+
+
+订阅者源码解析
+
+```python
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import rclpy                      # ROS2 Python接口库
+from rclpy.node   import Node     # ROS2 节点类
+from std_msgs.msg import String   # ROS2标准定义的String消息
+
+"""
+创建一个订阅者节点
+"""
+class SubscriberNode(Node):
+
+    def __init__(self, name):
+        super().__init__(name)                             # ROS2节点父类初始化
+        self.sub = self.create_subscription(\
+            String, "chatter", self.listener_callback, 10) # 创建订阅者对象（消息类型、话题名、订阅者回调函数、队列长度）
+
+    def listener_callback(self, msg):                      # 创建回调函数，执行收到话题消息后对数据的处理
+        self.get_logger().info('I heard: "%s"' % msg.data) # 输出日志信息，提示订阅收到的话题消息
+
+def main(args=None):                               # ROS2节点主入口main函数
+    rclpy.init(args=args)                          # ROS2 Python接口初始化
+    node = SubscriberNode("topic_helloworld_sub")  # 创建ROS2节点对象并进行初始化
+    rclpy.spin(node)                               # 循环等待ROS2退出
+    node.destroy_node()                            # 销毁节点对象
+    rclpy.shutdown()                               # 关闭ROS2 Python接口
+
+```
+
+- 程序入口配置
+
+```python
+    entry_points={
+        'console_scripts': [
+         'topic_helloworld_pub  = learning_topic.topic_helloworld_pub:main',
+         'topic_helloworld_sub  = learning_topic.topic_helloworld_sub:main',
+        ],
+    },
+
+```
+
+实现订阅者的流程：
+
+- 编程接口初始化
+- 创建节点并初始化
+- 创建订阅者对象
+- 回调函数处理话题数据
+- 销毁节点并关闭接口
