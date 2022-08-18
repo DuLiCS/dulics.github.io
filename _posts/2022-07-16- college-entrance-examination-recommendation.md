@@ -183,6 +183,12 @@ fp = open('./douban.json', 'w', encoding='utf-8')
 json.dump(list_data, fp, ensure_ascii=False)
 ```
 
+# 3.4 肯德基餐厅查询
+
+和上面的方法也是类似的，打开网页，点击查询找XHR内容。餐厅查询网址 http://www.kfc.com.cn/kfccda/storelist/index.aspx。
+
+![UA](/img/Requests9.png)
+
 
 7.16 更新1
 7.28 更新2
