@@ -44,7 +44,7 @@ $$
 \operatorname{MAE}(\mathbf{X}, h)=\frac{1}{m} \sum_{i=1}^m\left|h\left(\mathbf{x}^{(i)}\right)-y^{(i)}\right|
 $$
 
-RMSE对应欧几里得范数  $\ell_2$，也即是距离。记作：
+RMSE对应欧几里得范数，也叫做$\ell_2$范数，也即是距离。记作：
 
 $$
 \|\cdot\|_2
@@ -56,5 +56,27 @@ $$
 \|\cdot\|
 $$
 
-MAE对应
+MAE对应$\ell_1$范数，也称为曼哈顿范数。理解为街区移动两点间的距离。记作：
+$$
+\|\cdot\|_1
+$$
+一般而言，包含$n$个元素的向量$v$的$\ell_k$定义为：
+$$
+\|\mathbf{v}\|_k=\left(\left|v_0\right|^k+\left|v_1\right|^k+\cdots+\left|v_n\right|^k\right)^{\frac{1}{k}}
+$$
+性质：
+
+- 范数指标越高，越关注大值忽略小值。
+
+  
+
+  
+
+## 2.3 获取数据
+
+
+
+![](\img\housing_info.png)
+
+
 
