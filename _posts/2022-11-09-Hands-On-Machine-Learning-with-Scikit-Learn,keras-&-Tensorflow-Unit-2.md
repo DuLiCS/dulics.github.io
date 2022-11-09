@@ -32,7 +32,29 @@ tags: [tensorflow, machine learning]
 
 ### 2.2.2 选择性能指标
 
+RMSE算是经典的误差表示形式。对于较大的误差，因为平方的缘故，数值较大。
 
 $$
 \operatorname{RMSE}(\mathbf{X}, h)=\sqrt{\frac{1}{m} \sum_{i=1}^m\left(h\left(\mathbf{x}^{(i)}\right)-y^{(i)}\right)^2}
 $$
+
+个别数值较大或有异常区域是，使用MAE（Mean Absolute Error）
+
+$$
+\operatorname{MAE}(\mathbf{X}, h)=\frac{1}{m} \sum_{i=1}^m\left|h\left(\mathbf{x}^{(i)}\right)-y^{(i)}\right|
+$$
+
+RMSE对应欧几里得范数  $\ell_2$，也即是距离。记作：
+
+$$
+\|\cdot\|_2
+$$
+
+或
+
+$$
+\|\cdot\|
+$$
+
+MAE对应
+
