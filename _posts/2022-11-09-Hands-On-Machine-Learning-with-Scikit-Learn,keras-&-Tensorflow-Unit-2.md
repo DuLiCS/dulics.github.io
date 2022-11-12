@@ -2,7 +2,7 @@
 
 
 layout: post
-title: Hands On Machine Learning with Scikit Learn,keras & Tensorflow Unit 2
+title: Hands On Machine Learning with Scikit Learn,keras & Tensorflow
 subtitle: Unit 2
 tags: [tensorflow, machine learning]
 
@@ -125,3 +125,79 @@ np.random.permutation method randomly permute a sequence, or return a permuted r
 ![](\img\Correlation_examples2.png)
 
 使用corr()方法可以计算出每对属性之间的相关系数。相关系数的变化由-1到1，越接近-1代表负相关，反之为正相关。相关性和斜率无关。
+
+### 2.4.3 试验不同属性的组合
+
+使用不同的组合如每个家庭的房间数。寻找相关关系。
+
+## 2.5 数据准备
+
+### 2.5.1 数据清理
+
+对于缺失值的处理：
+
+- 放弃相应区域
+
+- 放弃整个属性
+
+- 将缺失值设为某个值
+
+  
+
+相对应的函数：
+
+- dropna()
+- drop()
+- fillna()
+
+Scikit-Learn使用SimpleImputer类来处理缺失值。
+
+### 2.5.2 处理文本和分类属性
+
+- OridinalEncoder
+- OneHotEncoder
+
+### 2.5.3 自定义转换器
+
+``
+
+```python
+from sklearn.base import BaseEstimator, TransformerMixin
+rooms_ix, bedrooms_ix, population_ix, households_ix = 3, 4, 5, 6
+class CombinedAttributesAdder(BaseEstimator, TransformerMixin):
+    def __init__(self, add_bedrooms_per_room = True): # no *args or **kargs
+        self.add_bedrooms_per_room = add_bedrooms_per_room
+    def fit(self, X, y=None):
+        return self  # nothing else to do
+    def transform(self, X, y=None):
+        rooms_per_household = X[:, rooms_ix] / X[:, households_ix]
+        population_per_household = X[:, population_ix] / X[:, households_ix]
+        if self.add_bedrooms_per_room:
+            bedrooms_per_room = X[:, bedrooms_ix] / X[:, rooms_ix]
+            return np.c_[X, rooms_per_household, population_per_household,bedrooms_per_room]
+        else:
+            return np.c_[X, rooms_per_household, population_per_household]
+
+attr_adder = CombinedAttributesAdder(add_bedrooms_per_room=False)
+housing_extra_attribs = attr_adder.transform(housing.values)
+```
+
+``
+
+### 2.5.4 特征缩放
+
+- MinMaxScaler
+- StandardScaler
+
+### 2.5.5 转换流水线
+
+- Pipeline
+
+- ColumnTransform
+
+  
+
+## 2.6 选择和训练模型
+
+### 2.6.1 训练和评估训练集
+
