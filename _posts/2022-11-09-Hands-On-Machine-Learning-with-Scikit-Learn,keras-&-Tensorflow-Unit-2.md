@@ -192,12 +192,24 @@ housing_extra_attribs = attr_adder.transform(housing.values)
 ### 2.5.5 转换流水线
 
 - Pipeline
-
 - ColumnTransform
-
-  
 
 ## 2.6 选择和训练模型
 
 ### 2.6.1 训练和评估训练集
+
+分别使用LinearRegression 和 DecisionTree训练模型，使用RMSE进行验证发现线性模型效果很差，但是决策树的RMSE为0。真的有这么好吗？应该是出现了过拟合。
+
+### 2.6.2 使用交叉验证进行评估
+
+- 方案一：使用train_test_split()函数划分数据集和验证集进行评估。
+- 方案二：使用Scikit-Learn的K-fold交叉验证。
+
+使用cross- validation可以发现更真实的模型性能的反映。
+
+## 2.7 微调模型
+
+### 2.7.1 网格搜索
+
+
 
