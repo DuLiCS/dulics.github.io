@@ -211,5 +211,35 @@ housing_extra_attribs = attr_adder.transform(housing.values)
 
 ### 2.7.1 网格搜索
 
+- 方案一：手动调整（枯燥乏味）
+- 方案二：使用GridSearchCV进行搜索
 
+### 2.7.2 随机搜索
+
+网格搜索适用于参数较少的情况，因为考虑到参数组合和K-fold，总尝试次数可能会很大，因此需要引入随机搜索，RandomizedSearchCV。
+
+
+
+## 2.10 练习题
+
+1.
+
+``
+
+```python
+from sklearn.svm import SVR
+from sklearn.model_selection import GridSearchCV
+
+param_grid = [
+        {'kernel': ['linear'], 'C': [10., 30., 100., 300., 1000., 3000., 10000., 30000.0]},
+        {'kernel': ['rbf'], 'C': [1.0, 3.0, 10., 30., 100., 300., 1000.0],
+         'gamma': [0.01, 0.03, 0.1, 0.3, 1.0, 3.0]},
+    ]
+
+svm_reg = SVR()
+grid_search = GridSearchCV(svm_reg, param_grid, cv=5, scoring='neg_mean_squared_error', verbose=2)
+grid_search.fit(housing_prepared, housing_labels)
+```
+
+``
 
