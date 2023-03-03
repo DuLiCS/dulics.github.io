@@ -51,6 +51,6 @@ ROS2的安装也比较简单，跟着官方的[Tutorial](https://docs.ros.org/en
 
 首先第一个运行sudo apt update的时候提示  The following signatures couldn't be verified because the public key is not available: NO_PUBKEY F42ED6FBAB17C654。[解决办法](https://blog.csdn.net/shanpenghui/article/details/90755148)
 
-其余遇到的坑已经不记得了，在安装的时候还是需要仔细一些。在运行的每一步的时候要多观察输出，出现任何错误都可能导致后续安装失败。最终简单测试一下，使用talker和listener简单测试一下。
+其余遇到的坑已经不记得了，在安装的时候还是需要仔细一些。在运行的每一步的时候要多观察输出，出现任何错误都可能导致后续安装失败。最后使用talker和listener简单测试一下。
 
 ![](/img/2023-03-03_21-11-02.png)
