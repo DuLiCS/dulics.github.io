@@ -58,3 +58,23 @@ ROS中的每一个node都应该负责一个单独的模块化的任务，比如�
 `ros2 run turtlesim turtle_teleop_key`
 
 这时候依然是在turtlesim package中运行另外一个可执行文件，turtle_teleop_key。这时用`ros2 node list`命令可以看到此时有两个活跃的nodes。
+
+![](/img/2023-03-03_23-58-54.png)
+
+### 3. Remapping
+
+node的性质可以用remapping来重新指定，例如node name，topic name，service name 等等。首先试试重命名 /turtlesim node。
+
+`ros2 run turtlesim turtlesim_node --ros-args --remap __node:=my_turtle`
+
+这时候会有3个nodes在运行。
+
+### 4. ros2 node info
+
+`	ros2 node info <node_name>`可以查看node的信息。
+
+`ros2 node info /my_turtle`
+
+返回subscriber，publisher，services and actions的列表。
+
+![](/img/2023-03-04_00-13-23.png)
