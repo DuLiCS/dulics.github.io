@@ -45,7 +45,13 @@ Topics 是数据在节点或系统不同部分传递的主要方式。
 
 ![](/img/2023-03-04_11-12-27.png)
 
-这张图上，`/turtlesim` node 和 `tele_turtle`
+这张图上，`/turtlesim` node 和 `/tele_turtle`通过topic互相交互。`/teleop_turtle`节点通过`/turtle1/cmd_vel`推数据。
+
+### 3.ros2 topic list
+
+`ros2 topic list`来查看当前的活跃话题。
+
+
 
 
 
