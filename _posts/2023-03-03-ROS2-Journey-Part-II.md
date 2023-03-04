@@ -78,3 +78,7 @@ node的性质可以用remapping来重新指定，例如node name，topic name，
 返回subscriber，publisher，services and actions的列表。
 
 ![](/img/2023-03-04_00-13-23.png)
+
+最后给出 node 的定义：
+
+A node is a participant in the ROS graph. ROS nodes use a ROS client library to communicate with other nodes. Nodes can publish or subscribe to Topics. Nodes can also provide or use Services and Actions. There are configurable Parameters associated with a node. Connections between nodes are established through a distributed discovery process. Nodes may be located in the same process, in different processes, or on different machines. These concepts will be described in more detail in the sections that follow.
