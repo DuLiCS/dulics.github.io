@@ -1,10 +1,9 @@
 ---
-
-
 layout: post
 title: ROS2 Journey Part V
-subtitle: Understanding parameters
+subtitle: Understanding Parameters
 tags: [ROS]
+
 
 ---
 
@@ -19,6 +18,7 @@ tags: [ROS]
         });
     </script>
 </head>
+
 
 
 # ROS2 Journey V
