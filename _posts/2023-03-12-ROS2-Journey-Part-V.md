@@ -2,8 +2,8 @@
 
 
 layout: post
-title: ROS2 Journey Part IV
-subtitle: Understanding Services
+title: ROS2 Journey Part V
+subtitle: Understanding Parameters
 tags: [ROS]
 
 ---
