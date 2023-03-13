@@ -27,66 +27,46 @@ tags: [ROS]
 
 ## 1. Background
 
-Services是另一种节点间通信的方式。Service基于call-and-response 模型，对应着的是topic的publisher- subscriber模型。对比来说，topic可以让节点持续的更新数据，services知识在被client请求时才传数据。
+这里说的参数指的是节点的值。也可以认为是节点的设置，一个节点可以以 integers, floats, booleans, strings, and lists的形式保存参数。
 
-![](/img/Service-SingleServiceClient.gif)
+### 2. Tasks
 
-![](/img/Service-MultipleServiceClient.gif)
+还是以 `/turtlesim` and `/teleop_turtle`为例。
 
-## Tasks
+查看方式 `ros2 param list`
 
-### 1. Setup
+查看参数的当前值可以用 `ros2 param get <node_name> <parameter_name>`
 
-打开`/turtlesim` and `/teleop_turtle`
+例如 `ros2 param get /turtlesim background_g`
 
-运行`ros2 service list`
+能查看当然就能设置
 
-![](/img/2023-03-09_21-45-56.png)
+`ros2 param set <node_name> <parameter_name> <value>`
 
-每个节点有6个service
+例如
 
-### 2. ros2 service type
+`ros2 param set /turtlesim background_r 150`
 
-`ros2 service type <service_name>`
+这个的作用是设置背景的R值。
 
-`ros2 service type /clear`
+查看所有的参数值用`ros2 param dump <node_name>`
 
-![](/Users/duli/CS/Github Personal Website/dulics.github.io/img/2023-03-09_21-50-21.png)
+还可以将参数出存在yaml文件里。
 
-这里的Empty指当请求时不接收任何数据。
+`ros2 param dump /turtlesim > turtlesim.yaml`
 
-`ros2 service list -t`可以查看service的类型。
+可以存储当然就可以load
 
-![](/img/2023-03-09_22-05-37.png)
+`ros2 param load <node_name> <parameter_file>`
 
-`ros2 service find std_srvs/srv/Empty`
+`ros2 param load /turtlesim turtlesim.yaml`
 
-可以返回所有Empty类型的services。
+可以设置节点启动时载入参数。
 
-`ros2 interface show <type_name>`
+`ros2 run <package_name> <executable_name> --ros-args --params-file <file_name>`
 
-如果想要手动请求service，需要首先知道输入的结构。就可以用interface来查看。
+`ros2 run turtlesim turtlesim_node --ros-args --params-file turtlesim.yaml`
 
-![](/img/2023-03-09_22-33-39.png)
+### Summary
 
-接下来我们就可以call。
-
-`ros2 service call /clear std_srvs/srv/Empty`
-
-![](/img/2023-03-09_22-38-19.png)
-
-![](/img/2023-03-09_22-57-22.png)
-
-轨迹被清除掉了。
-
-`ros2 service call /spawn turtlesim/srv/Spawn "{x: 2, y: 2, theta: 0.2, name: ''}"`	
-
-生成了一个新的turtle。
-
-![](/img/2023-03-09_23-00-41.png)
-
-## Summary
-
-Nodes can communicate using services in ROS 2. Unlike a topic - a one way communication pattern where a node publishes information that can be consumed by one or more subscribers - a service is a request/response pattern where a client makes a request to a node providing the service and the service processes the request and generates a response.
-
-You generally don’t want to use a service for continuous calls; topics or even actions would be better suited.
+Nodes have parameters to define their default configuration values. You can `get` and `set` parameter values from the command line. You can also save the parameter settings to a file to reload them in a future session.
