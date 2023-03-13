@@ -2,8 +2,8 @@
 
 
 layout: post
-title: ROS2 Journey Part VIII
-subtitle: Using colcon to build packages
+title: ROS2 Journey Part IX
+subtitle: Creating a workspace and package
 tags: [ROS]
 
 ---
@@ -21,9 +21,11 @@ tags: [ROS]
 </head>
 
 
-# ROS2 Journey VIII
+# ROS2 Journey IX
 
 
 
-## 1. Using `rqt_console`
+## 1. Creating a workspace
+
+A workspace is a directory containing ROS 2 packages. 
 
