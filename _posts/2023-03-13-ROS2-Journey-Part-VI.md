@@ -2,8 +2,8 @@
 
 
 layout: post
-title: ROS2 Journey Part VI
-subtitle: Understanding Actions
+title: ROS2 Journey Part V
+subtitle: Understanding Parameters
 tags: [ROS]
 
 ---
@@ -21,7 +21,7 @@ tags: [ROS]
 </head>
 
 
-# ROS2 Journey VI
+# ROS2 Journey V
 
 
 
