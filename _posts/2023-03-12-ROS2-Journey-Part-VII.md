@@ -101,3 +101,86 @@ The significance of what you’ve done so far is that you’ve run two turtlesim
 
 
 ## 3. Recording and playing back data
+
+`ros2 bag` is a command line tool for recording data published on topics in your system. It accumulates the data passed on any number of topics and saves it in a database. You can then replay the data to reproduce the results of your tests and experiments. Recording topics is also a great way to share your work and allow others to recreate it.
+
+Installation
+
+`sudo apt-get install ros-humble-ros2bag \
+                     ros-humble-rosbag2-storage-default-plugins`
+
+You’ll be recording your keyboard input in the `turtlesim` system to save and replay later on, so begin by starting up the `/turtlesim` and `/teleop_turtle` nodes.
+
+`ros2 run turtlesim turtlesim_node`
+
+`ros2 run turtlesim turtle_teleop_key`
+
+#### Choose a topic
+
+`ros2 bag` can only record data from topics that are published on. 
+
+`ros2 topic list`
+
+`/parameter_events
+/rosout
+/turtle1/cmd_vel
+/turtle1/color_sensor
+/turtle1/pose`
+
+To see the data that `/turtle1/cmd_vel` is publishing, run the command:
+
+`ros2 topic echo /turtle1/cmd_vel`
+
+```
+linear:
+  x: 2.0
+  y: 0.0
+  z: 0.0
+angular:
+  x: 0.0
+  y: 0.0
+  z: 0.0
+  ---
+```
+
+#### ros2 bag record
+
+```
+ros2 bag record <topic_name>
+```
+
+```
+ros2 bag record /turtle1/cmd_vel
+```
+
+Recording start
+
+Press `Ctrl+C` to stop recording.
+
+You can also record multiple topics, as well as change the name of the file `ros2 bag` saves to.
+
+```
+ros2 bag record -o subset /turtle1/cmd_vel /turtle1/pose
+```
+
+```
+ros2 bag info <bag_file_name>
+```
+
+```
+ros2 bag info subset
+```
+
+![](/img/2023-03-13_14-59-29.png)
+
+#### Repaly
+
+```
+ros2 bag play subset
+```
+
+![](/img/2023-03-13_15-01-26.png)
+
+#### Summary
+
+You can record data passed on topics in your ROS 2 system using the `ros2 bag` command. Whether you’re sharing your work with others or introspecting on your own experiments, it’s a great tool to know about.
