@@ -2,8 +2,8 @@
 
 
 layout: post
-title: ROS2 Journey Part VI
-subtitle: Other of CLI tools
+title: ROS2 Journey Part VII
+subtitle: Others of CLI tools
 tags: [ROS]
 
 ---
