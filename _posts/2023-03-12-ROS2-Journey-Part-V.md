@@ -3,7 +3,7 @@
 
 layout: post
 title: ROS2 Journey Part IV
-subtitle: Understanding Services
+subtitle: Understanding Parameters
 tags: [ROS]
 
 ---
@@ -21,7 +21,7 @@ tags: [ROS]
 </head>
 
 
-# ROS2 Journey IV
+# ROS2 Journey V
 
 
 
