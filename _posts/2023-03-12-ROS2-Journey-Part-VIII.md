@@ -2,7 +2,7 @@
 
 
 layout: post
-title: ROS2 Journey Part IX
+title: ROS2 Journey Part VIII
 subtitle: Creating a workspace and package
 tags: [ROS]
 
@@ -21,7 +21,7 @@ tags: [ROS]
 </head>
 
 
-# ROS2 Journey IX
+# ROS2 Journey VIII
 
 
 
