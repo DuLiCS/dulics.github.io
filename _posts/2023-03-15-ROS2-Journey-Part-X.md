@@ -367,6 +367,8 @@ ros2 pkg create --build-type ament_python py_pubsub
 
 Navigate into `ros2_ws/src/py_pubsub/py_pubsub`. 
 
+### 2.2 Write the publisher node
+
 ```bash
 wget https://raw.githubusercontent.com/ros2/examples/humble/rclpy/topics/minimal_publisher/examples_rclpy_minimal_publisher/publisher_member_function.py
 ```
@@ -427,3 +429,174 @@ if __name__ == '__main__':
     main()
 ```
 
+This is a Python code for a minimal ROS2 publisher node that publishes a string message on the topic "topic" every 0.5 seconds. The message contains the string "Hello World" followed by an incrementing integer value.
+
+The code uses the ROS2 Python client library called rclpy, which provides a Python interface for ROS2 communication. The rclpy.init() function initializes the ROS2 client library and the rclpy.shutdown() function shuts it down. The rclpy.spin() function keeps the node running until it is stopped.
+
+The code defines a class called MinimalPublisher, which inherits from the Node class in the rclpy.node module. The constructor of the MinimalPublisher class creates a publisher object that publishes messages of type String on the "topic" topic. It also creates a timer object that calls the timer_callback() function every 0.5 seconds. The timer_callback() function creates a string message containing the string "Hello World" followed by an integer value that is incremented every time the function is called. It then publishes the message using the publisher object and logs the message using the get_logger().info() function.
+
+Finally, the main() function initializes the ROS2 client library, creates an instance of the MinimalPublisher class, and starts the node using the rclpy.spin() function. It also destroys the node explicitly using the destroy_node() function and shuts down the ROS2 client library using the rclpy.shutdown() function. The if **name** == '**main**' block at the end of the code ensures that the main() function is called when the script is run as the main program.
+
+Open `package.xml` with your text editor.
+
+```xml
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>py_pubsub</name>
+  <version>0.0.0</version>
+  <description>Example of minimal publisher/subscriber using rclpy</description>
+  <maintainer email="dulics811@gmail.com">parallels</maintainer>
+  <license>TODO: License declaration</license>
+  
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
+```
+
+Open the `setup.py` file.
+
+```python
+from setuptools import setup
+
+package_name = 'py_pubsub'
+
+setup(
+    name=package_name,
+    version='0.0.0',
+    packages=[package_name],
+    data_files=[
+        ('share/ament_index/resource_index/packages',
+            ['resource/' + package_name]),
+        ('share/' + package_name, ['package.xml']),
+    ],
+    install_requires=['setuptools'],
+    zip_safe=True,
+    maintainer='duli',
+    maintainer_email='dulics811@gmail.com',
+    description='Example of minimal publisher/subscriber using rclpy',
+    license='Apache License 2.0',
+    tests_require=['pytest'],
+    entry_points={
+        'console_scripts': [
+        'talker = py_pubsub.publisher_member_function:main',
+        ],
+    },
+)
+```
+
+
+
+### 2.3 Write the subscriber node
+
+Return to `ros2_ws/src/py_pubsub/py_pubsub` to create the next node. Enter the following code in your terminal:
+
+```bash
+wget https://raw.githubusercontent.com/ros2/examples/humble/rclpy/topics/minimal_subscriber/examples_rclpy_minimal_subscriber/subscriber_member_function.py
+```
+
+
+
+```python
+# Copyright 2016 Open Source Robotics Foundation, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import rclpy
+from rclpy.node import Node
+
+from std_msgs.msg import String
+
+
+class MinimalSubscriber(Node):
+
+    def __init__(self):
+        super().__init__('minimal_subscriber')
+        self.subscription = self.create_subscription(
+            String,
+            'topic',
+            self.listener_callback,
+            10)
+        self.subscription  # prevent unused variable warning
+
+    def listener_callback(self, msg):
+        self.get_logger().info('I heard: "%s"' % msg.data)
+
+
+def main(args=None):
+    rclpy.init(args=args)
+
+    minimal_subscriber = MinimalSubscriber()
+
+    rclpy.spin(minimal_subscriber)
+
+    # Destroy the node explicitly
+    # (optional - otherwise it will be done automatically
+    # when the garbage collector destroys the node object)
+    minimal_subscriber.destroy_node()
+    rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()
+```
+
+This is a Python code for a minimal ROS2 subscriber node that listens to a string message on the topic "topic" and logs the message to the console.
+
+The code uses the ROS2 Python client library called rclpy, which provides a Python interface for ROS2 communication. The rclpy.init() function initializes the ROS2 client library and the rclpy.shutdown() function shuts it down. The rclpy.spin() function keeps the node running until it is stopped.
+
+The code defines a class called MinimalSubscriber, which inherits from the Node class in the rclpy.node module. The constructor of the MinimalSubscriber class creates a subscription object that subscribes to messages of type String on the "topic" topic. It also specifies the listener_callback() function to be called whenever a message is received on the topic. The listener_callback() function simply logs the message to the console using the get_logger().info() function.
+
+Finally, the main() function initializes the ROS2 client library, creates an instance of the MinimalSubscriber class, and starts the node using the rclpy.spin() function. It also destroys the node explicitly using the destroy_node() function and shuts down the ROS2 client library using the rclpy.shutdown() function. The if **name** == '**main**' block at the end of the code ensures that the main() function is called when the script is run as the main program.
+
+Reopen `setup.py` 
+
+```python
+entry_points={
+        'console_scripts': [
+                'talker = py_pubsub.publisher_member_function:main',
+                'listener = py_pubsub.subscriber_member_function:main',
+        ],
+},
+```
+
+### 2.4 Build an run
+
+```bash
+colcon build --packages-select py_pubsub
+```
+
+```bash
+. install/setup.bash
+```
+
+```bash
+ros2 run py_pubsub talker
+```
+
+```bash
+ros2 run py_pubsub listener
+```
+
+![](/img/2023-03-16_16-06-00.png)
+
+You created two nodes to publish and subscribe to data over a topic. Before running them, you added their dependencies and entry points to the package configuration files.
