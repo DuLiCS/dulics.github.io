@@ -3,7 +3,7 @@
 
 layout: post
 title: ROS2 Journey Part X
-subtitle: Writing a simole publisher and subscriber
+subtitle: Writing a simple publisher and subscriber
 tags: [ROS]
 
 ---
