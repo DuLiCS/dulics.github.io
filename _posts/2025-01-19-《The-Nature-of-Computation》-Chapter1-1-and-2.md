@@ -4,7 +4,7 @@
 layout: post
 title: 《The Nature of Computation》
 subtitle: 1.1 1.2
-tags: [读书, 书评]
+tags: [读书]
 
 ---
 
