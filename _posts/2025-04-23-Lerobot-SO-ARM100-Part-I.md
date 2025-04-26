@@ -76,6 +76,7 @@ BOM是bill of materials的缩写，也就是物料清单。这也是我要做的
 ---
 
 两只机械臂的版本：
+
 | Part                 | Amount | Unit Cost (RMB) | Buy CN  |
 |----------------------|--------|------------------|---------|
 | STS3215 Servo        | 12     | ¥97.72           | [TaoBao](https://item.taobao.com/item.htm?id=712179366565&skuId=5268252241438)  |
