@@ -42,3 +42,16 @@ tags: [Project, Robot]
    ```
    git clone https://github.com/huggingface/lerobot.git ~/lerobot
    ```
+
+5. 安装ffmpeg
+   ```
+   conda install ffmpeg -c conda-forge
+   ```
+
+6. 安装飞特电机的依赖
+
+```
+cd ~/lerobot && pip install -e ".[feetech]"
+```
+
+## 2.配置电机
