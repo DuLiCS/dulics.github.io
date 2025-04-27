@@ -49,9 +49,8 @@ tags: [Project, Robot]
    ```
 
 6. 安装飞特电机的依赖
-
-```
-cd ~/lerobot && pip install -e ".[feetech]"
-```
+   ```
+   cd ~/lerobot && pip install -e ".[feetech]"
+   ```
 
 ## 2.配置电机
