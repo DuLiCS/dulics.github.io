@@ -241,6 +241,7 @@ tags: [Project, Robot]
 
 安装好所有后，需要对电机进行校准。
 
+
 ```
 python lerobot/scripts/control_robot.py \
   --robot.type=so100 \
@@ -249,8 +250,113 @@ python lerobot/scripts/control_robot.py \
   --control.arms='["main_follower"]'
 ```
 
+
+
 按照提示摆所有的位置。
+
+
 
 | 1. Middle position | 2. Zero position                                                                                                                                       | 3. Rotated position                                                                                                                                             | 4. Rest position                                                                                                                                       |
 | ------------ |------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | ![](/img/follower_middle.jpg)| ![](/img/follower_zero.jpg) | ![](/img/follower_rotated.jpg) | ![](/img/follower_rest.jpg) |
+
+
+
+对主机械臂的校准也是一样的。
+
+
+```
+python lerobot/scripts/control_robot.py \
+  --robot.type=so100 \
+  --robot.cameras='{}' \
+  --control.type=calibrate \
+  --control.arms='["main_leader"]'
+```
+
+## 4.遥控
+
+这部分检查主机械臂和从机械臂的随动功能。也就是从机械臂按照从机械臂的动作来行动。
+
+```
+python lerobot/scripts/control_robot.py \
+  --robot.type=so100 \
+  --robot.cameras='{}' \
+  --control.type=teleoperate
+```
+
+## 5.录制dataset
+
+
+录制的第一步时先在hugging-face生成一个有写入权限的token，[地址如下](https://huggingface.co/settings/tokens)。** 特别要注意的是，token的值只会在生成时出现一次，一定要记好了。**
+
+![](/img/2025-05-29_10-37-46.jpg)
+
+```
+huggingface-cli login --token ${HUGGINGFACE_TOKEN} --add-to-git-credential
+```
+${HUGGINGFACE_TOKEN}这个就是token的value。
+
+![](/img/2025-05-29_10-59-19.jpg)
+
+
+下一步就是测试摄像头。我拿了两个一样型号的USB摄像头进行录制，结果两个都插在拓展坞就只能显示一个，想办法用OBS转换虚拟摄像头也不行，最后的方案是iPhone摄像头加USB摄像头的方式，然后就可以录制了。
+
+
+
+```
+python lerobot/scripts/control_robot.py \
+  --robot.type=so100 \
+  --control.type=record \
+  --control.fps=30 \
+  --control.single_task="Grasp a lego block and put it in the bin." \
+  --control.repo_id=${HF_USER}/so100_test \
+  --control.tags='["so100","tutorial"]' \
+  --control.warmup_time_s=5 \
+  --control.episode_time_s=30 \
+  --control.reset_time_s=30 \
+  --control.num_episodes=2 \
+  --control.push_to_hub=true
+
+```
+
+## 6.可视化
+
+录制完毕之后可以进行可视化。
+
+
+```
+python lerobot/scripts/visualize_dataset_html.py \
+  --repo-id dulics/so100_test \
+  --port 9091
+```
+
+默认是9090端口，这里是因为被占用，换了一个。
+
+![](/img/2025-05-29_11-09-26.jpg)
+
+![](/img/2025-05-29_11-13-51.jpg)
+
+这里是测试的录制，忽略摄像头的位置。
+
+
+## 7.回放
+
+```
+python lerobot/scripts/control_robot.py \
+  --robot.type=so100 \
+  --control.type=replay \
+  --control.fps=30 \
+  --control.repo_id=${HF_USER}/so100_test \
+  --control.episode=0
+```
+
+执行命令后就可以回放刚才的动作。
+
+![](/img/2025-05-29_11-40-48.jpg)
+
+## 7.训练策略
+
+
+## 8.评价策略
+
+
