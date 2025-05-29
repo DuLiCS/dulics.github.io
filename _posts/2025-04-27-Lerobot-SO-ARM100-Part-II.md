@@ -235,3 +235,22 @@ tags: [Project, Robot]
 ### 2.2 拆除主臂电机的齿轮。
 
    开盖后去除齿轮。** 特别强调：拆除时不能移动轴，否则很麻烦！！！！ **。另外，螺丝非常紧，一定要找好趁手的工具，拆了4个手快废了，上面的两个螺丝非常难拆，有一颗螺丝差点滑丝，用钳子取下来的。今天已经买了电动工具，工欲善其事，必先利其器。
+
+
+## 3. 校准
+
+安装好所有后，需要对电机进行校准。
+
+```
+python lerobot/scripts/control_robot.py \
+  --robot.type=so100 \
+  --robot.cameras='{}' \
+  --control.type=calibrate \
+  --control.arms='["main_follower"]'
+```
+
+按照提示摆所有的位置。
+
+| 1. Middle position | 2. Zero position                                                                                                                                       | 3. Rotated position                                                                                                                                             | 4. Rest position                                                                                                                                       |
+| ------------ |------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [](/img/follower_middle.webp)| <img src="../media/so101/follower_zero.webp?raw=true" alt="SO-101 leader arm zero position" title="SO-101 leader arm zero position" style="width:100%;"> | <img src="../media/so101/follower_rotated.webp?raw=true" alt="SO-101 leader arm rotated position" title="SO-101 leader arm rotated position" style="width:100%;"> | <img src="../media/so101/follower_rest.webp?raw=true" alt="SO-101 leader arm rest position" title="SO-101 leader arm rest position" style="width:100%;"> |
