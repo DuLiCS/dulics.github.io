@@ -371,7 +371,7 @@ pip install -e ".[feetech]"
 安装好后，我把so100_test文件夹放在了lerobot文件夹下，然后运行下面的命令就可以。
 
 ```
-(lerobot) root@ZkpE5J:/lerobot# python lerobot/scripts/train.py   --dataset.repo_id=so100_test   --dataset.root=/so100_test   --policy.type=act   --output_dir=outputs/train/act_so100_test   --job_name=act_so100_test   --policy.device=cuda
+(lerobot) root@ZkpE5J:/lerobot# python lerobot/scripts/train.py   --dataset.repo_id=so100_test   --dataset.root=so100_test   --policy.type=act   --output_dir=outputs/train/act_so100_test   --job_name=act_so100_test   --policy.device=cuda
 ```
 
 在这其中有各种小问题，一般是缺包或者ffmpeg没有安装安装相应的东西就可以。
