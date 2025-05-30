@@ -356,6 +356,55 @@ python lerobot/scripts/control_robot.py \
 
 ## 7.训练策略
 
+现在要训练首先需要找到dataset，位置在/Users/{Username}/.cache/huggingface/datasets/。我没有显卡，于是需要开云服务器训练，我用了矩池云的服务器。首先还是装环境，和之前完全一样。
+
+```
+conda create -n lerobot python=3.10 -y
+conda activate lerobot
+pip install torch torchvision
+# 你用的 LeRobot 版本，建议用源码安装或 requirements.txt 安装
+git clone https://github.com/huggingface/lerobot.git
+cd lerobot
+pip install -e ".[feetech]"
+```
+
+安装好后，我把so100_test文件夹放在了lerobot文件夹下，然后运行下面的命令就可以。
+
+```
+(lerobot) root@ZkpE5J:/lerobot# python lerobot/scripts/train.py   --dataset.repo_id=so100_test   --dataset.root=/so100_test   --policy.type=act   --output_dir=outputs/train/act_so100_test   --job_name=act_so100_test   --policy.device=cuda
+```
+
+在这其中有各种小问题，一般是缺包或者ffmpeg没有安装安装相应的东西就可以。
+
+```
+conda install -c conda-forge ffmpeg
+```
+
+我用的3090的服务器，训练时间大约需要3小时。
+
+```
+INFO 2025-05-30 23:52:00 ts/train.py:117 Logs will be saved locally.
+INFO 2025-05-30 23:52:00 ts/train.py:127 Creating dataset
+INFO 2025-05-30 23:52:01 ts/train.py:138 Creating policy
+INFO 2025-05-30 23:52:02 ts/train.py:144 Creating optimizer and scheduler
+INFO 2025-05-30 23:52:02 ts/train.py:156 Output dir: outputs/train/act_so100_test
+INFO 2025-05-30 23:52:02 ts/train.py:159 cfg.steps=100000 (100K)
+INFO 2025-05-30 23:52:02 ts/train.py:160 dataset.num_frames=1792 (2K)
+INFO 2025-05-30 23:52:02 ts/train.py:161 dataset.num_episodes=2
+INFO 2025-05-30 23:52:02 ts/train.py:162 num_learnable_params=51597190 (52M)
+INFO 2025-05-30 23:52:02 ts/train.py:163 num_total_params=51597238 (52M)
+INFO 2025-05-30 23:52:02 ts/train.py:202 Start offline training on a fixed dataset
+INFO 2025-05-30 23:52:29 ts/train.py:232 step:200 smpl:2K ep:2 epch:0.89 loss:6.849 grdn:154.061 lr:1.0e-05 updt_s:0.132 data_s:0.003
+INFO 2025-05-30 23:52:55 ts/train.py:232 step:400 smpl:3K ep:4 epch:1.79 loss:2.965 grdn:84.900 lr:1.0e-05 updt_s:0.126 data_s:0.004
+INFO 2025-05-30 23:53:21 ts/train.py:232 step:600 smpl:5K ep:5 epch:2.68 loss:2.489 grdn:73.559 lr:1.0e-05 updt_s:0.125 data_s:0.004
+INFO 2025-05-30 23:53:47 ts/train.py:232 step:800 smpl:6K ep:7 epch:3.57 loss:2.226 grdn:68.934 lr:1.0e-05 updt_s:0.125 data_s:0.004
+INFO 2025-05-30 23:54:13 ts/train.py:232 step:1K smpl:8K ep:9 epch:4.46 loss:2.003 grdn:63.689 lr:1.0e-05 updt_s:0.126 data_s:0.004
+INFO 2025-05-30 23:54:39 ts/train.py:232 step:1K smpl:10K ep:11 epch:5.36 loss:1.830 grdn:61.683 lr:1.0e-05 updt_s:0.126 data_s:0.004
+INFO 2025-05-30 23:55:06 ts/train.py:232 step:1K smpl:11K ep:12 epch:6.25 loss:1.638 grdn:58.646 lr:1.0e-05 updt_s:0.126 data_s:0.003
+```
+
+明天真正训练一个策略再说。
+
 
 ## 8.评价策略
 
