@@ -408,4 +408,21 @@ INFO 2025-05-30 23:55:06 ts/train.py:232 step:1K smpl:11K ep:12 epch:6.25 loss:1
 
 ## 8.评价策略
 
+训练好的模型放在lerobot文件夹下。如下就可以验证。
+今天的一个是正前方，一个是后上方，尤其是后上方遮挡比较严重，训练的模型效果并不理想，训练的时候只做了3个episode也是一部分原因，明天再次测试训练，训练时间有点长，3090用了将近四个小时。
 
+```
+python lerobot/scripts/control_robot.py \
+  --robot.type=so100 \
+  --control.type=record \
+  --control.fps=30 \
+  --control.single_task="Grasp a wood brick and put it in the bin." \
+  --control.repo_id=dulics/eval_act_so100_hellolerobot \
+  --control.tags='["tutorial"]' \
+  --control.warmup_time_s=5 \
+  --control.episode_time_s=60 \
+  --control.reset_time_s=30 \
+  --control.num_episodes=10 \
+  --control.push_to_hub=true \
+  --control.policy.path=pretrained_model
+```
