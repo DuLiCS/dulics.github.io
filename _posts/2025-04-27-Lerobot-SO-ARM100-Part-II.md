@@ -426,3 +426,6 @@ python lerobot/scripts/control_robot.py \
   --control.push_to_hub=true \
   --control.policy.path=pretrained_model
 ```
+
+
+经过研究发现episode的次数过小可能对训练来说是远远不够的，前两次训练都是5个episode以内。昨天晚上测试使用40个episode训练后得到了明显的提升，效果还是令人满意的。
